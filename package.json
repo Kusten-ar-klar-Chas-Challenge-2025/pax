@@ -2,9 +2,10 @@
   "name": "pax",
   "version": "1.0.0",
   "description": "### Gruppmedlemmar:  **SUVX24:** Jennifer Gott, Sabina Stawbrink, Oscar Asserlund, Erik Dahl, Johan Modin   **FMWX24:** Hannah Bärlin, Hanna Kindholm, Tova Hansen   **FJSX24:** Alice Eriksson, Phithai Lai, Dennis Granheimer, Rhiannon Brönnimann",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js"
   },
   "repository": {
     "type": "git",
