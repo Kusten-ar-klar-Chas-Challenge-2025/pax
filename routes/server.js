@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 8000;
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -14,7 +14,38 @@ let rooms = [
     name: 'Conference Room A',
     projector: true,
     screen: true,
-    'air-quality': 85
+    'air-quality': 85,
+    floor: 1
+  },
+  {
+    id: 2,
+    seats: 5,
+    availability: true,
+    name: 'Conference Room A',
+    projector: true,
+    screen: true,
+    'air-quality': 85,
+    floor: 1
+  },
+  {
+    id: 3,
+    seats: 20,
+    availability: true,
+    name: 'Conference Room A',
+    projector: true,
+    screen: true,
+    'air-quality': 85,
+    floor: 1
+  },
+  {
+    id: 4,
+    seats: 100,
+    availability: true,
+    name: 'Conference Room A',
+    projector: true,
+    screen: true,
+    'air-quality': 85,
+    floor: 1
   }
 ];
 
