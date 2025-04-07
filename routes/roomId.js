@@ -1,13 +1,49 @@
 import express from "express";
 const app = express();
-const { Pool } = require("pg");
+const PORT = 3000;
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, // ???
+app.use(express.json()); // Så vi kan använda req.body
+
+// Mocked list with rooms
+let rooms = [
+  {
+    id: 1,
+    name: "Konferens A",
+    seats: 6,
+    availability: true,
+    projector: true,
+    screen: false,
+    air: true,
+    floor: 1,
+    whiteboard: true,
+  },
+  {
+    id: 2,
+    name: "Mötesrum B",
+    seats: 4,
+    availability: false,
+    projector: false,
+    screen: false,
+    air: true,
+    floor: 2,
+    whiteboard: true,
+  },
+];
+
+// Get all rooms
+app.get("/api/rooms", (req, res) => {
+  res.json(rooms);
 });
 
-app.put("/api/rooms/:id", async (req, res) => {
+// Update a room
+app.put("/api/rooms/:id", (req, res) => {
   const id = parseInt(req.params.id);
+  const index = rooms.findIndex((room) => room.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ error: "Room not found!" });
+  }
+
   const {
     seats,
     availability,
@@ -17,32 +53,34 @@ app.put("/api/rooms/:id", async (req, res) => {
     air,
     floor,
     whiteboard,
-  } = req.body; // get new info from body
-  const room = rooms.find((room) => room.id === id); // find room
+  } = req.body;
 
-  if (!room) {
-    return res.status(404).json({ error: "Can't find room!" });
-  }
+  // Update room
+  rooms[index] = {
+    ...rooms[index],
+    seats,
+    availability,
+    name,
+    projector,
+    screen,
+    air,
+    floor,
+    whiteboard,
+  };
 
-  if (false) {
-    room.available = true;
-  } else {
-    room.available = false;
-  }
-
-  res.json(room); // Skicka tillbaka den uppdaterade listan
+  res.json(rooms[index]);
 });
 
-module.exports = roomsId;
+// Add new room
+app.post("/api/rooms", (req, res) => {
+  const newRoom = { id: Date.now(), ...req.body };
+  rooms.push(newRoom);
+  res.status(201).json(newRoom);
+});
 
-// try {
-//   const result = await pool.query("SELECT * FROM rooms"); // get all the rooms
-//   res.json(result.rows); // the array of rooms as json
-// } catch (error) {
-//   w;
-//   console.error("Error loading rooms: ", error);
-//   res.status(500).json({ error: "Something went wrong loading rooms" });
-// }
+app.listen(PORT, () => {
+  console.log(`✅ Mock-server körs på http://localhost:${PORT}`);
+});
 
 // new version
 
