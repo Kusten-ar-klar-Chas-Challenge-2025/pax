@@ -132,6 +132,33 @@ app.get("/rooms", async (req, res) => {
   }
 });
 
+// DELETE ROOMS
+app.delete("/rooms/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const result = await pool.query("DELETE FROM rooms WHERE id = $1 RETURNING *", [id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        message: "Room not found."
+      });
+    }
+
+    res.status(200).json({
+      message: "Room deleted successfully", 
+      deletedRoom: result.rows[0]
+    });
+    
+  } catch (err) {
+    console.error("Error deleting room:", err);
+    res.status(500).json({
+      message: "Internal server error"
+    });
+  }
+
+});
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
