@@ -1,61 +1,62 @@
-#include "measurement_state.h"
-#include "networking_base.h"
-#include "PostMan.h"
 #include <Arduino.h>
+#include "networking_base.h"
+#include "measurement_state.h"
+#include "system_state_manager.h"
+#include "system_configuration.h"
+#include "system_tasks.h"
 
-int ledPin = 3;
-MeasurementState roomState(2, 5000);
+// Pin definitions - avoiding SPI pins (10-13)
+constexpr uint8_t STATUS_LED_PIN = 9;
+constexpr uint8_t PIR_PIN = 2;
 
-WiFiClient wifi;
-EthernetClient ether;
-NetworkingBase network (&wifi, &ether) ;
+// Global configuration object
+SystemConfiguration g_config;
 
-PostMan postman(SERVER_URL, SERVER_ENDPOINT, SERVER_PORT, &network);
+// Global objects - accessed by tasks.cpp through extern
+WiFiClient wifi_client;
+EthernetClient ethernet_client;
+NetworkingBase network(&wifi_client, &ethernet_client);  // Will be initialized in setup
+MeasurementState measurement_state(PIR_PIN);  // PIR hold duration from config
+SystemStateManager state_manager(&measurement_state, g_config.get_office_hours(), STATUS_LED_PIN);
 
 void setup()
 {
-    constexpr uint32_t serial_baud_rate = 115200;
-    Serial.begin( serial_baud_rate );
+    // Initialize serial
+    Serial.begin(115200);
+    delay(100);
     
-    // Let Serial start
-    delay( 50 );
+    Serial.println(F("Office Hours Room Monitor: Initializing..."));
     
-
-    Serial.println( F("System: Initializing room state") );
-    roomState.init();
+    // Initialize network clients
+    network = NetworkingBase(&wifi_client, &ethernet_client);
     
-
-    Serial.println( F("System: Initializing network") );
+    // Try to load configuration from storage
+    if (!g_config.load_configuration())
+    {
+        Serial.println(F("Failed to load configuration, using defaults"));
+        // Save default configuration
+        g_config.save_configuration();
+    }
+    
+    // Set PIR hold duration from config
+    measurement_state = MeasurementState(PIR_PIN, g_config.get_pir_hold_duration_ms());
+    
+    // Initialize components
+    measurement_state.init();
     network.begin();
+    state_manager.begin();
     
-
-    Serial.println( F("System: Configuring I/O pins") );
-    pinMode( ledPin, OUTPUT );
-    digitalWrite( ledPin, LOW );
+    // Initialize tasks system
+    Tasks::init();
     
-
-    delay( 100 );
-    
-    Serial.println( F("System: Initialization complete") );
+    Serial.println(F("Office Hours Room Monitor: Initialization complete"));
 }
 
 void loop()
 {
-    roomState.update();
     
+    Tasks::run_all();
     
-    if ( roomState.roomHasActivity() )
-    {
-        digitalWrite( ledPin, HIGH );
-    }
-    else
-    {
-        digitalWrite( ledPin, LOW );
-    }
-    
-    
-    network();
-    
-
-    delay( 10 );
+    // Small delay to prevent CPU overload
+    delay(10);
 }

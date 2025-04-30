@@ -3,14 +3,16 @@
 !/**/
 !*.*
 
-# Ignore VS Code config folder
+# Ignore VS Code/clion config folder
 .vscode/
+.idea
 
 # Ignore .exe
 *.exe
 
 # Ignore pio files
 .pio
+
 
 # Ignore sensitive files
 arduino_secrets.h
