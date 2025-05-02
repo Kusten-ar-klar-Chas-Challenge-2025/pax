@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import pool from "./db.js";
 import swaggerUi from "swagger-ui-express";
-import swaggerSpec from "./swagger.js";
+import swaggerSpec from "./swagger/swagger.js";
 
 console.log("index.js is running");
 

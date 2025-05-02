@@ -94,8 +94,13 @@ const swaggerDefinition = {
 
 const options = {
   swaggerDefinition,
-  apis: [path.join(__dirname, "routes/*.js")],
+  apis: [path.join(__dirname, "../routes/*.js")],
 };
+
+console.log(
+  "Looking for Swagger comments in:",
+  path.join(__dirname, "../routes/*.js")
+);
 
 const swaggerSpec = swaggerJSDoc(options);
 
