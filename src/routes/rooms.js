@@ -3,6 +3,25 @@ import pool from "../db.js";
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * /rooms:
+ *   get:
+ *     summary: Get all rooms
+ *     tags: [Rooms]
+ *     responses:
+ *       200:
+ *         description: A list of rooms
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Room'
+ *       500:
+ *         description: Internal server error
+ */
+
 // GET /rooms – get all rooms
 router.get("/", async (req, res) => {
   try {
@@ -13,6 +32,32 @@ router.get("/", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+/**
+ * @swagger
+ * /rooms/{id}:
+ *   get:
+ *     summary: Get a room by ID
+ *     tags: [Rooms]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Room ID
+ *     responses:
+ *       200:
+ *         description: Room found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Room'
+ *       404:
+ *         description: Room not found
+ *       500:
+ *         description: Internal server error
+ */
 
 // GET /rooms/:id – get a room
 router.get("/:id", async (req, res) => {
@@ -31,6 +76,28 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+/**
+ * @swagger
+ * /rooms:
+ *   post:
+ *     summary: Create a new room
+ *     tags: [Rooms]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CreateRoomInput'
+ *     responses:
+ *       201:
+ *         description: Room created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Room'
+ *       500:
+ *         description: Error creating room
+ */
 
 // POST /rooms – create a new room
 router.post("/", async (req, res) => {
@@ -71,6 +138,38 @@ router.post("/", async (req, res) => {
     res.status(500).send("Error creating room");
   }
 });
+
+/**
+ * @swagger
+ * /rooms/{id}:
+ *   put:
+ *     summary: Update a room
+ *     tags: [Rooms]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Room ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CreateRoomInput'
+ *     responses:
+ *       200:
+ *         description: Room updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Room'
+ *       404:
+ *         description: Room not found
+ *       500:
+ *         description: Internal server error
+ */
 
 // PUT /rooms/:id – update a room
 router.put("/:id", async (req, res) => {
@@ -125,6 +224,37 @@ router.put("/:id", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+/**
+ * @swagger
+ * /rooms/{id}:
+ *   delete:
+ *     summary: Delete a room
+ *     tags: [Rooms]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Room ID
+ *     responses:
+ *       200:
+ *         description: Room deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 room:
+ *                   $ref: '#/components/schemas/Room'
+ *       404:
+ *         description: Room not found
+ *       500:
+ *         description: Internal server error
+ */
 
 // DELETE /rooms/:id – delete a room
 router.delete("/:id", async (req, res) => {

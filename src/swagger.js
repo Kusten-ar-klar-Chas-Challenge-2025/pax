@@ -21,7 +21,6 @@ const swaggerDefinition = {
   ],
   components: {
     schemas: {
-      // ✅ User schema
       User: {
         type: "object",
         properties: {
@@ -32,7 +31,7 @@ const swaggerDefinition = {
           role: { type: "string" },
         },
       },
-      UserInput: {
+      CreateUserInput: {
         type: "object",
         required: ["firstname", "lastname", "email", "password"],
         properties: {
@@ -43,8 +42,6 @@ const swaggerDefinition = {
           role: { type: "string" },
         },
       },
-
-      // ✅ Room schema
       Room: {
         type: "object",
         properties: {
@@ -52,7 +49,7 @@ const swaggerDefinition = {
           name: { type: "string" },
           description: { type: "string" },
           available: { type: "boolean" },
-          air_quality: { type: "integer" },
+          air_quality: { type: "string" },
           screen: { type: "boolean" },
           floor: { type: "integer" },
           chairs: { type: "integer" },
@@ -60,19 +57,35 @@ const swaggerDefinition = {
           projector: { type: "boolean" },
         },
       },
-      RoomInput: {
+      CreateRoomInput: {
         type: "object",
-        required: ["name"],
+        required: [
+          "name",
+          "description",
+          "available",
+          "air_quality",
+          "screen",
+          "floor",
+          "chairs",
+          "whiteboard",
+          "projector",
+        ],
         properties: {
           name: { type: "string" },
           description: { type: "string" },
           available: { type: "boolean" },
-          air_quality: { type: "integer" },
+          air_quality: { type: "string" },
           screen: { type: "boolean" },
           floor: { type: "integer" },
           chairs: { type: "integer" },
           whiteboard: { type: "boolean" },
           projector: { type: "boolean" },
+        },
+      },
+      Error: {
+        type: "object",
+        properties: {
+          error: { type: "string" },
         },
       },
     },
