@@ -1,0 +1,157 @@
+import { FC, useState } from "react";
+import Button from "./Button";
+
+type Room = {
+    id: number;
+    name: string;
+    description?: string;
+    available: boolean;
+    air_quality: number;
+    screen: boolean;
+    floor: number;
+    chairs: number;
+    whiteboard: boolean;
+    projector: boolean;
+};
+
+type CreateRoomModalProps = {
+    isOpen: boolean;
+    onClose: () => void;
+    onCreate: (room: Room) => void;
+};
+
+const CreateRoomModal: FC<CreateRoomModalProps> = ({ isOpen, onClose, onCreate }) => {
+    const [form, setForm] = useState<Omit<Room, "id">>({
+        name: "",
+        description: "",
+        available: true,
+        air_quality: 0,
+        screen: false,
+        floor: 0,
+        chairs: 0,
+        whiteboard: false,
+        projector: false,
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value, type, checked } = e.target;
+        setForm((prev) => ({
+            ...prev,
+            [name]: type === "checkbox" ? checked : type === "number" ? Number(value) : value,
+        }));
+    };
+
+    const handleSubmit = () => {
+        const newRoom: Room = {
+            id: Date.now(),  // enkel mock-id
+            ...form,
+        };
+        onCreate(newRoom);
+        onClose(); // Stänger modalen efter skapandet
+    };
+
+    if (!isOpen) return null;  // Om modalen inte är öppen, rendera ingenting
+
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-md space-y-4">
+                <h2 className="text-xl font-semibold">Skapa nytt rum</h2>
+
+                {/* Namn */}
+                <div className="space-y-2">
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Rum Namn</label>
+                    <input
+                        id="name"
+                        className="w-full border rounded p-2"
+                        placeholder="Namn"
+                        name="name"
+                        value={form.name}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                {/* Beskrivning */}
+                <div className="space-y-2">
+                    <label htmlFor="description" className="block text-sm font-medium text-gray-700">Beskrivning</label>
+                    <textarea
+                        id="description"
+                        className="w-full border rounded p-2"
+                        placeholder="Beskrivning"
+                        name="description"
+                        value={form.description}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                {/* Våning, Stolar, Luftkvalitet */}
+                <div className="grid grid-cols-2 gap-2">
+                    <div className="space-y-2">
+                        <label htmlFor="floor" className="block text-sm font-medium text-gray-700">Våning</label>
+                        <input
+                            id="floor"
+                            type="text"
+                            className="border rounded p-2"
+                            placeholder="Våning"
+                            name="floor"
+                            value={form.floor}
+                            onChange={handleChange}
+                        />
+                    </div>
+
+                    <div className="space-y-2">
+                        <label htmlFor="chairs" className="block text-sm font-medium text-gray-700">Stolar</label>
+                        <input
+                            id="chairs"
+                            type="text"
+                            className="border rounded p-2"
+                            placeholder="Stolar"
+                            name="chairs"
+                            value={form.chairs}
+                            onChange={handleChange}
+                        />
+                    </div>
+
+                </div>
+
+                {/* Checkboxar: Skärm, Whiteboard, Projektor */}
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                    <label className="flex items-center space-x-2">
+                        <input
+                            type="checkbox"
+                            name="screen"
+                            checked={form.screen}
+                            onChange={handleChange}
+                        />
+                        <span>Skärm</span>
+                    </label>
+                    <label className="flex items-center space-x-2">
+                        <input
+                            type="checkbox"
+                            name="whiteboard"
+                            checked={form.whiteboard}
+                            onChange={handleChange}
+                        />
+                        <span>Whiteboard</span>
+                    </label>
+                    <label className="flex items-center space-x-2">
+                        <input
+                            type="checkbox"
+                            name="projector"
+                            checked={form.projector}
+                            onChange={handleChange}
+                        />
+                        <span>Projektor</span>
+                    </label>
+                </div>
+
+                {/* Knapp för att skicka formuläret */}
+                <div className="flex justify-end space-x-2">
+                    <Button variant="outline" onClick={onClose}>Avbryt</Button>
+                    <Button onClick={handleSubmit}>Skapa</Button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default CreateRoomModal;
