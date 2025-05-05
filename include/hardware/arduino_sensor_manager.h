@@ -3,14 +3,7 @@
 
 #include "sensor_manager.h"
 
-class TempSensor {
-    public:
-    [[nodiscard]] static float read_celsius () noexcept;
-    static bool ready_for_reading();
-    static void setup(uint8_t pin);
-};
 
-//! TemperatureSensor::read_celsius
 
 
 class ArduinoSensorManager : public SensorManager

@@ -1,4 +1,5 @@
 #include "sensor_manager.h"
+#include "sensor_tmp36.h"
 
 SensorManager::SensorManager(PinIO * pin_source, Clock * clock_source)
     : m_pin_source(pin_source), m_clock_source(clock_source)

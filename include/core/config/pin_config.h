@@ -20,9 +20,18 @@
 #define A5 19U
 #endif
 
+
+
 //! @brief Struct to configure the pins
 //! @details This struct is used to configure the pins for the project
 struct PinConfig {
+
+
+    static constexpr uint8_t pin_temp_sensor {A0};
+    static constexpr uint8_t pin_debug_led {2};
+    static constexpr uint8_t pin_pir_sensor {3};
+    static constexpr uint8_t pin_network_select {7};
+
     //! @brief Struct to store the pin number and mode
     struct PinEntry {
         uint8_t pin;
@@ -32,13 +41,13 @@ struct PinConfig {
     //! @brief Compile-time array of pin-mode pairs
     static constexpr PinEntry pins[] = {
         //! @brief Debug LED for room activity
-        {2, OUTPUT},
+        {pin_debug_led, OUTPUT},
         //! @brief PIR sensor
-        {3, INPUT},
+        {pin_pir_sensor, INPUT},
         //! @brief Network mode selection, LOW for Ethernet, HIGH for WiFi
-        {7, INPUT_PULLUP},
+        {pin_network_select, INPUT_PULLUP},
         //! @brief Temperature sensor
-        {A0, INPUT}
+        {pin_temp_sensor, INPUT}
     };
 
     //! Iterator setup for the pin config array
