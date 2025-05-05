@@ -1,5 +1,5 @@
-#ifndef ARDUINO_PIN_IO_H
-#define ARDUINO_PIN_IO_H
+#ifndef HARDWARE_ARDUINO_PIN_IO_H
+#define HARDWARE_ARDUINO_PIN_IO_H
 
 #include "pin_io.h"
 
