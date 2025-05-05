@@ -1,5 +1,5 @@
-#ifndef PIN_IO_H
-#define PIN_IO_H
+#ifndef CORE_INTERFACES_PIN_IO_H
+#define CORE_INTERFACES_PIN_IO_H
 
 #include <stdint.h>
 

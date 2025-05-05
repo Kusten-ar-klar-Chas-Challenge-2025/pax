@@ -42,23 +42,20 @@ class SensorManager
     PinIO * m_pin_source;
     //! @brief Clock object to read from
     Clock * m_clock_source;
+    protected:
+    explicit SensorManager(PinIO * pin_source, Clock * clock_source = nullptr);
 
     public:
-    //! @brief Constructor
-    //! @param pin_source PinIO object to read from
-    //! @param clock_source Clock object to read from
-    //! @note nullptr allowed in clock source for test purposes only
-    explicit SensorManager(PinIO * pin_source, Clock * clock_source = nullptr);
     //! @brief Get the latest sensor reading
     //! @return SensorReading object
     //! @note Should be called after request_reading
     //! @note Returns the latest reading from the sensor
     //! nodiscard because you should use this data or you should not use this function
-    [[nodiscard]] SensorReading read() const noexcept;
+    [[nodiscard]] virtual SensorReading read() const noexcept = 0;
     //! @brief Request a reading from the sensor
     //! @return Time of request in milliseconds
     //! @note Should be called before read()
-    [[nodiscard]] uint32_t request_reading() noexcept;
+    [[nodiscard]] virtual uint32_t request_reading() noexcept = 0;
 };
 
 #endif
