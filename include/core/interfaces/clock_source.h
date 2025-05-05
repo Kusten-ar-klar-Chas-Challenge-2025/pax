@@ -1,5 +1,5 @@
-#ifndef CLOCK_SOURCE_H
-#define CLOCK_SOURCE_H
+#ifndef CORE_INTERFACES_CLOCK_SOURCE_H
+#define CORE_INTERFACES_CLOCK_SOURCE_H
 
 #include <cstdint>
 

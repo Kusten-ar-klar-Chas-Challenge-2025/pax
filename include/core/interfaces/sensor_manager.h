@@ -1,5 +1,5 @@
-#ifndef SENSOR_MANAGER_H
-#define SENSOR_MANAGER_H
+#ifndef CORE_INTERFACES_SENSOR_MANAGER_H
+#define CORE_INTERFACES_SENSOR_MANAGER_H
 
 #include <cstdint>
 #include "pin_io.h"

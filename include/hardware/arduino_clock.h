@@ -1,5 +1,5 @@
-#ifndef ARDUINO_CLOCK_H
-#define ARDUINO_CLOCK_H
+#ifndef HARDWARE_ARDUINO_CLOCK_H
+#define HARDWARE_ARDUINO_CLOCK_H
 
 #include <Arduino.h>
 #include <RTC.h>

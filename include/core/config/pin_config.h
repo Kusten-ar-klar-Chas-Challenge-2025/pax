@@ -1,6 +1,6 @@
 // pin_config.h
-#ifndef PIN_CONFIG_H
-#define PIN_CONFIG_H
+#ifndef CORE_CONFIG_PIN_CONFIG_H
+#define CORE_CONFIG_PIN_CONFIG_H
 
 #include <stdint.h> //! uint8_t
 #include <stddef.h> //! size_t
