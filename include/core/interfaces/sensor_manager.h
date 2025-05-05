@@ -5,9 +5,8 @@
 #include "pin_io.h"
 #include "clock_source.h"
 
-class SensorReading
+struct SensorReading
 {
-    public:
     //! @brief Constructor
     //! @param temperature Temperature in Celsius
     //! @param humidity Humidity in %
@@ -20,17 +19,16 @@ class SensorReading
         float eco2, 
         bool motion, 
         uint32_t time_ms);
-    private:
     //! @brief Temperature in Celsius
-    float m_temperature;
+    float temperature;
     //! @brief Humidity in %
-    float m_humidity;
+    float humidity;
     //! @brief CO2 in ppm
-    float m_eco2;
+    float eco2;
     //! @brief Motion in binary
-    bool m_motion;
+    bool motion;
     //! @brief Time of reading in milliseconds
-    uint32_t m_time_ms;
+    uint32_t time_ms;
 };
 
 class SensorManager
