@@ -1,3 +1,9 @@
+//! @file pin_io.h
+//! @author Jennifer Gott
+//! @date 2025-05-06
+//! @brief Pin IO interface
+
+
 #ifndef CORE_INTERFACES_PIN_IO_H
 #define CORE_INTERFACES_PIN_IO_H
 
@@ -36,5 +42,4 @@ class PinIO
     virtual void pinMode(uint8_t pin, uint8_t mode) noexcept = 0;
 };
 
-#endif
-
+#endif  // CORE_INTERFACES_PIN_IO_H

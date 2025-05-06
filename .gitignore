@@ -3,8 +3,9 @@
 !/**/
 !*.*
 
-# Ignore VS Code config folder
+# Ignore IDE config folders
 .vscode/
+.idea/ 
 
 # Ignore .exe
 *.exe
@@ -14,3 +15,6 @@
 
 # Ignore sensitive files
 arduino_secrets.h
+
+# Ignore build files
+build/

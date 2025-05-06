@@ -1,8 +1,16 @@
+//! @file arduino_pin_io.h
+//! @author Jennifer Gott
+//! @date 2025-05-06
+//! @brief Arduino pin IO implementation
+//! @note This is a singleton class
+//! Wraps the Arduino pin IO functions via the PinIO interface
+
 #ifndef HARDWARE_ARDUINO_PIN_IO_H
 #define HARDWARE_ARDUINO_PIN_IO_H
 
-#include "pin_io.h"
-
+#include <Arduino.h> //!< Arduino library
+#include "pin_io.h" //!< Pin IO interface
+#include "pin_config.h" //!< Pin config
 //! @brief Class to wrap Arduino pin IO
 //! @details This class is used to wrap the Arduino pin IO functions
 class ArduinoPinIO : public PinIO
@@ -11,29 +19,62 @@ class ArduinoPinIO : public PinIO
     //! @brief Call this to setup the configured pins
     //! @details This function will set the mode of all the pins in the pin config array
     //! If the pin config array is not set, the function will not do anything
-    void setup() noexcept override;
+    void setup() noexcept override
+    {
+        for (const auto& pin : PinConfig::pins)
+        {
+            pinMode(pin.pin, pin.mode);
+        }
+    }
+
+
     //! @brief Read the digital value of a pin
     //! @param pin The pin to read
     //! @return The digital value of the pin
     //! Nodiscard because pin reads should be checked
-    [[nodiscard]] bool digitalRead(uint8_t pin) noexcept override;
+    [[nodiscard]] bool digitalRead(uint8_t pin) noexcept override
+    {
+        return digitalRead(pin);
+    }
+
+
     //! @brief Write the digital value of a pin
     //! @param pin The pin to write to
     //! @param value The value to write to the pin
-    void digitalWrite(uint8_t pin, bool value) noexcept override;
+    void digitalWrite(uint8_t pin, bool value) noexcept override
+    {
+        digitalWrite(pin, value);
+    }
+
+
     //! @brief Read the analog value of a pin   
     //! @param pin The pin to read
     //! @return The analog value of the pin
     //! Nodiscard because pin reads should be checked
-    [[nodiscard]] uint16_t analogRead(uint8_t pin) noexcept override;
+    [[nodiscard]] uint16_t analogRead(uint8_t pin) noexcept override
+    {
+        return analogRead(pin);
+    }
+
+
     //! @brief Write the analog value of a pin
     //! @param pin The pin to write to
     //! @param value The value to write to the pin
-    void analogWrite(uint8_t pin, uint16_t value) noexcept override;
+    void analogWrite(uint8_t pin, uint16_t value) noexcept override
+    {
+        analogWrite(pin, value);
+    }
+
+
     //! @brief Set the mode of a pin
     //! @param pin The pin to set the mode of
     //! @param mode The mode to set the pin to
-    void pinMode(uint8_t pin, uint8_t mode) noexcept override;
+    void pinMode(uint8_t pin, uint8_t mode) noexcept override
+    {
+        pinMode(pin, mode);
+    }
+
+
 };
 
 #endif

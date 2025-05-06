@@ -1,6 +1,8 @@
 #ifndef MOCK_IO_H
 #define MOCK_IO_H
 
+#ifdef UNIT_TEST
+
 #include "pin_io.h"
 #include <map>
 
@@ -58,4 +60,6 @@ class MockPinIO : public PinIO
     //! @note Should be 1023 for 10 bit resolution or 4095 for 12 bit resolution
     void set_analog_resolution ( uint16_t resolution ) noexcept;
 };
-#endif
+
+#endif  // UNIT_TEST
+#endif  // MOCK_IO_H

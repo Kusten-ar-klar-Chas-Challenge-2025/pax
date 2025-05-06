@@ -1,45 +1,83 @@
-#include <Arduino.h>
+//! @file main.cpp
+//! @author Jennifer Gott
+//! @date 2025-05-06
+//! @brief Pax Occupancy sensor
+//! @details This program is used to read the occupancy of a room and send the data to the backend
+//! For the Arduino R4 Wifi.
 
-#include "arduino_secrets.h"
-#include "arduino_sensor_manager.h"
-#include "arduino_pin_io.h"
-#include "concrete_network_manager.h"
+
+#include <Arduino.h> //!< Arduino library
+#include <string_view> //!< String view
+#include "backend_network.h" //!< Backend network interface
+#include "network_types.h" //!< Network types
+#include "physical_network_factory.h" //!< Factory for creating physical networks
+#include "arduino_pin_io.h" //!< Arduino pin IO implementation, also includes the pin config
+#include "arduino_secrets.h" //!< Arduino secrets constants for SSID and PASSWORD and SERVER_HOST and SERVER_PORT
 
 ArduinoPinIO pin_io;
-ArduinoSensorManager sensor_manager(&pin_io);
-uint32_t last_reading_time = 0;
 
-ServerConfig server_config{
-  std::string_view(SERVER_HOST), 
-  SERVER_PORT
-};
-
-NetworkSecrets network_secrets{
-  std::string_view(SSID),
-  std::string_view(PASSWORD)
-};
-
-HttpBackendNetwork http_backend_network;
-ConcreteNetworkManager network_manager(
-  PhysicalNetworkFactory::new_connection(), 
-  http_backend_network, 
-  server_config,
-  network_secrets
-);
-
-void setup() {
-  Serial.begin(115200);
+void setup() 
+{
   pin_io.setup();
-  sensor_manager.request_reading();
-  network_manager.connect();
+  Serial.begin(115200);
+
+  NetworkSecrets secrets = {SSID, PASSWORD};
+  ServerConfig config = {SERVER_HOST, SERVER_PORT};
+
+  //! Read the network select pin to determine if the network is wifi or ethernet
+  bool use_wifi = pin_io.digitalRead(PinConfig::pin_network_select) == HIGH;
+
+
+  //! Structured binding of a std::pair to get the physical and backend network objects from the factory
+  auto [physical, backend] = PhysicalNetworkFactory::create_network(use_wifi, config);
+
+  physical.connect(secrets);
+
+  if (physical.connected()) 
+  {
+    char config_response[256];
+    auto result = backend.request(HttpMethod::GET, "api/config", "", config_response,
+                                  sizeof(config_response));
+    if (!is_error(result)) 
+    {
+      Serial.print(F("Config: "));
+      Serial.println(config_response);
+    } 
+    else 
+    {
+      Serial.print(F("Config request failed: "));
+      Serial.println(static_cast<int>(result));
+    }
+
+    char time_response[256];
+    result = backend.request(HttpMethod::GET, "api/time", "", time_response,
+                             sizeof(time_response));
+    if (!is_error(result)) 
+    {
+      Serial.print(F("Time: "));
+      Serial.println(time_response);
+    } 
+    else 
+    {
+      Serial.print(F("Time request failed: "));
+      Serial.println(static_cast<int>(result));
+    }
+
+    char room_id[16];
+    snprintf(room_id, sizeof(room_id), "api/rooms/%d", 101);
+    std::string_view message = "{\"occupied\":true}";
+    result = backend.request(HttpMethod::PUT, room_id, message, nullptr, 0);
+    if (!is_error(result)) 
+    {
+      Serial.println(F("Room status updated"));
+    } else {
+      Serial.print(F("Room update failed: "));
+      Serial.println(static_cast<int>(result));
+    }
+  } else 
+  {
+    Serial.println(F("Network connection failed"));
+  }
 }
 
-void loop() {
-  SensorReading sensor_reading = sensor_manager.read();
-  if ( sensor_reading.time_ms > last_reading_time )
-  {
-    last_reading_time = sensor_reading.time_ms;
-    Serial.println(sensor_reading.temperature);
-    network_manager.send(std::to_string(sensor_reading.temperature));
-  } 
-}
+void loop() {}

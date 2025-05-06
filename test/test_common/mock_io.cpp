@@ -1,3 +1,5 @@
+#ifdef UNIT_TEST
+
 #include "mock_io.h"
 
 MockPinIO::MockPinIO(
@@ -74,3 +76,5 @@ void MockPinIO::set_analog_resolution(uint16_t resolution)
         m_analog_resolution = 1023;
     }
 }
+
+#endif  // UNIT_TEST

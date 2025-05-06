@@ -1,7 +1,13 @@
+//! @file physical_network.h
+//! @author Jennifer Gott
+//! @date 2025-05-06
+//! @brief Physical network interface
+//! @note This is a pure virtual class, extend this class for your specific physical network implementation.
+
 #ifndef CORE_INTERFACES_PHYSICAL_NETWORK_H
 #define CORE_INTERFACES_PHYSICAL_NETWORK_H
 
-#include "network_manager.h"
+#include "network_types.h"
 
 //! @brief Physical network interface
 //! @note This is a pure virtual class
@@ -16,7 +22,13 @@ public:
     PhysicalNetwork& operator=(const PhysicalNetwork&) = delete;
 
     //! @brief Connect to the network
-    virtual bool connect(const NetworkSecrets& secrets) = 0;
+    //! @param secrets The network secrets
+    //! @return The error code
+    //! @usage auto error = network.connect(secrets);
+    //! if (is_error(error)) {
+    //!     // handle the error
+    //! }
+    virtual NetworkError connect(const NetworkSecrets& secrets) = 0;
     //! @brief Disconnect from the network
     virtual void disconnect() = 0;
     //! @brief Check if the network is connected
@@ -25,4 +37,4 @@ public:
     virtual ~PhysicalNetwork() = default;
 };
 
-#endif
+#endif  // CORE_INTERFACES_PHYSICAL_NETWORK_H
