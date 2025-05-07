@@ -6,8 +6,8 @@
 //! Call the static method create_network to get a pair of physical and backend networks.
 //! @note Only do this once and only in the Arduino context, not in unit tests.
 
-#ifndef PHYSICAL_NETWORK_FACTORY_H_
-#define PHYSICAL_NETWORK_FACTORY_H_
+#ifndef PHYSICAL_NETWORK_FACTORY_H
+#define PHYSICAL_NETWORK_FACTORY_H
 
 #include <utility>
 #include "backend_network.h"
@@ -46,4 +46,4 @@ private:
   }
 };
 
-#endif  // PHYSICAL_NETWORK_FACTORY_H_
+#endif  // PHYSICAL_NETWORK_FACTORY_H

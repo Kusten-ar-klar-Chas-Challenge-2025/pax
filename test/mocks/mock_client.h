@@ -28,6 +28,9 @@ class Client {
   size_t m_next_read_result_size {0};
   bool m_next_available_result {true};
   size_t m_next_available_result_size {0};
+  std::string m_last_request;
+  std::string m_last_response;
+  std::string m_last_error;
 
  public:
   //! @brief Constructor
@@ -147,6 +150,18 @@ class Client {
   //! @brief Set the next write result size
   //! @param size The next write result size
   void set_next_write_result_size(size_t size) { m_next_write_result_size = size; }
+
+  //! @brief Get the last request
+  //! @return The last request
+  const std::string& get_last_request() const { return m_last_request; }
+
+  //! @brief Get the last response
+  //! @return The last response
+  const std::string& get_last_response() const { return m_last_response; }
+
+  //! @brief Get the last error
+  //! @return The last error
+  const std::string& get_last_error() const { return m_last_error; }  
   
 };
 

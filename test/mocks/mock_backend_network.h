@@ -7,7 +7,7 @@
 #include <cstring>
 #include "backend_network.h"
 
-class MockBackendNetwork : public BackendNetwork 
+class MockBackendNetwork : public BackendNetwork
 {
     private:
     const ServerConfig& m_config;
@@ -18,7 +18,7 @@ class MockBackendNetwork : public BackendNetwork
     public:
     explicit MockBackendNetwork(const ServerConfig& config) : m_config(config) {}
 
-    bool request(HttpMethod method,
+    NetworkError request(HttpMethod method,
                const std::string_view& endpoint,
                const std::string_view& request_message,
                char* response_buffer,
@@ -26,11 +26,11 @@ class MockBackendNetwork : public BackendNetwork
     {
         if (method == HttpMethod::GET && (!response_buffer || max_len == 0)) 
         {
-            return false;
+            return NetworkError::NO_BUFFER_PROVIDED;
         }
         if (method != HttpMethod::GET && request_message.empty()) 
         {
-            return false;
+            return NetworkError::NO_REQUEST_MESSAGE;
         }
 
         m_last_method = method;
@@ -43,9 +43,9 @@ class MockBackendNetwork : public BackendNetwork
             size_t bytes_to_copy = std::min(response.length(), max_len - 1);
             std::memcpy(response_buffer, response.data(), bytes_to_copy);
             response_buffer[bytes_to_copy] = '\0';
-            return bytes_to_copy > 0;
+            return NetworkError::OK;
         }
-        return true;
+        return NetworkError::OK;
     }
 
     std::string get_last_message() const { return m_last_message; }
