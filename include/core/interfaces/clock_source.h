@@ -3,17 +3,38 @@
 
 #include <cstdint>
 
+class DateTime; // forward declaration based on RTC library
+class TimeSpan; // forward declaration based on RTC library
+
+
+//! @brief Interface for a clock source
+//! Clock should give common interface to time related functions, both 
+//! arduino::millis() and RTC time functions.
+//! This allows for testing of time related functions without having to depend on the actual time
+//! and for use of mock clock sources in tests.
+//! Expected clock source implementations:
+
 class Clock
 {
-    protected:
-    Clock() = default;
     public:
+    //! @brief Get time since clock initialized in milliseconds
+    //! @return Time in milliseconds
+    //! @note This is the Arduino millis() function and should wrap when the timer overflows
     virtual uint32_t millis() const noexcept = 0;
+    //! @brief Get the current time
+    //! @param[out] time DateTime object to store the current time
+    virtual void now(DateTime& time) const noexcept = 0;
+    //! @brief Set the time on the clock
+    //! @param time DateTime object containing the time to set the clock to
+    virtual void set_time(DateTime time) noexcept = 0;
+    //! @brief Destructor for base class
     virtual ~Clock() = default;
-    virtual void set_time() noexcept = 0;
+    protected:
+    //! @brief Default constructor protected to prevent instantiation of abstract class
+    Clock() = default;
 };
 
 
 
-#endif
+#endif  // CORE_INTERFACES_CLOCK_SOURCE_H
 

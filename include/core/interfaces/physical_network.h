@@ -8,7 +8,7 @@
 #define CORE_INTERFACES_PHYSICAL_NETWORK_H
 
 #include "network_types.h"
-
+#include <array> // for get_mac_address
 //! @brief Physical network interface
 //! @note This is a pure virtual class
 class PhysicalNetwork {
@@ -33,6 +33,11 @@ public:
     virtual void disconnect() = 0;
     //! @brief Check if the network is connected
     virtual bool connected() const = 0;
+
+    //! @brief Get the MAC address of the network interface
+    //! @param[out] mac_address Pointer to a buffer to store the MAC address
+    //! @return True if the MAC address was successfully retrieved, false otherwise
+    virtual bool get_mac_address(std::array<uint8_t, 6>& mac_address) const = 0;
 
     virtual ~PhysicalNetwork() = default;
 };

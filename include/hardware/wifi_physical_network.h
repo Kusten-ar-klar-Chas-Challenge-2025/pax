@@ -19,7 +19,7 @@
 class WiFiPhysicalNetwork : public PhysicalNetwork 
 {
     private:
-        WiFiClient network_connection;
+        WiFiClient m_client;
         static constexpr int MAX_ATTEMPTS = 10; //!< Maximum number of attempts to connect to the network
     public:
     //! @brief Connect to the network
@@ -38,7 +38,7 @@ class WiFiPhysicalNetwork : public PhysicalNetwork
             case WL_CONNECTED:
                 return NetworkError::OK;
             case WL_CONNECT_FAILED:
-                return NetworkError::CONNECT_FAILED;
+                return NetworkError::CONNECTION_TIMEOUT;
             default:
                 return NetworkError::UNKNOWN;
         }
@@ -46,6 +46,7 @@ class WiFiPhysicalNetwork : public PhysicalNetwork
     //! @brief Disconnect from the network
     void disconnect() override 
     {
+        m_client.stop();
         WiFi.disconnect();
     }
     //! @brief Check if the network is connected    
@@ -56,8 +57,19 @@ class WiFiPhysicalNetwork : public PhysicalNetwork
     //! @brief Get the underlying Client object
     //! @return Reference to the WiFiClient object
     //! @note Use by taking a Client& from the PhysicalNetwork interface
-    Client& get_network_connection() const {
-        return network_connection;
+    Client& get_network_connection()  {
+        return m_client;
+    }
+    //! @brief Get the MAC address of the network interface
+    //! @param[out] mac_address Reference to a fixed size array to store the MAC address
+    //! @return True if the MAC address was successfully retrieved, false otherwise
+    bool get_mac_address(std::array<uint8_t, 6>& mac_address) const override {
+        if (WiFi.status() != WL_NO_MODULE)
+        {
+            return false;
+        }
+        WiFi.macAddress(mac_address.data());
+        return true;
     }
 };
 

@@ -1,3 +1,9 @@
+//! @file test_eeprom_device_id.cpp
+//! @brief Test cases for the EepromDeviceId class
+//! @author Jennifer Gott (simbachu@gmail.com)
+//! @date 2025-05-08
+
+
 #include <unity.h>
 #include "eeprom_device_id.h"
 #include "eeprom_24lc64.h"

@@ -13,6 +13,7 @@
 class EthernetPhysicalNetwork : public PhysicalNetwork {
  private:
   EthernetClient m_client;
+  std::array<uint8_t, 6> m_mac_address = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
   static inline bool is_ip_address_zero(const IPAddress& ip) { return ip == IPAddress(0,0,0,0); }
 
  public:
@@ -23,8 +24,7 @@ class EthernetPhysicalNetwork : public PhysicalNetwork {
   //! @return NetworkError enum value
   [[nodiscard]] NetworkError connect([[maybe_unused]]const NetworkSecrets& secrets) override {
     //! Some example MAC address
-    uint8_t mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
-    Ethernet.begin(mac);
+    Ethernet.begin(m_mac_address.data());
     
     if (Ethernet.linkStatus() == LinkON) 
     {
@@ -33,7 +33,7 @@ class EthernetPhysicalNetwork : public PhysicalNetwork {
         //! If the IP address is 0.0.0.0, then we need to set the IP address manually
         //! This is a workaround for the Ethernet library bug
         //! https://github.com/arduino-libraries/Ethernet/issues/348
-        Ethernet.begin(mac, IPAddress(192,168,1,100));
+        Ethernet.begin(m_mac_address.data(), IPAddress(192,168,1,100));
       }
       return NetworkError::OK;
     }
@@ -53,6 +53,18 @@ class EthernetPhysicalNetwork : public PhysicalNetwork {
   }
 
   Client& get_network_connection() { return m_client; }
+
+  //! @brief Get the MAC address of the network interface
+  //! @param[out] mac_address Pointer to a buffer to store the MAC address
+  //! @return True if the MAC address was successfully retrieved, false otherwise
+  bool get_mac_address(std::array<uint8_t, 6>& mac_address) const override {
+    if (Ethernet.hardwareStatus() == EthernetNoHardware)
+    {
+      return false;
+    }
+    mac_address = m_mac_address;
+    return true;
+  }
 };
 
 #endif  // ETHERNET_PHYSICAL_NETWORK_H
