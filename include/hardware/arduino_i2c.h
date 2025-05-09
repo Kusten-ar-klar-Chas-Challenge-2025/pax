@@ -11,6 +11,16 @@ public:
     //! @param wire Reference to the TwoWire instance (e.g., Wire or Wire1)
     ArduinoI2C(TwoWire& wire) : wire(wire) {}
 
+    //! @brief Sets the memory address of the I2C device we are going to use
+    //! @param device_address The device address of the I2C device (7-bit)
+    //! @param memory_address The memory address of the I2C device
+    //! @return true if successful, false otherwise
+    bool set_address(uint8_t device_address, uint16_t memory_address) {
+        wire.beginTransmission(device_address);
+        wire.write(memory_address);
+        return wire.endTransmission() == 0;
+    }
+
     //! @brief Write data to I2C device
     //! @param address The I2C device address
     //! @param source The data to write

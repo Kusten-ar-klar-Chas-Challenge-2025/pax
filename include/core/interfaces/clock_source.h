@@ -22,11 +22,12 @@ class Clock
     //! @note This is the Arduino millis() function and should wrap when the timer overflows
     virtual uint32_t millis() const noexcept = 0;
     //! @brief Get the current time
-    //! @param[out] time DateTime object to store the current time
-    virtual void now(DateTime& time) const noexcept = 0;
+    //! @return DateTime object containing the current time
+    //! @note This differs from the R4A1 RTC.h that fills a DateTime object. This usage follows RTClib instead.
+    virtual DateTime now() const noexcept = 0;
     //! @brief Set the time on the clock
     //! @param time DateTime object containing the time to set the clock to
-    virtual void set_time(DateTime time) noexcept = 0;
+    virtual void set_time(const DateTime& time) noexcept = 0;
     //! @brief Destructor for base class
     virtual ~Clock() = default;
     protected:

@@ -3,6 +3,8 @@
 
 #include <cstdint>
 #include <cstring>
+#include <array>
+#include "uuid.h"
 
 //! @brief Device ID format for storage in 24LC64 EEPROM (28 bytes)
 struct DeviceId {
@@ -14,10 +16,24 @@ struct DeviceId {
 
     static constexpr size_t SIZE = 28; //!< Total size in bytes
 
-    //! @brief Initialize the device ID with a UUID
-    DeviceId(const uint16_t* uuid) : prefix(), version(0x01), unique_id(), reserved(), checksum() {
+    DeviceId() : prefix(), version(0x01), unique_id(), reserved(), checksum() {
         std::memcpy(prefix, "DID:", 4);
-        std::memcpy(unique_id, uuid, 16);
+        std::memset(unique_id, 0, 16);
+        std::memset(reserved, 0, 5);
+        checksum = compute_crc16();
+    }
+
+    DeviceId(const DeviceId& other) : prefix(), version(other.version), unique_id(), reserved(), checksum() {
+        std::memcpy(prefix, other.prefix, 4);
+        std::memcpy(unique_id, other.unique_id, 16);
+        std::memcpy(reserved, other.reserved, 5);
+        checksum = other.checksum;
+    }
+
+    //! @brief Initialize the device ID with a UUID
+    DeviceId(const Uuid& uuid) : prefix(), version(0x01), unique_id(), reserved(), checksum() {
+        std::memcpy(prefix, "DID:", 4);
+        std::memcpy(unique_id, uuid.bytes.data(), 16);
         std::memset(reserved, 0, 5);
         checksum = compute_crc16();
     }

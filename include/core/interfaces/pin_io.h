@@ -8,6 +8,7 @@
 #define CORE_INTERFACES_PIN_IO_H
 
 #include <stdint.h>
+#include "pin_config.h"
 
 //! @brief Base class for pin IO
 //! @details Interface class to handle IO from GPIO on Arduino
@@ -30,16 +31,16 @@ class PinIO
     virtual void setup() noexcept = 0;
     //! @brief Read the pin
     //! Nodiscard because pin reads should be checked
-    [[nodiscard]] virtual bool digitalRead(uint8_t pin) noexcept = 0;
+    [[nodiscard]] virtual bool digitalRead(PinConfig::Pin pin) noexcept = 0;
     //! @brief Write the pin
-    virtual void digitalWrite(uint8_t pin, bool value) noexcept = 0;
+    virtual void digitalWrite(PinConfig::Pin pin, bool value) noexcept = 0;
     //! @brief Read analog value
     //! Nodiscard because pin reads should be checked
-    [[nodiscard]] virtual uint16_t analogRead(uint8_t pin) noexcept = 0;
+    [[nodiscard]] virtual uint16_t analogRead(PinConfig::Pin pin) noexcept = 0;
     //! @brief Write analog value
-    virtual void analogWrite(uint8_t pin, uint16_t value) noexcept = 0;  
+    virtual void analogWrite(PinConfig::Pin pin, uint16_t value) noexcept = 0;  
     //! @brief Set the mode of a pin
-    virtual void pinMode(uint8_t pin, uint8_t mode) noexcept = 0;
+    virtual void pinMode(PinConfig::Pin pin, uint8_t mode) noexcept = 0;
 };
 
 #endif  // CORE_INTERFACES_PIN_IO_H

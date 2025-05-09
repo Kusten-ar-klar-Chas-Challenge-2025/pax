@@ -23,7 +23,7 @@ class ArduinoPinIO : public PinIO
     {
         for (const auto& pin : PinConfig::pins)
         {
-            pinMode(pin.pin, pin.mode);
+            ::pinMode(static_cast<uint8_t>(pin.pin), static_cast<PinMode>(pin.mode));
         }
     }
 
@@ -32,18 +32,18 @@ class ArduinoPinIO : public PinIO
     //! @param pin The pin to read
     //! @return The digital value of the pin
     //! Nodiscard because pin reads should be checked
-    [[nodiscard]] bool digitalRead(uint8_t pin) noexcept override
+    [[nodiscard]] bool digitalRead(PinConfig::Pin pin) noexcept override
     {
-        return digitalRead(pin);
+        return ::digitalRead(static_cast<uint8_t>(pin));
     }
 
 
     //! @brief Write the digital value of a pin
     //! @param pin The pin to write to
     //! @param value The value to write to the pin
-    void digitalWrite(uint8_t pin, bool value) noexcept override
+    void digitalWrite(PinConfig::Pin pin, bool value) noexcept override
     {
-        digitalWrite(pin, value);
+        ::digitalWrite(static_cast<uint8_t>(pin), static_cast<PinStatus>(value));
     }
 
 
@@ -51,27 +51,27 @@ class ArduinoPinIO : public PinIO
     //! @param pin The pin to read
     //! @return The analog value of the pin
     //! Nodiscard because pin reads should be checked
-    [[nodiscard]] uint16_t analogRead(uint8_t pin) noexcept override
+    [[nodiscard]] uint16_t analogRead(PinConfig::Pin pin) noexcept override
     {
-        return analogRead(pin);
+        return ::analogRead(static_cast<uint8_t>(pin));
     }
 
 
     //! @brief Write the analog value of a pin
     //! @param pin The pin to write to
     //! @param value The value to write to the pin
-    void analogWrite(uint8_t pin, uint16_t value) noexcept override
+    void analogWrite(PinConfig::Pin pin, uint16_t value) noexcept override
     {
-        analogWrite(pin, value);
+        ::analogWrite(static_cast<uint8_t>(pin), value);
     }
 
 
     //! @brief Set the mode of a pin
     //! @param pin The pin to set the mode of
     //! @param mode The mode to set the pin to
-    void pinMode(uint8_t pin, uint8_t mode) noexcept override
+    void pinMode(PinConfig::Pin pin, uint8_t mode) noexcept override
     {
-        pinMode(pin, mode);
+        ::pinMode(static_cast<uint8_t>(pin), static_cast<PinMode>(mode));
     }
 
 
