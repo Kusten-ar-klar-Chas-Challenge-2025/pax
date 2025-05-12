@@ -33,7 +33,7 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    command: sh -c "npx ts-node-dev --respawn --transpile-only app/index.ts"
+    command: sh -c "npx ts-node-dev --respawn --transpile-only api/index.ts"
 
 volumes:
   pgdata:

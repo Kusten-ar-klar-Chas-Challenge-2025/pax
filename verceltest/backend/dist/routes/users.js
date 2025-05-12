@@ -1,20 +1,17 @@
-import express from "express";
-import pool from "../db";
-const router = express.Router();
-/**
- * @swagger
- * /ping:
- *   get:
- *     summary: Test route
- *     responses:
- *       200:
- *         description: Pong response
- */
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const db_1 = __importDefault(require("../db"));
+const asyncHandler_1 = __importDefault(require("../middlewares/asyncHandler"));
+const router = express_1.default.Router();
 /**
  * @swagger
  * tags:
  *   name: Users
- *   description: User management
+ *   description: User management endpoints
  */
 /**
  * @swagger
@@ -46,11 +43,10 @@ const router = express.Router();
  *       500:
  *         description: Error creating user
  */
-// Create a new user
-router.post("/", async (req, res) => {
+router.post("/", (0, asyncHandler_1.default)(async (req, res) => {
     const { firstname, lastname, email, password, role } = req.body;
     try {
-        const result = await pool.query(`INSERT INTO users (firstname, lastname, email, password, role)
+        const result = await db_1.default.query(`INSERT INTO users (firstname, lastname, email, password, role)
        VALUES ($1, $2, $3, $4, $5)
        RETURNING id, firstname, lastname, email, role`, [firstname, lastname, email, password, role || "user"]);
         res.status(201).json(result.rows[0]);
@@ -59,7 +55,7 @@ router.post("/", async (req, res) => {
         console.error("Error creating user:", err);
         res.status(500).json({ error: "Error creating user" });
     }
-});
+}));
 /**
  * @swagger
  * /users:
@@ -77,22 +73,17 @@ router.post("/", async (req, res) => {
  *                 $ref: '#/components/schemas/User'
  *       500:
  *         description: Error fetching users
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Error'
  */
-// GET all users
-router.get("/", async (req, res) => {
+router.get("/", (0, asyncHandler_1.default)(async (_req, res) => {
     try {
-        const result = await pool.query("SELECT id, firstname, lastname, email, role FROM users");
+        const result = await db_1.default.query("SELECT id, firstname, lastname, email, role FROM users");
         res.json(result.rows);
     }
     catch (err) {
         console.error("Error fetching users:", err);
         res.status(500).json({ error: "Error fetching users" });
     }
-});
+}));
 /**
  * @swagger
  * /users/{id}:
@@ -105,7 +96,6 @@ router.get("/", async (req, res) => {
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID of the user
  *     responses:
  *       200:
  *         description: User found
@@ -115,22 +105,13 @@ router.get("/", async (req, res) => {
  *               $ref: '#/components/schemas/User'
  *       404:
  *         description: User not found
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Error'
  *       500:
  *         description: Error fetching user
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Error'
  */
-// GET a specific user
-router.get("/:id", async (req, res) => {
+router.get("/:id", (0, asyncHandler_1.default)(async (req, res) => {
     const { id } = req.params;
     try {
-        const result = await pool.query("SELECT id, firstname, lastname, email, role FROM users WHERE id = $1", [id]);
+        const result = await db_1.default.query("SELECT id, firstname, lastname, email, role FROM users WHERE id = $1", [id]);
         if (result.rows.length === 0) {
             return res.status(404).json({ error: "User not found" });
         }
@@ -140,7 +121,7 @@ router.get("/:id", async (req, res) => {
         console.error("Error fetching user:", err);
         res.status(500).json({ error: "Error fetching user" });
     }
-});
+}));
 /**
  * @swagger
  * /users/{id}:
@@ -153,7 +134,6 @@ router.get("/:id", async (req, res) => {
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID of the user to update
  *     requestBody:
  *       required: true
  *       content:
@@ -163,29 +143,16 @@ router.get("/:id", async (req, res) => {
  *     responses:
  *       200:
  *         description: User updated successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/User'
  *       404:
  *         description: User not found
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Error'
  *       500:
  *         description: Error updating user
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Error'
  */
-// Update a user
-router.put("/:id", async (req, res) => {
+router.put("/:id", (0, asyncHandler_1.default)(async (req, res) => {
     const { id } = req.params;
     const { firstname, lastname, email, role } = req.body;
     try {
-        const result = await pool.query(`UPDATE users 
+        const result = await db_1.default.query(`UPDATE users 
        SET firstname = $1, lastname = $2, email = $3, role = $4
        WHERE id = $5 
        RETURNING id, firstname, lastname, email, role`, [firstname, lastname, email, role, id]);
@@ -198,7 +165,7 @@ router.put("/:id", async (req, res) => {
         console.error("Error updating user:", err);
         res.status(500).json({ error: "Error updating user" });
     }
-});
+}));
 /**
  * @swagger
  * /users/{id}:
@@ -211,7 +178,6 @@ router.put("/:id", async (req, res) => {
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID of the user to delete
  *     responses:
  *       200:
  *         description: User deleted successfully
@@ -226,22 +192,13 @@ router.put("/:id", async (req, res) => {
  *                   $ref: '#/components/schemas/User'
  *       404:
  *         description: User not found
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Error'
  *       500:
  *         description: Error deleting user
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Error'
  */
-// Delete a user
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", (0, asyncHandler_1.default)(async (req, res) => {
     const { id } = req.params;
     try {
-        const result = await pool.query("DELETE FROM users WHERE id = $1 RETURNING id, firstname, lastname, email, role", [id]);
+        const result = await db_1.default.query("DELETE FROM users WHERE id = $1 RETURNING id, firstname, lastname, email, role", [id]);
         if (result.rows.length === 0) {
             return res.status(404).json({ error: "User not found" });
         }
@@ -251,9 +208,5 @@ router.delete("/:id", async (req, res) => {
         console.error("Error deleting user:", err);
         res.status(500).json({ error: "Error deleting user" });
     }
-});
-export default router;
-// To do
-// Inloggning (POST /login) med bcrypt och jsonwebtoken
-// Middleware för att skydda admin-only routes
-// Validering med t.ex. zod eller express-validator
+}));
+exports.default = router;
