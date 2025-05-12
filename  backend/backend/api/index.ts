@@ -1,11 +1,10 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import pool from "./db";
 import swaggerUi from "swagger-ui-express";
-import swaggerSpec from "./swagger/swagger";
+import swaggerSpec from "./swagger/swagger-export.json";
 import cors from "cors";
 import limiter from "./middlewares/rateLimiter";
-import { Request, Response } from "express";
 import errorHandler from "./middlewares/errorHandler";
 
 console.log("Index.ts is running");
@@ -14,7 +13,7 @@ dotenv.config();
 
 const app = express();
 
-const port = process.env.PORT || 13000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json()); // for parsing application/json
 
@@ -38,6 +37,8 @@ app.use(errorHandler);
 
 // Swagger route
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.get("/", (req: Request, res: Response) => res.send("Express on Vercel"));
 
 app.get("/setup", async (_req: Request, res: Response) => {
   console.log("setup starting");
@@ -95,4 +96,4 @@ if (process.env.NODE_ENV !== "production") {
   console.log("DB_PORT:", process.env.DB_PORT);
 }
 
-export default app; // Export for testing
+export default app;

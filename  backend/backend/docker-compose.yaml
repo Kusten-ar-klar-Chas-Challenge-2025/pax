@@ -29,11 +29,11 @@ services:
       DB_NAME: db123
       DB_PASSWORD: password123
       DB_PORT: 5432
-      PORT: 13000
+      PORT: 3000
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    command: sh -c "npx ts-node-dev --respawn --transpile-only src/index.ts"
+    command: sh -c "npx ts-node-dev --respawn --transpile-only app/index.ts"
 
 volumes:
   pgdata:

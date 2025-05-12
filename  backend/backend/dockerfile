@@ -1,20 +1,18 @@
 # 1. Basbild
 FROM node:18
 
-# 2. Arbetskatalog
+# 2. Ange arbetskatalog
 WORKDIR /usr/src/app
 
-# 3. Kopiera package-filer och installera beroenden
+# 3. Kopiera package.json + lockfile och installera beroenden
 COPY package*.json ./
 RUN npm install
 
-# 4. Kopiera resten av koden
+# 4. Kopiera övriga projektfiler
 COPY . .
 
-# 5. Exponera porten
-EXPOSE 13000
+# 5. Exponera den port som appen kör på (enligt din docker-compose: 13000)
+EXPOSE 3000
 
-# 6. Välj startkommando baserat på miljö
-# DEV = ts-node-dev
-# PROD = kör kompilerad JS från dist
+# 6. Startkommando (du styr detta via docker-compose, men det här funkar också)
 CMD [ "npm", "run", "dev" ]
