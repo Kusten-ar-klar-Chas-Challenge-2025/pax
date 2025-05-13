@@ -3,13 +3,6 @@
 PostMan::PostMan(const char *serverURL, const char *endpoint, uint16_t port, Stream *stream)
     : serverURL{serverURL}, endpoint{endpoint}, port{port}, m_stream{stream} {}
 
-/**
- * @brief Create the JSON payload that passes sensor data and fetches the current date and time.
- * @param temperature
- * @param occupancyStatus
- * @param airQuality
- * @return String
- */
 String PostMan::createJSON(const String &temperature, const String &occupancyStatus, const String &airQuality)
 {
     String json = "{\n";
@@ -20,11 +13,6 @@ String PostMan::createJSON(const String &temperature, const String &occupancySta
     return json;
 }
 
-/**
- * @brief Create HTTP POST request header for the given JSON payload.
- * @param jsonPayload The JSON data to be sent.
- * @return String - The full HTTP POST request header.
- */
 String PostMan::createHTTPHeader(const String &json)
 {
     String httpRequest = "";
@@ -36,14 +24,6 @@ String PostMan::createHTTPHeader(const String &json)
     return httpRequest;
 }
 
-/**
- * @brief Establish a connection and send the HTTP POST request with the JSON payload constructed from the parameters.
- * @param temperature
- * @param occupancyStatus
- * @param airQuality
- * @return true = succesful transmission to server endpoint
- * @return false = failure to send to server endpoint
- */
 bool PostMan::sendPost(const String &temperature, const String &occupancyStatus, const String &airQuality, NetworkingBase &network)
 {
     String json = createJSON(temperature, occupancyStatus, airQuality);
