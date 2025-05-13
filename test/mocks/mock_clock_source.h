@@ -1,4 +1,9 @@
-// MockClock.h
+//! @file mock_clock_source.h
+//! @brief Mock clock source implementation
+//! @details This file contains the implementation of the mock clock source for native testing
+//! The clock source is std::chrono::steady_clock and the delay is std::this_thread::sleep_for
+
+
 #ifndef MOCK_CLOCK_H
 #define MOCK_CLOCK_H
 
@@ -6,6 +11,7 @@
 #include <ctime>
 #include <chrono>
 #include <string>
+#include <thread>
 
 // Define the DateTime and TimeSpan classes for the mock
 class TimeSpan {
@@ -143,13 +149,13 @@ public:
 
 };
 
+//! @brief Mock clock source implementation
+//! @details This class is a mock implementation of the Clock interface
+//! The clock source is std::chrono::steady_clock and the delay is std::this_thread::sleep_for
+//! Use this to test time related functions without having to depend on the actual time
+//! and for use of mock clock sources in tests.
+//! Some concrete libraries need time functions for seeding RNG or for delays between reads and writes
 class MockClock : public Clock {
-private:
-    DateTime set_time_value;
-    bool is_running;
-    int8_t trim_value;
-    uint32_t set_millis_value;
-    std::chrono::steady_clock::time_point start;
 
 public:
     MockClock() 
@@ -190,6 +196,10 @@ public:
         return set_millis_value;
     }
 
+    void delay(uint32_t milliseconds) const noexcept override {
+        std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+    }
+
     DateTime now() const noexcept override {
         return set_time_value;
     }
@@ -202,6 +212,13 @@ public:
     operator bool() const {
         return is_running;
     }
+
+    private:
+    DateTime set_time_value;
+    bool is_running;
+    int8_t trim_value;
+    uint32_t set_millis_value;
+    std::chrono::steady_clock::time_point start;
 };
 
 #endif // MOCK_CLOCK_H

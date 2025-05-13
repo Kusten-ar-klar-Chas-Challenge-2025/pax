@@ -1,26 +1,29 @@
 #ifndef MOCK_BACKEND_NETWORK_H
 #define MOCK_BACKEND_NETWORK_H
 
-#ifdef UNIT_TEST
 
 #include <string>
 #include <cstring>
 #include "backend_network.h"
-
+#include <vector>
 class MockBackendNetwork : public BackendNetwork
 {
-    private:
-    const ServerConfig& m_config;
-    std::string m_last_message;
-    std::string m_last_endpoint;
-    HttpMethod m_last_method;
-
     public:
+    struct Request {
+        HttpMethod method;
+        std::string url;
+        const char* body;
+        std::string response;
+        size_t response_size;
+    };
+
+    std::vector<Request> requests;
+
     explicit MockBackendNetwork(const ServerConfig& config) : m_config(config) {}
 
     NetworkError request(HttpMethod method,
                const std::string_view& endpoint,
-               const std::string_view& request_message,
+               const std::string_view& request_body,
                char* response_buffer,
                size_t max_len) override 
     {
@@ -28,31 +31,31 @@ class MockBackendNetwork : public BackendNetwork
         {
             return NetworkError::NO_BUFFER_PROVIDED;
         }
-        if (method != HttpMethod::GET && request_message.empty()) 
+        if (method != HttpMethod::GET && request_body.empty()) 
         {
             return NetworkError::NO_REQUEST_MESSAGE;
         }
 
-        m_last_method = method;
-        m_last_endpoint = endpoint;
-        m_last_message = request_message;
-
-        if (method == HttpMethod::GET && response_buffer) 
-        {
-            std::string response = "Mock response for " + m_last_endpoint;
-            size_t bytes_to_copy = std::min(response.length(), max_len - 1);
-            std::memcpy(response_buffer, response.data(), bytes_to_copy);
-            response_buffer[bytes_to_copy] = '\0';
-            return NetworkError::OK;
+        Request req;
+        req.method = method;
+        req.url = endpoint;
+        req.body = request_body.data();
+        req.response_size = max_len;
+        if (!requests.empty() && requests.back().response.size() <= max_len) {
+            req.response = requests.back().response;
+            std::strncpy(response_buffer, req.response.c_str(), max_len);
         }
-        return NetworkError::OK;
+        requests.push_back(req);
     }
 
-    std::string get_last_message() const { return m_last_message; }
-    std::string get_last_endpoint() const { return m_last_endpoint; }
-    HttpMethod get_last_method() const { return m_last_method; }
-};
+        // Set the next response for testing
+    void set_response(const std::string& response) {
+        requests.push_back({HttpMethod::GET, "", nullptr, response, 0});
+    }
 
-#endif  // UNIT_TEST
+    private:
+    const ServerConfig& m_config;
+    
+};
 
 #endif  // MOCK_BACKEND_NETWORK_H

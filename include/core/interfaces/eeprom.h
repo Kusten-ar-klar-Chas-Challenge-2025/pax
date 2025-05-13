@@ -37,7 +37,7 @@ class Eeprom {
         //! @brief Write a string view to EEPROM
         //! @param address The address to write to
         //! @param[in] source The string view to write
-        virtual EepromError write_string_view(uint16_t address, std::string_view source) = 0;
+        virtual EepromError write(uint16_t address, std::string_view source) = 0;
 };
 
 #endif // INTERFACES_EEPROM_H

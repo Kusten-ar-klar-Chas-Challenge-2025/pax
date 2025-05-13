@@ -54,6 +54,39 @@ struct Uuid {
         //! Fill the next 6 bytes with the MAC address
         std::memcpy(bytes.data() + 10, mac_address.data(), 6);
     }
+
+    //! @brief Copy constructor from a device id
+    Uuid(const DeviceId& device_id) {
+        memcpy (bytes.data(), device_id.unique_id, 16);
+    }
+
+    //! @brief Move constructor from a device id
+    Uuid(DeviceId&& device_id) {
+        memcpy (bytes.data(), device_id.unique_id, 16);
+    }
+
+    //! @brief Assignment operator from a device id
+    Uuid& operator=(const DeviceId& device_id) {
+        memcpy (bytes.data(), device_id.unique_id, 16);
+        return *this;
+    }
+
+    //! @brief Convert a UUID to a hexadecimal string with hyphens
+    //! @return The UUID as a hexadecimal string with hyphens
+    std::array<char, 37> to_string() const
+    {
+        std::array<char, 37> result = {0};
+        //! Format the UUID into the result array
+        snprintf(result.data(), result.size(),
+             "%02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x-%02x%02x%02x%02x%02x%02x",
+             bytes[0], bytes[1], bytes[2], bytes[3], //!< first 4 bytes
+             bytes[4], bytes[5],                    //!< next 2 bytes
+             bytes[6], bytes[7],                    //!< next 2 bytes
+             bytes[8], bytes[9],                    //!< next 2 bytes
+             bytes[10], bytes[11], bytes[12], bytes[13], bytes[14], bytes[15]); //!< last 6 bytes
+        return result;
+    }
+
 };
 
 #endif  // INTERFACES_UUID_H

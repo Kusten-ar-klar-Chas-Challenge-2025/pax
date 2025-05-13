@@ -21,6 +21,10 @@ class Clock
     //! @return Time in milliseconds
     //! @note This is the Arduino millis() function and should wrap when the timer overflows
     virtual uint32_t millis() const noexcept = 0;
+    //! @brief Delay for a given number of milliseconds
+    //! @param milliseconds Number of milliseconds to delay
+    //! @note This is the Arduino delay() function and should block the calling thread
+    virtual void delay(uint32_t milliseconds) const noexcept = 0;
     //! @brief Get the current time
     //! @return DateTime object containing the current time
     //! @note This differs from the R4A1 RTC.h that fills a DateTime object. This usage follows RTClib instead.
@@ -29,6 +33,7 @@ class Clock
     //! @param time DateTime object containing the time to set the clock to
     virtual void set_time(const DateTime& time) noexcept = 0;
     //! @brief Destructor for base class
+    virtual operator bool() const = 0;
     virtual ~Clock() = default;
     protected:
     //! @brief Default constructor protected to prevent instantiation of abstract class

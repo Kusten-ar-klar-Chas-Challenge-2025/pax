@@ -59,7 +59,7 @@ struct DeviceId {
     //! @brief Verify the device ID checksum
     bool is_valid() const {
         return checksum == compute_crc16();
-    }
+    }    
 };
 
 #endif // INTERFACES_DEVICE_ID_H

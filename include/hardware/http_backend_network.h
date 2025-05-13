@@ -36,6 +36,12 @@ class HttpBackendNetwork : public BackendNetwork {
       return NetworkError::NO_REQUEST_MESSAGE;
     }
 
+    //! Connect to the server using the ServerConfig
+    if (!m_http_client.connect(m_config.host.data(), m_config.port))
+    {
+      return NetworkError::NOT_CONNECTED;
+    }
+
     m_http_client.beginRequest();
     
     switch(method) 
@@ -85,6 +91,7 @@ class HttpBackendNetwork : public BackendNetwork {
     }
     //! End the request
     m_http_client.endRequest();
+    m_http_client.stop();
     //! Return the success status
     //! If we get here and we read data, then the request was successful
     //! If we get here and we didn't read data, then the request failed

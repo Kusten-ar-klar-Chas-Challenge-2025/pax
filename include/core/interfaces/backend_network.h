@@ -34,7 +34,7 @@ class BackendNetwork
 //! @brief Perform a HTTP request to the backend server
 //! @param[in] method HTTP method to use
 //! @param[in] endpoint Endpoint to request
-//! @param[in] request_message Request message to send, empty for GET requests
+//! @param[in] request_body Request body to send, empty for GET requests
 //! @param[out] response_buffer Buffer to store the response
 //! @param[in] max_len Maximum length of the response buffer
 //! @return The error code
@@ -47,7 +47,7 @@ class BackendNetwork
 //! }
   virtual NetworkError request(HttpMethod method,
                       const std::string_view& endpoint,
-                      const std::string_view& request_message,
+                      const std::string_view& request_body,
                       char* response_buffer,
                       size_t max_len) = 0;
   virtual ~BackendNetwork() = default;

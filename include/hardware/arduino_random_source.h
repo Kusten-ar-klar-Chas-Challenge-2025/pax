@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include "core/interfaces/random_source.h"
 
-class ArduinoRandom : public RandomSource
+class ArduinoRandomSource : public RandomSource
 {
     public:
     void randomSeed(uint32_t seed) override { ::randomSeed(seed); }
