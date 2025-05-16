@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Header from "./components/Header";
 import Footer from "./components/Footer";
 import RoomCard from "./components/RoomCard";
 import CreateRoomModal from "./components/CreateRoomModal";

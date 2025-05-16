@@ -9,9 +9,13 @@ import {
 import { User } from "../types/user";
 import Button from "@/components/Button";
 import { useEffect, useState } from "react";
+import UserModal from "@/components/UserModal";
+
 const Users: React.FC = () => {
   const API_BASE_URL = "http://localhost:13000";
   const [users, setUsers] = useState<User[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingUser, setEditingUser] = useState<User | undefined>(undefined);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,7 +70,14 @@ const Users: React.FC = () => {
     <main className="flex flex-col justify-center p-6 bg-gray-300 gap-4 text-black w-full h-screen overflow-auto">
       <section className="flex gap-4">
         <h1 className="text-2xl font-bold">Users</h1>
-        <Button onClick={() => {}}>Add User</Button>
+        <Button
+          onClick={() => {
+            setEditingUser(undefined);
+            setIsModalOpen(true);
+          }}
+        >
+          Add User
+        </Button>
       </section>
       <section className="flex-grow gap-4 flex">
         {mockUsers.map((user) => (
@@ -81,14 +92,26 @@ const Users: React.FC = () => {
               <p> Role: {user.role}</p>
             </CardContent>
             <CardFooter className="flex gap-2">
-              <Button onClick={() => {}}>Update</Button>
+              <Button
+                onClick={() => {
+                  setEditingUser(user);
+                  setIsModalOpen(true);
+                }}
+              >
+                Update
+              </Button>
               <Button onClick={() => {}}>Delete</Button>
             </CardFooter>
           </Card>
         ))}
       </section>
+      <UserModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        user={editingUser}
+      />
     </main>
   );
 };
-
+//ebba was here
 export default Users;

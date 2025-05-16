@@ -32,11 +32,11 @@ const router = express.Router();
  *         application/json:
  *           schema:
  *             type: object
- *             required: [firstname, lastname, email, password]
+ *             required: [name, surname, email, password]
  *             properties:
- *               firstname:
+ *               name:
  *                 type: string
- *               lastname:
+ *               surname:
  *                 type: string
  *               email:
  *                 type: string
@@ -53,14 +53,14 @@ const router = express.Router();
 
 // Create a new user
 router.post("/", async (req, res) => {
-  const { firstname, lastname, email, password, role } = req.body;
+  const { name, surname, email, password, role } = req.body;
 
   try {
     const result = await pool.query(
-      `INSERT INTO users (firstname, lastname, email, password, role)
+      `INSERT INTO users (name, surname, email, password, role)
        VALUES ($1, $2, $3, $4, $5)
-       RETURNING id, firstname, lastname, email, role`,
-      [firstname, lastname, email, password, role || "user"]
+       RETURNING id, name, surname, email, role`,
+      [name, surname, email, password, role || "user"]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -103,7 +103,7 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT id, firstname, lastname, email, role FROM users"
+      "SELECT id, name, surname, email, role FROM users"
     );
     res.json(result.rows);
   } catch (err) {
@@ -155,7 +155,7 @@ router.get("/:id", async (req, res) => {
 
   try {
     const result = await pool.query(
-      "SELECT id, firstname, lastname, email, role FROM users WHERE id = $1",
+      "SELECT id, name, surname, email, role FROM users WHERE id = $1",
       [id]
     );
 
@@ -207,18 +207,74 @@ router.get("/:id", async (req, res) => {
  *         description: Error updating user
  */
 
+// Follow a user
+router.post('/:id/follow/:followedId', async (req, res) => {
+  const { id, followedId } = req.params;
+  try {
+    await pool.query(
+      'INSERT INTO followers (follower_id, followed_id) VALUES ($1, $2) ON CONFLICT DO NOTHING',
+      [id, followedId]
+    );
+    res.status(200).json({ message: 'Followed successfully' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to follow user' });
+  }
+});
+
+// Unfollow a user
+router.delete('/:id/unfollow/:followedId', async (req, res) => {
+  const { id, followedId } = req.params;
+  try {
+    await pool.query(
+      'DELETE FROM followers WHERE follower_id = $1 AND followed_id = $2',
+      [id, followedId]
+    );
+    res.status(200).json({ message: 'Unfollowed successfully' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to unfollow user' });
+  }
+});
+
+// Get followers of a user
+router.get('/:id/followers', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(
+      'SELECT users.id, users.name, users.surname, users.email, users.role FROM followers JOIN users ON followers.follower_id = users.id WHERE followers.followed_id = $1',
+      [id]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to get followers' });
+  }
+});
+
+// Get users this user is following
+router.get('/:id/following', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(
+      'SELECT users.id, users.name, users.surname, users.email, users.role FROM followers JOIN users ON followers.followed_id = users.id WHERE followers.follower_id = $1',
+      [id]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to get following' });
+  }
+});
+
 // Update a user
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
-  const { firstname, lastname, email, role } = req.body;
+  const { name, surname, email, role } = req.body;
 
   try {
     const result = await pool.query(
       `UPDATE users 
-       SET firstname = $1, lastname = $2, email = $3, role = $4
+       SET name = $1, surname = $2, email = $3, role = $4
        WHERE id = $5 
-       RETURNING id, firstname, lastname, email, role`,
-      [firstname, lastname, email, role, id]
+       RETURNING id, name, surname, email, role`,
+      [name, surname, email, role, id]
     );
 
     if (result.rows.length === 0) {
@@ -260,7 +316,7 @@ router.delete("/:id", async (req, res) => {
 
   try {
     const result = await pool.query(
-      "DELETE FROM users WHERE id = $1 RETURNING id, firstname, lastname, email, role",
+      "DELETE FROM users WHERE id = $1 RETURNING id, name, surname, email, role",
       [id]
     );
 
