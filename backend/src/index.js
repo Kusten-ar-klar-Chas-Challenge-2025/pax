@@ -4,8 +4,6 @@ import pool from "./db.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swagger.js";
 import cors from "cors";
-import rateLimit from "express-rate-limit";
-import limiter from "./middlewares/rateLimiter.js";
 
 console.log("index.js is running");
 

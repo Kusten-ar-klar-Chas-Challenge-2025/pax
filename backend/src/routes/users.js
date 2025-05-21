@@ -207,62 +207,6 @@ router.get("/:id", async (req, res) => {
  *         description: Error updating user
  */
 
-// Follow a user
-router.post('/:id/follow/:followedId', async (req, res) => {
-  const { id, followedId } = req.params;
-  try {
-    await pool.query(
-      'INSERT INTO followers (follower_id, followed_id) VALUES ($1, $2) ON CONFLICT DO NOTHING',
-      [id, followedId]
-    );
-    res.status(200).json({ message: 'Followed successfully' });
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to follow user' });
-  }
-});
-
-// Unfollow a user
-router.delete('/:id/unfollow/:followedId', async (req, res) => {
-  const { id, followedId } = req.params;
-  try {
-    await pool.query(
-      'DELETE FROM followers WHERE follower_id = $1 AND followed_id = $2',
-      [id, followedId]
-    );
-    res.status(200).json({ message: 'Unfollowed successfully' });
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to unfollow user' });
-  }
-});
-
-// Get followers of a user
-router.get('/:id/followers', async (req, res) => {
-  const { id } = req.params;
-  try {
-    const result = await pool.query(
-      'SELECT users.id, users.name, users.surname, users.email, users.role FROM followers JOIN users ON followers.follower_id = users.id WHERE followers.followed_id = $1',
-      [id]
-    );
-    res.json(result.rows);
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to get followers' });
-  }
-});
-
-// Get users this user is following
-router.get('/:id/following', async (req, res) => {
-  const { id } = req.params;
-  try {
-    const result = await pool.query(
-      'SELECT users.id, users.name, users.surname, users.email, users.role FROM followers JOIN users ON followers.followed_id = users.id WHERE followers.follower_id = $1',
-      [id]
-    );
-    res.json(result.rows);
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to get following' });
-  }
-});
-
 // Update a user
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
