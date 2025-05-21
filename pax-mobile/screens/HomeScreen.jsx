@@ -18,6 +18,7 @@ const HomeScreen = () => {
   const { theme, isDark, toggleTheme } = useTheme();
   const styles = createStyles(theme);
 
+  //cmt
   return (
     <SafeAreaProvider>
       <ScrollView>
