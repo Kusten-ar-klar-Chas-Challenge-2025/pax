@@ -75,7 +75,7 @@ const UserModal: FC<UserModalProps> = ({ isOpen, onClose, user }) => {
   };
   const onCreate = async (user: User) => {
     try {
-      const res = await fetch("http://localhost:13000/users", {
+      const res = await fetch("http://localhost:13000/users/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
@@ -89,7 +89,7 @@ const UserModal: FC<UserModalProps> = ({ isOpen, onClose, user }) => {
 
   return (
     <Modal>
-      <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-md space-y-4">
+      <div className="p-6 space-y-4 w-full max-w-md bg-white rounded-2xl shadow-lg">
         <h2 className="text-xl font-semibold">
           {user ? "Redigera användare" : "Skapa ny användare"}
         </h2>
@@ -104,7 +104,7 @@ const UserModal: FC<UserModalProps> = ({ isOpen, onClose, user }) => {
           </label>
           <input
             id="name"
-            className="w-full border rounded p-2"
+            className="p-2 w-full rounded border"
             placeholder="Namn"
             name="name"
             value={form.name}
@@ -121,7 +121,7 @@ const UserModal: FC<UserModalProps> = ({ isOpen, onClose, user }) => {
           </label>
           <input
             id="surname"
-            className="w-full border rounded p-2"
+            className="p-2 w-full rounded border"
             placeholder="Efternamn"
             name="surname"
             value={form.surname}
@@ -139,7 +139,7 @@ const UserModal: FC<UserModalProps> = ({ isOpen, onClose, user }) => {
           </label>
           <input
             id="email"
-            className="w-full border rounded p-2"
+            className="p-2 w-full rounded border"
             placeholder="E-post"
             name="email"
             value={form.email}
@@ -157,7 +157,7 @@ const UserModal: FC<UserModalProps> = ({ isOpen, onClose, user }) => {
             <input
               id="role"
               type="text"
-              className="border rounded p-2"
+              className="p-2 rounded border"
               placeholder="Roll"
               name="role"
               value={form.role}

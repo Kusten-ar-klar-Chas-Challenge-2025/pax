@@ -27,15 +27,7 @@
     "nodemon": "^3.1.9",
     "pg": "^8.14.1",
     "ps": "^1.0.0",
-<<<<<<< HEAD
-    "react-router-dom": "^7.5.2",
-    "recharts": "^2.15.3"
-  },
-  "devDependencies": {
-    "typescript": "^5.8.3"
-=======
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
->>>>>>> develop-backend
   }
 }

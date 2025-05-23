@@ -67,7 +67,7 @@ const Users: React.FC = () => {
   ];
 
   return (
-    <main className="flex flex-col justify-center p-6 bg-gray-300 gap-4 text-black w-full h-screen overflow-auto">
+    <main className="flex overflow-auto flex-col gap-4 justify-center p-6 w-full h-screen text-black bg-gray-300">
       <section className="flex gap-4">
         <h1 className="text-2xl font-bold">Users</h1>
         <Button
@@ -79,7 +79,7 @@ const Users: React.FC = () => {
           Add User
         </Button>
       </section>
-      <section className="flex-grow gap-4 flex">
+      <section className="flex flex-grow gap-4">
         {mockUsers.map((user) => (
           <Card key={user.id} className="h-fit">
             <CardHeader>
@@ -100,7 +100,19 @@ const Users: React.FC = () => {
               >
                 Update
               </Button>
-              <Button onClick={() => {}}>Delete</Button>
+              <Button className="bg-red-500" onClick={async () => {
+                   try {
+                    const res = await fetch("http://localhost:13000/users", {
+                      method: "DELETE",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(user.id),
+                    });
+                    if (!res.ok) throw new Error("Kunde inte ta bort användaren");
+                    // Optionally handle response here
+                  } catch (error) {
+                    console.error("Fel vid delete", error);
+                  }
+               }}>Delete</Button>
             </CardFooter>
           </Card>
         ))}
