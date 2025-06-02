@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['sendroomstate_0',['sendRoomState',['../class_post_man.html#ad31060a21c8d92ab30f193d210df8f25',1,'PostMan']]],
-  ['senduuid_1',['sendUuid',['../class_post_man.html#ad7e10ec00c0550649b0728d700812a17',1,'PostMan']]],
-  ['setup_2',['setup',['../main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d',1,'main.cpp']]]
+  ['room_5fendpoint_0',['room_endpoint',['../class_backend.html#af9d45bca988053f6575d5bd511222195',1,'Backend']]],
+  ['room_5fhas_5factivity_1',['room_has_activity',['../class_measurement_state.html#a2e0453e1e1e1f14d7cbe344e488fba12',1,'MeasurementState']]],
+  ['room_5fhas_5factivity_5fbool_2',['room_has_activity_bool',['../class_measurement_state.html#a6b71cb7c130fb838355e0f51ad3ffd8e',1,'MeasurementState']]]
 ];

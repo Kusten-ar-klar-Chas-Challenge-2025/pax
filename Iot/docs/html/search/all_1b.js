@@ -1,10 +1,25 @@
 var searchData=
 [
-  ['underhållbarhet_0',['3.2.3 Tillförlitlighet och Underhållbarhet',['../md__s_r_s.html#autotoc_md58',1,'']]],
-  ['update_5fall_1',['update_all',['../class_measurement_state.html#a1ab88550ceb4111d5a9ef76a2131e39a',1,'MeasurementState']]],
-  ['update_5fpir_2',['update_pir',['../class_measurement_state.html#a21a5e090c27d0926931ce1ca38b861d3',1,'MeasurementState']]],
-  ['utvecklingsmetodik_3',['5. Projektorganisation och Utvecklingsmetodik',['../md__s_r_s.html#autotoc_md69',1,'']]],
-  ['uuid_4',['UUID',['../md_docs_2_device_01_registration.html#autotoc_md1',1,'']]],
-  ['uuid_5',['uuid',['../struct_server_info.html#a434c263468eddabde080a642ad07b23e',1,'ServerInfo']]],
-  ['uuid_20och_20rum_6',['Koppling mellan UUID och rum',['../md_docs_2_device_01_registration.html#autotoc_md2',1,'']]]
+  ['tar_20längre_20tid_20än_20förväntat_0',['Hur hanterar teamet förändringar i tidsplanen om någor tar längre tid än förväntat?',['../md_docs_2_p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md23',1,'']]],
+  ['teamet_20förändringar_20i_20tidsplanen_20om_20någor_20tar_20längre_20tid_20än_20förväntat_1',['Hur hanterar teamet förändringar i tidsplanen om någor tar längre tid än förväntat?',['../md_docs_2_p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md23',1,'']]],
+  ['teamsamarbete_20och_20kunskapöverföring_3a_2',['Teamsamarbete och kunskapöverföring:',['../md_docs_2_p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md16',1,'']]],
+  ['teamsamarbete_20och_20kunskapöverföring_3a_20strong_3',['&lt;strong&gt;Teamsamarbete och kunskapöverföring:&lt;/strong&gt;',['../md_docs_2_p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md19',1,'']]],
+  ['teamsamarbete_20och_20kunskapsöverföring_3a_4',['Teamsamarbete och kunskapsöverföring:',['../md_docs_2_p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md13',1,'']]],
+  ['teamstruktur_20och_20ansvarsområden_5',['5.1 Teamstruktur och Ansvarsområden',['../md_docs_2_s_r_s.html#autotoc_md60',1,'']]],
+  ['teamstruktur_20och_20ansvarsområden_6',['Teamstruktur och ansvarsområden',['../md_docs_2_p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md10',1,'']]],
+  ['teamwork_20och_20säker_20kunskapsöverföring_3a_7',['Teamwork och säker kunskapsöverföring:',['../md_docs_2_p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md20',1,'']]],
+  ['teknisk_20arkitektur_8',['4.1 Teknisk Arkitektur',['../md_docs_2_s_r_s.html#autotoc_md51',1,'']]],
+  ['teknologier_20för_20frontend_20backend_20och_20iot_9',['Teknologier för frontend, backend och IoT.',['../md_docs_2_p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md9',1,'']]],
+  ['temp_5fpin_10',['temp_pin',['../main_8cpp.html#ad0fa1af2200a5bbc682c219293e32138',1,'main.cpp']]],
+  ['temp_5fsensor_2ecpp_11',['temp_sensor.cpp',['../temp__sensor_8cpp.html',1,'']]],
+  ['tempsensor_12',['TempSensor',['../class_temp_sensor.html',1,'TempSensor'],['../class_temp_sensor.html#a389f822dfa1db1419c70cab417d6a5be',1,'TempSensor::TempSensor()']]],
+  ['testning_20och_20kvalitetssäkring_13',['6. Testning och Kvalitetssäkring',['../md_docs_2_s_r_s.html#autotoc_md62',1,'']]],
+  ['teststrategi_14',['6.1 Teststrategi',['../md_docs_2_s_r_s.html#autotoc_md63',1,'']]],
+  ['tid_20än_20förväntat_15',['Hur hanterar teamet förändringar i tidsplanen om någor tar längre tid än förväntat?',['../md_docs_2_p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md23',1,'']]],
+  ['tidsplan_20och_20milstolpar_16',['8. Tidsplan och Milstolpar',['../md_docs_2_s_r_s.html#autotoc_md68',1,'']]],
+  ['tidsplan_20och_20milstolpar_3a_17',['Tidsplan och milstolpar:',['../md_docs_2_p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md22',1,'']]],
+  ['tidsplanen_20om_20någor_20tar_20längre_20tid_20än_20förväntat_18',['Hur hanterar teamet förändringar i tidsplanen om någor tar längre tid än förväntat?',['../md_docs_2_p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md23',1,'']]],
+  ['tillförlitlighet_20och_20underhållbarhet_19',['3.2.3 Tillförlitlighet och Underhållbarhet',['../md_docs_2_s_r_s.html#autotoc_md48',1,'']]],
+  ['tre_20subteam_20',['Projektteam bestående av tre subteam',['../md_docs_2_s_r_s.html#autotoc_md36',1,'']]],
+  ['try_5fget_5froom_5fid_21',['try_get_room_id',['../main_8cpp.html#ab116e710d226d4fdac0761d67f01bbdd',1,'main.cpp']]]
 ];

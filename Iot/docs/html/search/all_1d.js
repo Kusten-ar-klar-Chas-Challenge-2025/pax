@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['wifi_0',['Wifi',['../class_wifi.html',1,'']]],
-  ['wifi_1',['To build the Arduino code you need to configure wifi',['../md__r_e_a_d_m_e.html#autotoc_md29',1,'']]],
-  ['wifi_5fon_2',['wifi_on',['../class_networking_base.html#a48dc85510d4b4d20d2b7e9953a1cec12',1,'NetworkingBase']]]
+  ['verify_5ftoken_5fvalidity_0',['verify_token_validity',['../class_backend.html#a958feee15e9bab2a96f6be00bd8c8c24',1,'Backend']]],
+  ['verktyg_20och_20metodik_1',['5.2 Verktyg och Metodik',['../md_docs_2_s_r_s.html#autotoc_md61',1,'']]],
+  ['verktyg_3a_2',['Arbetsmetodik och verktyg:',['../md_docs_2_p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md21',1,'']]]
 ];

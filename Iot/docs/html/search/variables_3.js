@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uuid_0',['uuid',['../struct_server_info.html#a434c263468eddabde080a642ad07b23e',1,'ServerInfo']]]
+  ['endpoints_0',['endpoints',['../struct_server_info.html#ac45b4710e5ced6067c190e3285fcdeb4',1,'ServerInfo']]]
 ];

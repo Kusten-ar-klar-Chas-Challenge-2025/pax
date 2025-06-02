@@ -79,7 +79,7 @@ private:
      * 
      */
     uint16_t m_iaq_baseline_eco2;
-        /**
+    /**
      * @brief Calibration varible for SGP30 sensor
      * 
      */
@@ -121,19 +121,35 @@ public:
      */
     String room_has_activity();
     /**
+     * @brief Function returns current room activity status
+     * 
+     * @return bool true if room has activity, false otherwise
+     */
+    bool room_has_activity_bool();
+    /**
      * @brief Function returns Air Quality in a printable format 
      * 
      * @return String Values 0-100, representing percentage 
      */
     String get_air_quality();
     /**
-     * @brief Funciton returns Temperature in a printable format
+     * @brief Function returns Air Quality as a float
+     * 
+     * @return float Values 0-100, representing percentage
+     */
+    float get_air_quality_float();
+    /**
+     * @brief Function returns Temperature in a printable format
      * 
      * @return String temperature in °C
      */
     String get_temperature();
+    /**
+     * @brief Function returns Temperature as a float
+     * 
+     * @return float temperature in °C
+     */
+    float get_temperature_float();
 };
-
-
 
 #endif

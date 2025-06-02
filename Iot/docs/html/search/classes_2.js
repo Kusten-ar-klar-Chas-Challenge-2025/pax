@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['networkingbase_0',['NetworkingBase',['../class_networking_base.html',1,'']]]
+  ['httpresponse_0',['HttpResponse',['../struct_http_response.html',1,'']]]
 ];

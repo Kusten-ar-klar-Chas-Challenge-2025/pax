@@ -39,15 +39,20 @@ Kopiera mallen under för att konfigurera din egna uppkoppling (SSID, Password, 
 
 #define SECRET_SSID "SSID" // Your WiFi SSID
 #define SECRET_PASS "PASSWORD" // Your WiFi password 
-#define SERVER_URL "url.domain"
-#define SERVER_ENDPOINT "/post"
-#define SERVER_PORT 8080 
 
-struct ServerConfig {
-    IPAddress ip;
-    uint16_t port;
-};
-const ServerConfig SERVER = { IPAddress(192, 0, 0, 0), SERVER_PORT};
+// Server configuration
+#define SERVER_URL "database.com"
+#define SERVER_PORT 443  // Default HTTPS port
+#define API_PATH "" 
+
+// Auth configuration
+#define JWT_USER "email"
+#define JWT_PASS "password"
+
+// Device configuration
+#define DEVICE_UUID "UUID2"  // UUID for initial registration
+#define ROOM_OVERRIDE 30     // Optional room ID override for testing
+
 
 #endif
 ```

@@ -4,6 +4,7 @@
  * 
  */
 #include "measurement_state.h"
+#include <cmath>  // For NAN
 
 
 MeasurementState::MeasurementState(uint8_t pir_pin, unsigned long hold_duration, uint8_t temp_sensor_pin)
@@ -69,8 +70,6 @@ void MeasurementState::update_all(){
     }
 }
 
-
-
 String MeasurementState::room_has_activity(){
     if (get_current_time() - m_last_activation_time <= m_hold_duration) {
         return "true";
@@ -79,6 +78,9 @@ String MeasurementState::room_has_activity(){
       }    
 }
 
+bool MeasurementState::room_has_activity_bool() {
+    return get_current_time() - m_last_activation_time <= m_hold_duration;
+}
 
 void MeasurementState::read_air_quality()
 {
@@ -97,18 +99,34 @@ void MeasurementState::read_air_quality()
     }
 }
 
- String MeasurementState::get_air_quality()
- {
+String MeasurementState::get_air_quality()
+{
     if (!m_sgp_initialized) {
         return F("Sensor error");
     }
     return String(m_air_quality);
- }
+}
+
+float MeasurementState::get_air_quality_float()
+{
+    if (!m_sgp_initialized) {
+        return NAN;  // Return NAN to indicate error
+    }
+    return m_air_quality;
+}
     
- String MeasurementState::get_temperature()
- {
+String MeasurementState::get_temperature()
+{
     if (!m_temp_sensor_connected) {
         return F("Sensor error");
     }
     return String(m_temperature);
- }
+}
+
+float MeasurementState::get_temperature_float()
+{
+    if (!m_temp_sensor_connected) {
+        return NAN;  // Return NAN to indicate error
+    }
+    return m_temperature;
+}

@@ -1,7 +1,15 @@
 var searchData=
 [
-  ['någor_20tar_20längre_20tid_20än_20förväntat_0',['Hur hanterar teamet förändringar i tidsplanen om någor tar längre tid än förväntat?',['../md__p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md23',1,'']]],
-  ['need_20to_20configure_20wifi_1',['To build the Arduino code you need to configure wifi',['../md__r_e_a_d_m_e.html#autotoc_md29',1,'']]],
-  ['networking_5fbase_2ecpp_2',['networking_base.cpp',['../networking__base_8cpp.html',1,'']]],
-  ['networkingbase_3',['NetworkingBase',['../class_networking_base.html',1,'NetworkingBase'],['../class_networking_base.html#a1aa06ed53087f36c2f7751510d89cecc',1,'NetworkingBase::NetworkingBase()']]]
+  ['mål_3a_0',['Projektets syfte och mål:',['../md_docs_2_p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md6',1,'']]],
+  ['målgrupper_20och_20intressenter_1',['2.3 Målgrupper och Intressenter',['../md_docs_2_s_r_s.html#autotoc_md35',1,'']]],
+  ['målgrupper_3a_2',['Intressenter och målgrupper:',['../md_docs_2_p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md8',1,'']]],
+  ['main_2ecpp_3',['main.cpp',['../main_8cpp.html',1,'']]],
+  ['measurement_5fstate_2ecpp_4',['measurement_state.cpp',['../measurement__state_8cpp.html',1,'']]],
+  ['measurementstate_5',['MeasurementState',['../class_measurement_state.html',1,'MeasurementState'],['../class_measurement_state.html#aaae9523bb6258fc023706c1220aa1dcf',1,'MeasurementState::MeasurementState()']]],
+  ['mellan_20uuid_20och_20rum_6',['Koppling mellan UUID och rum',['../md_docs_2_device_01_registration.html#autotoc_md2',1,'']]],
+  ['metodik_7',['5.2 Verktyg och Metodik',['../md_docs_2_s_r_s.html#autotoc_md61',1,'']]],
+  ['milstolpar_8',['8. Tidsplan och Milstolpar',['../md_docs_2_s_r_s.html#autotoc_md68',1,'']]],
+  ['milstolpar_3a_9',['Tidsplan och milstolpar:',['../md_docs_2_p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md22',1,'']]],
+  ['mobilapplikation_10',['Mobilapplikation',['../md_docs_2_s_r_s.html#autotoc_md56',1,'']]],
+  ['montering_20i_20rummet_11',['Montering i rummet',['../md_docs_2_device_01_registration.html#autotoc_md3',1,'']]]
 ];

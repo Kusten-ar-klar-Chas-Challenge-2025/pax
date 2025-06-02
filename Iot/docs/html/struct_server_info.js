@@ -1,10 +1,25 @@
 var struct_server_info =
 [
-    [ "config_endpoint", "struct_server_info.html#ac355a2d06ead2e3fc5d15d00e7d7dd15", null ],
+    [ "ServerInfo", "struct_server_info.html#a86df5ebb796aabdd6196d15c171b6a19", null ],
+    [ "is_configured", "struct_server_info.html#ac7f9273a3d3d5b23e4784f6aa87b5d37", null ],
+    [ "set_jwt_token", "struct_server_info.html#ab7c52284374b92ea983af26d12b96293", null ],
+    [ "set_room_endpoint", "struct_server_info.html#aac8855b31232afe2ea26d7fdb5145441", null ],
+    [ "auth", "struct_server_info.html#adb27054d844033b2c7b1d46dcb290a7a", null ],
+    [ "auth", "struct_server_info.html#a7e72ae6a00460c1d3e3ecc1edf9bd3be", null ],
+    [ "config", "struct_server_info.html#ab66fa4b6b7c73613975c7a7374fb7564", null ],
+    [ "endpoints", "struct_server_info.html#ac45b4710e5ced6067c190e3285fcdeb4", null ],
+    [ "jwt_pass", "struct_server_info.html#abe04c95652856167d8012a3a4289f0b9", null ],
+    [ "jwt_token", "struct_server_info.html#add7c56c60dfa720cfe92c96250ca95d8", null ],
+    [ "jwt_token_buffer", "struct_server_info.html#a7028b62ca9da118b208d9aceb137c0ac", null ],
+    [ "jwt_user", "struct_server_info.html#a54df96bf395e8fb1fe8ffe9f706ebf9f", null ],
+    [ "login", "struct_server_info.html#a0f7e2e240b331b2ac1e387c57df045f4", null ],
+    [ "room_endpoint", "struct_server_info.html#a750b169b70490a37202c176077da2042", null ],
+    [ "room_endpoint_buffer", "struct_server_info.html#af721bc42d890fc5202976f78ffb18acb", null ],
     [ "room_id", "struct_server_info.html#aee436fc5f8625916da2ac56bc75353dd", null ],
-    [ "room_state_endpoint", "struct_server_info.html#a0a6441ffa70618ab548c3c9d358f567b", null ],
+    [ "rooms", "struct_server_info.html#a25b63d06c50ee2014228d3f69d67fa8b", null ],
     [ "server_api_path", "struct_server_info.html#a37a44b68ba1b95bbc135e592fac2f4db", null ],
     [ "server_base_url", "struct_server_info.html#a96cae32bd6aeb72da2129088ae35ea36", null ],
+    [ "server_cert", "struct_server_info.html#a3f71ac1be0f2d5b696caf3aaa480a993", null ],
     [ "server_port", "struct_server_info.html#a5da4fdda8e0ace98a90205f9a64f848a", null ],
     [ "uuid", "struct_server_info.html#a434c263468eddabde080a642ad07b23e", null ]
 ];

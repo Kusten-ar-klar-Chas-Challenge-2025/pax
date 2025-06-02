@@ -1,11 +1,9 @@
 var searchData=
 [
-  ['kommunikation_3a_0',['API-kommunikation:',['../md__s_r_s.html#autotoc_md63',1,'']]],
-  ['komponenter_1',['Komponenter',['../md__r_e_a_d_m_e.html#autotoc_md31',1,'']]],
-  ['koppling_20mellan_20uuid_20och_20rum_2',['Koppling mellan UUID och rum',['../md_docs_2_device_01_registration.html#autotoc_md2',1,'']]],
-  ['krav_3',['Krav',['../md__s_r_s.html#autotoc_md48',1,'3. Specifika Krav'],['../md__s_r_s.html#autotoc_md49',1,'3.1 Funktionella Krav'],['../md__s_r_s.html#autotoc_md55',1,'3.2 Icke-Funktionella Krav']]],
-  ['kunskapöverföring_3a_4',['Teamsamarbete och kunskapöverföring:',['../md__p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md16',1,'']]],
-  ['kunskapöverföring_3a_20strong_5',['&lt;strong&gt;Teamsamarbete och kunskapöverföring:&lt;/strong&gt;',['../md__p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md19',1,'']]],
-  ['kunskapsöverföring_3a_6',['kunskapsöverföring:',['../md__p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md13',1,'Teamsamarbete och kunskapsöverföring:'],['../md__p_r_o_j_e_k_t_p_l_a_n.html#autotoc_md20',1,'Teamwork och säker kunskapsöverföring:']]],
-  ['kvalitetssäkring_7',['Kvalitetssäkring',['../md__s_r_s.html#autotoc_md72',1,'6. Testning och Kvalitetssäkring'],['../md__s_r_s.html#autotoc_md74',1,'6.2 Kvalitetssäkring']]]
+  ['jwt_5fpass_0',['jwt_pass',['../struct_server_info.html#abe04c95652856167d8012a3a4289f0b9',1,'ServerInfo']]],
+  ['jwt_5fretry_5ftime_1',['JWT_RETRY_TIME',['../main_8cpp.html#a136e6e27c3e7eca05e9d71b5895af22f',1,'main.cpp']]],
+  ['jwt_5ftoken_2',['jwt_token',['../struct_server_info.html#add7c56c60dfa720cfe92c96250ca95d8',1,'ServerInfo::jwt_token'],['../class_backend.html#a05a88fa6cfd6f4825c0cb9f0e04584cb',1,'Backend::jwt_token()']]],
+  ['jwt_5ftoken_5fbuffer_3',['jwt_token_buffer',['../struct_server_info.html#a7028b62ca9da118b208d9aceb137c0ac',1,'ServerInfo']]],
+  ['jwt_5fuser_4',['jwt_user',['../struct_server_info.html#a54df96bf395e8fb1fe8ffe9f706ebf9f',1,'ServerInfo']]],
+  ['jwt_5fvalid_5',['JWT_VALID',['../main_8cpp.html#aa51313be2faacb739a18fdeecefbac75a752de9c94c5bffb592ac17396d0e66c4',1,'main.cpp']]]
 ];

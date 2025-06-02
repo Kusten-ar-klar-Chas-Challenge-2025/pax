@@ -15,6 +15,7 @@
 
 # Ignore sensitive files
 arduino_secrets.h
+.env
 
 # Track Doxyfile for doxygen configuration
 !Doxyfile

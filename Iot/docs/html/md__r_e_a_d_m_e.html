@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Pax Room Booking IoT: Chas Challenge 2025</title>
+<title>Pax Room Booking IoT: Chas Challenge 2025 &quot;Kusten är Klar&quot;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -102,66 +102,70 @@ $(function(){initNavTree('md__r_e_a_d_m_e.html',''); initResizable(true); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Chas Challenge 2025</div></div>
+  <div class="headertitle"><div class="title">Chas Challenge 2025 "Kusten är Klar"</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md26"></a></p>
-<h1><a class="anchor" id="autotoc_md27"></a>
-Projektgrupp 2 Extended</h1>
-<h2><a class="anchor" id="autotoc_md28"></a>
-Gruppmedlemmar:</h2>
-<p><b>SUVX24:</b> Jennifer Gott, Sabina Stawbrink, Oscar Asserlund, Erik Dahl, Johan Modin <br  />
- <b>FMWX24:</b> Hannah Bärlin, Hanna Kindholm, Tova Hansen <br  />
- <b>FJSX24:</b> Alice Eriksson, Phithai Lai, Dennis Granheimer, Rhiannon Brönnimann <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md79"></a></p>
+<p><b>SUVX24 Authors:</b> <a href="https://github.com/simbachu">Jennifer Gott</a>, <a href="https://github.com/binasime">Sabina Stawbrink</a>, <a href="https://github.com/NewNamesAreHard">Oscar Asserlund</a>, <a href="https://github.com/erikdsp">Erik Dahl</a>, <a href="https://github.com/bubba-94">Johan Modin</a> <br  />
 </p>
-<p><a href="https://github.com/Kusten-ar-klar-Chas-Challenge-2025/pax/blob/main/PROJEKTPLAN.md">Projektplan</a></p>
-<h3><a class="anchor" id="autotoc_md29"></a>
-To build the Arduino code you need to configure wifi</h3>
-<p>Create the file <code><a class="el" href="arduino__secrets_8h_source.html">arduino_secrets.h</a></code> in the <code>/include</code> folder This file will not be tracked/uploaded by git/github Copy the content below and change SSID, password and URL and IPAddress to your values. Currently running on local server with IPAddress and port 8080</p>
-<div class="fragment"><div class="line">#ifndef ARDUINO_SECRETS_H</div>
-<div class="line">#define ARDUINO_SECRETS_H</div>
+<h1><a class="anchor" id="autotoc_md80"></a>
+Beskrivning</h1>
+<p>PAX är ett bokningssystem bestående av olika sensorer och teknologier i en hel produkt som mäter aktivitet och olika miljödata i konferensrum, kopplade till en enhet. <br  />
+ Den insamlade datan hanteras av en IoT-komponent som kommunicerar med en backend via ett API, där data lagras i en databas. <br  />
+ Med PAX kan du på ett effektivt och automatiserat sätt, övervaka statusen på era olika lokaler. <br  />
+</p>
+<h2><a class="anchor" id="autotoc_md81"></a>
+Komponenter</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone"><b>Komponent</b>   </th><th class="markdownTableHeadNone"><b>I/O Pin</b>   </th><th class="markdownTableHeadNone"><b>Beskrivning</b>    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>Arduino Uno Rev4 Mini</b>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">Microkontroller för inkoppling.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>PIR-sensor HC-SR501</b>   </td><td class="markdownTableBodyNone"><b>2</b>   </td><td class="markdownTableBodyNone">Används för att detektera rörelse i rummet.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>LED</b>   </td><td class="markdownTableBodyNone"><b>3</b>   </td><td class="markdownTableBodyNone">Används för att driva en LED.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>Temp-sensor DS18B20</b>   </td><td class="markdownTableBodyNone"><b>6</b>   </td><td class="markdownTableBodyNone">Används för temperaturmätning i rummet.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>Luftkvalitets-sensor SPG30</b>   </td><td class="markdownTableBodyNone"><b>SDA(A4) / SCL(A5)</b>   </td><td class="markdownTableBodyNone">Används för att mäta luftkvaliteten i rummet.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>Internet Interface Config Pin</b>   </td><td class="markdownTableBodyNone"><b>7</b>   </td><td class="markdownTableBodyNone">Används för att indikera val av nätverks interface.   </td></tr>
+</table>
+<p><a href="https://github.com/Kusten-ar-klar-Chas-Challenge-2025/pax/blob/main/PROJEKTPLAN.md">Projektplan</a> <br  />
+ <a href="https://github.com/Kusten-ar-klar-Chas-Challenge-2025/pax/blob/docs/documentation_updates/Iot/docs/SRS.md">SRS</a> <br  />
+</p>
+<h3><a class="anchor" id="autotoc_md82"></a>
+Platform IO</h3>
+<p>Installera PlatformIO och öppna undermappen pax/Iot med PlatformIO. <br  />
+ PlatformIO kommer automatiskt installera de beroenden som är definierade i Platformio.ini. <br  />
+ Skapa en .h fil kallad <b><code>arduino_secrets.h</code></b> i <b><code>/include</code></b> mappen. <br  />
+ Kopiera mallen under för att konfigurera din egna uppkoppling (SSID, Password, URL) mellan sensor och wifi. <br  />
+</p>
+<div class="fragment"><div class="line"> cpp</div>
 <div class="line"> </div>
-<div class="line">#define SECRET_SSID &quot;wifi&quot;</div>
-<div class="line">#define SECRET_PASS &quot;password&quot;</div>
-<div class="line">#define SERVER_URL &quot;url&quot;</div>
-<div class="line">#define SERVER_ENDPOINT &quot;/post&quot;</div>
-<div class="line">#define SERVER_PORT 8080</div>
-<div class="line">struct ServerConfig {</div>
-<div class="line">    IPAddress ip;</div>
-<div class="line">    uint16_t port;</div>
-<div class="line">};</div>
-<div class="line">const ServerConfig SERVER = { IPAddress(192, 0, 0, 0), SERVER_PORT};</div>
+<div class="line">#ifndef ARDUINO_SECRETS_H // Header guard </div>
+<div class="line">#define ARDUINO_SECRETS_H </div>
+<div class="line"> </div>
+<div class="line">#define SECRET_SSID &quot;SSID&quot; // Your WiFi SSID</div>
+<div class="line">#define SECRET_PASS &quot;PASSWORD&quot; // Your WiFi password </div>
+<div class="line"> </div>
+<div class="line">// Server configuration</div>
+<div class="line">#define SERVER_URL &quot;database.com&quot;</div>
+<div class="line">#define SERVER_PORT 443  // Default HTTPS port</div>
+<div class="line">#define API_PATH &quot;&quot; </div>
+<div class="line"> </div>
+<div class="line">// Auth configuration</div>
+<div class="line">#define JWT_USER &quot;email&quot;</div>
+<div class="line">#define JWT_PASS &quot;password&quot;</div>
+<div class="line"> </div>
+<div class="line">// Device configuration</div>
+<div class="line">#define DEVICE_UUID &quot;UUID2&quot;  // UUID for initial registration</div>
+<div class="line">#define ROOM_OVERRIDE 30     // Optional room ID override for testing</div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">#endif</div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md31"></a>
-Komponenter</h1>
-<h2><a class="anchor" id="autotoc_md32"></a>
-PIR-sensor</h2>
-<ul>
-<li><b>Pin</b>: 2</li>
-<li><b>Beskrivning</b>: HC-SR501, används för att detektera rörelse i rummet.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md33"></a>
-Temp-sensor</h2>
-<ul>
-<li><b>Pin</b>:</li>
-<li><b>Beskrivning</b>: DS18B20, används för temperaturmätning i rummet.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md34"></a>
-Luft-sensor</h2>
-<ul>
-<li><b>Pin</b>:</li>
-<li><b>Beskrivning</b>: SPG30, MOX-gas sensor som mäter luftkvaliteten i rummet, mäter VOC och väte (H₂) vilket används för att beräkna eCO₂ värdet.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md35"></a>
-LED (Test, ta bort?)</h2>
-<ul>
-<li><b>Pin</b>: 3</li>
-<li><b>Beskrivning</b>: Röd led, indikerar rörelse? </li>
-</ul>
-</div></div><!-- contents -->
+</div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

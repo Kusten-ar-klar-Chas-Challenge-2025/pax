@@ -103,34 +103,84 @@ $(function(){initNavTree('struct_server_info.html',''); initResizable(true); });
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="struct_server_info-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">ServerInfo Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a86df5ebb796aabdd6196d15c171b6a19" id="r_a86df5ebb796aabdd6196d15c171b6a19"><td class="memItemLeft" align="right" valign="top"><a id="a86df5ebb796aabdd6196d15c171b6a19" name="a86df5ebb796aabdd6196d15c171b6a19"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ServerInfo</b> (std::string_view url, uint16_t port, std::string_view api_path, std::string_view user, std::string_view pass, std::string_view id)</td></tr>
+<tr class="memdesc:a86df5ebb796aabdd6196d15c171b6a19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that takes all configuration values. <br /></td></tr>
+<tr class="separator:a86df5ebb796aabdd6196d15c171b6a19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7c52284374b92ea983af26d12b96293" id="r_ab7c52284374b92ea983af26d12b96293"><td class="memItemLeft" align="right" valign="top"><a id="ab7c52284374b92ea983af26d12b96293" name="ab7c52284374b92ea983af26d12b96293"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_jwt_token</b> (std::string_view token)</td></tr>
+<tr class="memdesc:ab7c52284374b92ea983af26d12b96293"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the JWT token in the buffer. <br /></td></tr>
+<tr class="separator:ab7c52284374b92ea983af26d12b96293"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac8855b31232afe2ea26d7fdb5145441" id="r_aac8855b31232afe2ea26d7fdb5145441"><td class="memItemLeft" align="right" valign="top"><a id="aac8855b31232afe2ea26d7fdb5145441" name="aac8855b31232afe2ea26d7fdb5145441"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_room_endpoint</b> (std::string_view endpoint)</td></tr>
+<tr class="memdesc:aac8855b31232afe2ea26d7fdb5145441"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the room endpoint in the buffer. <br /></td></tr>
+<tr class="separator:aac8855b31232afe2ea26d7fdb5145441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7f9273a3d3d5b23e4784f6aa87b5d37" id="r_ac7f9273a3d3d5b23e4784f6aa87b5d37"><td class="memItemLeft" align="right" valign="top"><a id="ac7f9273a3d3d5b23e4784f6aa87b5d37" name="ac7f9273a3d3d5b23e4784f6aa87b5d37"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_configured</b> () const</td></tr>
+<tr class="memdesc:ac7f9273a3d3d5b23e4784f6aa87b5d37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the server info is properly configured. <br /></td></tr>
+<tr class="separator:ac7f9273a3d3d5b23e4784f6aa87b5d37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a96cae32bd6aeb72da2129088ae35ea36" id="r_a96cae32bd6aeb72da2129088ae35ea36"><td class="memItemLeft" align="right" valign="top"><a id="a96cae32bd6aeb72da2129088ae35ea36" name="a96cae32bd6aeb72da2129088ae35ea36"></a>
-std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>server_base_url</b></td></tr>
-<tr class="memdesc:a96cae32bd6aeb72da2129088ae35ea36"><td class="mdescLeft">&#160;</td><td class="mdescRight">base url of the server <br /></td></tr>
+<tr class="memitem:a96cae32bd6aeb72da2129088ae35ea36" id="r_a96cae32bd6aeb72da2129088ae35ea36"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a96cae32bd6aeb72da2129088ae35ea36">server_base_url</a></td></tr>
+<tr class="memdesc:a96cae32bd6aeb72da2129088ae35ea36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base server configuration.  <br /></td></tr>
 <tr class="separator:a96cae32bd6aeb72da2129088ae35ea36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5da4fdda8e0ace98a90205f9a64f848a" id="r_a5da4fdda8e0ace98a90205f9a64f848a"><td class="memItemLeft" align="right" valign="top"><a id="a5da4fdda8e0ace98a90205f9a64f848a" name="a5da4fdda8e0ace98a90205f9a64f848a"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>server_port</b></td></tr>
 <tr class="memdesc:a5da4fdda8e0ace98a90205f9a64f848a"><td class="mdescLeft">&#160;</td><td class="mdescRight">port of the server <br /></td></tr>
 <tr class="separator:a5da4fdda8e0ace98a90205f9a64f848a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f71ac1be0f2d5b696caf3aaa480a993" id="r_a3f71ac1be0f2d5b696caf3aaa480a993"><td class="memItemLeft" align="right" valign="top"><a id="a3f71ac1be0f2d5b696caf3aaa480a993" name="a3f71ac1be0f2d5b696caf3aaa480a993"></a>
+std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>server_cert</b> = root_cert</td></tr>
+<tr class="memdesc:a3f71ac1be0f2d5b696caf3aaa480a993"><td class="mdescLeft">&#160;</td><td class="mdescRight">server certificate from PROGMEM <br /></td></tr>
+<tr class="separator:a3f71ac1be0f2d5b696caf3aaa480a993"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37a44b68ba1b95bbc135e592fac2f4db" id="r_a37a44b68ba1b95bbc135e592fac2f4db"><td class="memItemLeft" align="right" valign="top"><a id="a37a44b68ba1b95bbc135e592fac2f4db" name="a37a44b68ba1b95bbc135e592fac2f4db"></a>
 std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>server_api_path</b></td></tr>
 <tr class="memdesc:a37a44b68ba1b95bbc135e592fac2f4db"><td class="mdescLeft">&#160;</td><td class="mdescRight">path to the api <br /></td></tr>
 <tr class="separator:a37a44b68ba1b95bbc135e592fac2f4db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a6441ffa70618ab548c3c9d358f567b" id="r_a0a6441ffa70618ab548c3c9d358f567b"><td class="memItemLeft" align="right" valign="top"><a id="a0a6441ffa70618ab548c3c9d358f567b" name="a0a6441ffa70618ab548c3c9d358f567b"></a>
-std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>room_state_endpoint</b></td></tr>
-<tr class="memdesc:a0a6441ffa70618ab548c3c9d358f567b"><td class="mdescLeft">&#160;</td><td class="mdescRight">path snippet for sending room update information, send PUT to room_state_endpoint/room_id <br /></td></tr>
-<tr class="separator:a0a6441ffa70618ab548c3c9d358f567b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac355a2d06ead2e3fc5d15d00e7d7dd15" id="r_ac355a2d06ead2e3fc5d15d00e7d7dd15"><td class="memItemLeft" align="right" valign="top"><a id="ac355a2d06ead2e3fc5d15d00e7d7dd15" name="ac355a2d06ead2e3fc5d15d00e7d7dd15"></a>
-std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>config_endpoint</b></td></tr>
-<tr class="memdesc:ac355a2d06ead2e3fc5d15d00e7d7dd15"><td class="mdescLeft">&#160;</td><td class="mdescRight">path snippet for getting room id, send GET request to config_endpoint/uuid <br /></td></tr>
-<tr class="separator:ac355a2d06ead2e3fc5d15d00e7d7dd15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac45b4710e5ced6067c190e3285fcdeb4" id="r_ac45b4710e5ced6067c190e3285fcdeb4"><td class="memItemLeft" ><a id="ac45b4710e5ced6067c190e3285fcdeb4" name="ac45b4710e5ced6067c190e3285fcdeb4"></a>
+struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a610ca4f87936c2c54218987bd497af4f" id="r_a610ca4f87936c2c54218987bd497af4f"><td class="memItemLeft" >
+&#160;&#160;&#160;std::string_view&#160;&#160;&#160;<b>auth</b> = &quot;/auth&quot;&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:a610ca4f87936c2c54218987bd497af4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base auth endpoint. <br /></td></tr>
+<tr class="separator:a610ca4f87936c2c54218987bd497af4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5f96e3e9272dddc4fe4eb53f55ddeaa" id="r_ac5f96e3e9272dddc4fe4eb53f55ddeaa"><td class="memItemLeft" >
+&#160;&#160;&#160;std::string_view&#160;&#160;&#160;<b>rooms</b> = &quot;/rooms&quot;&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:ac5f96e3e9272dddc4fe4eb53f55ddeaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base rooms endpoint. <br /></td></tr>
+<tr class="separator:ac5f96e3e9272dddc4fe4eb53f55ddeaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b831f23c36bf37da0a1f7b464d04ae8" id="r_a8b831f23c36bf37da0a1f7b464d04ae8"><td class="memItemLeft" >
+&#160;&#160;&#160;std::string_view&#160;&#160;&#160;<b>config</b> = &quot;/config&quot;&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:a8b831f23c36bf37da0a1f7b464d04ae8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base config endpoint. <br /></td></tr>
+<tr class="separator:a8b831f23c36bf37da0a1f7b464d04ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac45b4710e5ced6067c190e3285fcdeb4" id="r_ac45b4710e5ced6067c190e3285fcdeb4"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>endpoints</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:ac45b4710e5ced6067c190e3285fcdeb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">API endpoints - all should start with / and not end with /. <br /></td></tr>
+<tr class="separator:ac45b4710e5ced6067c190e3285fcdeb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e72ae6a00460c1d3e3ecc1edf9bd3be" id="r_a7e72ae6a00460c1d3e3ecc1edf9bd3be"><td class="memItemLeft" ><a id="a7e72ae6a00460c1d3e3ecc1edf9bd3be" name="a7e72ae6a00460c1d3e3ecc1edf9bd3be"></a>
+struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8d307e6ef6e5d81db40b33adc0d97de" id="r_aa8d307e6ef6e5d81db40b33adc0d97de"><td class="memItemLeft" >
+&#160;&#160;&#160;std::string_view&#160;&#160;&#160;<b>login</b> = &quot;/login&quot;&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:aa8d307e6ef6e5d81db40b33adc0d97de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Login endpoint (appended to auth) <br /></td></tr>
+<tr class="separator:aa8d307e6ef6e5d81db40b33adc0d97de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e72ae6a00460c1d3e3ecc1edf9bd3be" id="r_a7e72ae6a00460c1d3e3ecc1edf9bd3be"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>auth</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:a7e72ae6a00460c1d3e3ecc1edf9bd3be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Auth endpoints. <br /></td></tr>
+<tr class="separator:a7e72ae6a00460c1d3e3ecc1edf9bd3be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54df96bf395e8fb1fe8ffe9f706ebf9f" id="r_a54df96bf395e8fb1fe8ffe9f706ebf9f"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54df96bf395e8fb1fe8ffe9f706ebf9f">jwt_user</a></td></tr>
+<tr class="memdesc:a54df96bf395e8fb1fe8ffe9f706ebf9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">JWT configuration.  <br /></td></tr>
+<tr class="separator:a54df96bf395e8fb1fe8ffe9f706ebf9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe04c95652856167d8012a3a4289f0b9" id="r_abe04c95652856167d8012a3a4289f0b9"><td class="memItemLeft" align="right" valign="top"><a id="abe04c95652856167d8012a3a4289f0b9" name="abe04c95652856167d8012a3a4289f0b9"></a>
+std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>jwt_pass</b></td></tr>
+<tr class="memdesc:abe04c95652856167d8012a3a4289f0b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">JWT authentication password. <br /></td></tr>
+<tr class="separator:abe04c95652856167d8012a3a4289f0b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a434c263468eddabde080a642ad07b23e" id="r_a434c263468eddabde080a642ad07b23e"><td class="memItemLeft" align="right" valign="top"><a id="a434c263468eddabde080a642ad07b23e" name="a434c263468eddabde080a642ad07b23e"></a>
 std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>uuid</b></td></tr>
 <tr class="memdesc:a434c263468eddabde080a642ad07b23e"><td class="mdescLeft">&#160;</td><td class="mdescRight">uuid for the room (128 bit with dashes) <br /></td></tr>
@@ -139,9 +189,77 @@ std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>uuid</b><
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>room_id</b></td></tr>
 <tr class="memdesc:aee436fc5f8625916da2ac56bc75353dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">room id for the room (up to 4 bytes) <br /></td></tr>
 <tr class="separator:aee436fc5f8625916da2ac56bc75353dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af721bc42d890fc5202976f78ffb18acb" id="r_af721bc42d890fc5202976f78ffb18acb"><td class="memItemLeft" align="right" valign="top">std::array&lt; char, 64 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af721bc42d890fc5202976f78ffb18acb">room_endpoint_buffer</a></td></tr>
+<tr class="memdesc:af721bc42d890fc5202976f78ffb18acb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer and view for constructed room endpoint.  <br /></td></tr>
+<tr class="separator:af721bc42d890fc5202976f78ffb18acb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a750b169b70490a37202c176077da2042" id="r_a750b169b70490a37202c176077da2042"><td class="memItemLeft" align="right" valign="top"><a id="a750b169b70490a37202c176077da2042" name="a750b169b70490a37202c176077da2042"></a>
+std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>room_endpoint</b> = room_endpoint_buffer.data()</td></tr>
+<tr class="memdesc:a750b169b70490a37202c176077da2042"><td class="mdescLeft">&#160;</td><td class="mdescRight">View of current room endpoint. <br /></td></tr>
+<tr class="separator:a750b169b70490a37202c176077da2042"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7028b62ca9da118b208d9aceb137c0ac" id="r_a7028b62ca9da118b208d9aceb137c0ac"><td class="memItemLeft" align="right" valign="top"><a id="a7028b62ca9da118b208d9aceb137c0ac" name="a7028b62ca9da118b208d9aceb137c0ac"></a>
+std::array&lt; char, 512 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>jwt_token_buffer</b></td></tr>
+<tr class="memdesc:a7028b62ca9da118b208d9aceb137c0ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer for JWT token. <br /></td></tr>
+<tr class="separator:a7028b62ca9da118b208d9aceb137c0ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add7c56c60dfa720cfe92c96250ca95d8" id="r_add7c56c60dfa720cfe92c96250ca95d8"><td class="memItemLeft" align="right" valign="top"><a id="add7c56c60dfa720cfe92c96250ca95d8" name="add7c56c60dfa720cfe92c96250ca95d8"></a>
+std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>jwt_token</b> = jwt_token_buffer.data()</td></tr>
+<tr class="memdesc:add7c56c60dfa720cfe92c96250ca95d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">View of current JWT token. <br /></td></tr>
+<tr class="separator:add7c56c60dfa720cfe92c96250ca95d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>include/<a class="el" href="_post_man_8h_source.html">PostMan.h</a></li>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a54df96bf395e8fb1fe8ffe9f706ebf9f" name="a54df96bf395e8fb1fe8ffe9f706ebf9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54df96bf395e8fb1fe8ffe9f706ebf9f">&#9670;&#160;</a></span>jwt_user</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view ServerInfo::jwt_user</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>JWT configuration. </p>
+<p>JWT authentication username/email </p>
+
+</div>
+</div>
+<a id="af721bc42d890fc5202976f78ffb18acb" name="af721bc42d890fc5202976f78ffb18acb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af721bc42d890fc5202976f78ffb18acb">&#9670;&#160;</a></span>room_endpoint_buffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::array&lt;char, 64&gt; ServerInfo::room_endpoint_buffer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Buffer and view for constructed room endpoint. </p>
+<p>Buffer for room endpoint construction </p>
+
+</div>
+</div>
+<a id="a96cae32bd6aeb72da2129088ae35ea36" name="a96cae32bd6aeb72da2129088ae35ea36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96cae32bd6aeb72da2129088ae35ea36">&#9670;&#160;</a></span>server_base_url</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view ServerInfo::server_base_url</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Base server configuration. </p>
+<p>base url of the server </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>include/<a class="el" href="_backend_8h_source.html">Backend.h</a></li>
+<li>src/<a class="el" href="_backend_8cpp.html">Backend.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
