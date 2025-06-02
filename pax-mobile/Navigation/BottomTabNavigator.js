@@ -77,19 +77,33 @@ export default function BottomTabNavigator() {
           {/* <Tab.Screen name="Contact" component={Contact} /> */}
           <Tab.Screen
             name="Logout"
-            component={() => null}
-            iconName = "sign-out-alt"
+            // component={() => null}
+            // iconName = "sign-out-alt"
             listeners={({ navigation }) => ({
               tabPress: (e) => {
                 e.preventDefault();
-                logout();
-                navigation.reset({
-                  index: 0,
-                  routes: [{ name: 'Login' }],
-                });
+                logout(null);
               },
             })}
-          />
+            options={{
+              tabBarLabel: "Logga ut",
+              tabBarIcon: ({ color, size }) => (
+                <View
+                  style={{
+                    backgroundColor: "#84ca6f",
+                    borderRadius: 25,
+                    padding: 10,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                <Icon name='sign-out-alt' size={size} color={color} />
+                </View>
+              ),
+            }}
+          >
+          {() => null}
+          </Tab.Screen>
         </>
       )}
     </Tab.Navigator>

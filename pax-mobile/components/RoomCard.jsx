@@ -84,7 +84,7 @@ const RoomCard = () => {
       marginTop: 10,
     },
     button: {
-      backgroundColor: theme.textSecondary,
+      backgroundColor: theme.buttonColor,
       padding: 12,
       flex: 1,
       marginHorizontal: 5,
