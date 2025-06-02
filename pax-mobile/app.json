@@ -32,6 +32,7 @@
     "plugins": [
       "expo-secure-store"
     ],
+    "owner": "hannakindholm",
     "extra": {
       "eas": {
         "projectId": "635b49bc-f6d8-4543-b8b3-11f00416c4c4"
