@@ -89,6 +89,18 @@ private:
      * 
      */
     void read_air_quality();
+    /**
+     * @brief Reads messages from serial and if command is valid updates offset parameter
+     * 
+     * Example commands: 
+     * TEMP0        resets offset
+     * TEMP+1       sets offset to +1.0
+     * TEMP-1.5     set offset to -1.5
+     * 
+     * @param offset reference is updated if a valid command was received
+     * @return true if a valid command was received
+     */
+    bool get_new_temperature_offset_from_serial(float& offset);
 public:
     /**
      * @brief Constructor
@@ -103,6 +115,25 @@ public:
      * 
      */
     void begin();
+    /**
+     * @brief Reads from serial, and if command is valid updates temperature offset 
+     * 
+     * @return true if a new offset was successfully set
+     */
+    bool update_temperature_offset_from_serial();
+    /**
+     * @brief Set new temperature offset for TempSensor
+     * 
+     * @param new_temperature_offset (Accepts values between -50 and 50)
+     * @return true on success
+     */
+    bool set_temperature_offset(float new_temperature_offset);
+    /**
+     * @brief Get current temperature offset
+     * 
+     * @return float 
+     */
+    float get_temperature_offset();
     /**
      * @brief Read PIR sensor value for room activity and update private variables
      * 
