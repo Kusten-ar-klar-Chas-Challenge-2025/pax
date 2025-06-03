@@ -160,6 +160,10 @@ void setup() {
     Serial.println(F("System: Initializing room state"));
 #endif
     room_state.begin();
+    // TODO: READ from EEPROM and update offset
+    // float saved_offset = read_temperature_offset_from_eeprom();
+    // room_state.set_temperature_offset(saved_offset);
+
 #ifdef MAIN_STATE_DEBUG
     Serial.println(F("System: Initializing WiFi"));
 #endif
@@ -269,6 +273,20 @@ void setup() {
 
 //! Arduino main loop function
 void loop() {
+
+    // Check serial for incoming calibration messages
+    if (Serial.available())
+    {
+        if(room_state.update_temperature_offset_from_serial())
+        {
+           // save_temperature_offset_to_eeprom(room_state.get_temperature_offset());
+        } 
+        else 
+        {
+            Serial.println("Received invalid serial command");
+        }
+    }
+
     // read sensor data
     room_state.update_all();
 
