@@ -2,9 +2,8 @@ import React from "react";
 import { ScrollView, Text, Image, View, StyleSheet } from "react-native";
 import { useTheme } from "../theme/ThemeContext";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
-import HomeScreen from "./HomeScreen";
 
-const Contact = () => {
+const Datachart = () => {
   const { theme, isDark, toggleTheme } = useTheme();
   const styles = createStyles(theme);
   return (
@@ -12,18 +11,8 @@ const Contact = () => {
       <ScrollView style={{ backgroundColor: theme.background }}>
         <SafeAreaView>
           <View style={styles.container}>
-            <Image
-              source={require("../assets/illustrationer/illustrationer_pax-01.svg")}
-              style={styles.image}
-            />
             <View style={styles.card}>
-              <Text style={styles.title}>NEED HELP?</Text>
-              <Text style={styles.smallTitle}>Contact us at:</Text>
-              <Text style={styles.text}>
-                <Text style={styles.icon}>✉ </Text> hello@pax.com{"\n"}
-                <Text style={styles.icon}>✆ </Text> +46 771-729 729{"\n"}
-                <Text style={styles.iconDark}>✆ </Text> (+46 771-PAX PAX)
-              </Text>
+              <Text style={styles.title}>UNDER CONSTRUCTION</Text>
             </View>
           </View>
         </SafeAreaView>
@@ -32,7 +21,7 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Datachart;
 
 const createStyles = (theme) =>
   StyleSheet.create({
@@ -50,7 +39,7 @@ const createStyles = (theme) =>
       backgroundColor: theme.card,
       height: 300,
       width: 320,
-      top: 26,
+      top: 226,
       elevation: 3,
       borderRadius: 20,
       opacity: 300,

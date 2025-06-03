@@ -5,19 +5,19 @@ export const lightTheme = {
   accent: '#7DBA6A',
 
   // Layout och bakgrunder
-  background: '#FCFFF5',
-  card: '#097564',
-  headerBackground: '#FCFFF5',
-  tabBackground: '#24524B',
+  background: '#cefabf',
+  card: '#84ca6f',
+  headerBackground: ' #FCFFF5',
+  tabBackground: '#66c181',
 
   // Text
-  textLight: "#7DBA6A",
-  textPrimary: '#BFCBB',
-  textSecondary: '#B5DA87',  
+  textLight: " #7DBA6A",
+  textPrimary: ' #BFCBB0',
+  textSecondary: '#b5da87',
 
   //Knapp icon
-  iconSwitchmode: '#B5DA87',
-  buttonColor: '#344C3D',
+  iconSwitchmode: ' #B5DA87',
+  buttonColor: ' #344C3D',
 };
 
 export const darkTheme = {

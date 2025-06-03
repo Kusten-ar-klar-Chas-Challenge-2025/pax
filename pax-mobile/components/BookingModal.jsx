@@ -81,7 +81,7 @@ const BookingModal = ({ visible, onClose, room, onBookingSuccess, theme }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           room_id: room.id,
-          user_id: 1, // Just nu hårdkodat – byt vid behov
+          user_id: 1,
           start_time: requestedStart.toISOString(),
           end_time: requestedEnd.toISOString(),
         }),
@@ -202,7 +202,7 @@ const createStyles = (theme) =>
       color: theme.textPrimary,
     },
     button: {
-      backgroundColor: theme.card,
+      backgroundColor: "#7DBA6A",
       padding: 12,
       borderRadius: 8,
       alignItems: "center",
