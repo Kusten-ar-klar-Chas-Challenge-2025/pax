@@ -23,6 +23,40 @@ unsigned long MeasurementState::get_current_time(){
     return millis();
 }
 
+bool MeasurementState::get_new_temperature_offset_from_serial(float& offset)
+{
+String serial_message = Serial.readStringUntil('\n');    
+    if (serial_message.length()>0) {
+      serial_message.trim();  // remove whitespace at end of String
+      int sign;
+      // check for valid commands
+      if (serial_message.substring(0, 4) == "TEMP") {
+        if (serial_message.substring(4,5) == "0") 
+        {
+          sign = 0;
+        } else if (serial_message.substring(4,5) == "+")
+        {
+          sign = 1;
+        }
+        else if (serial_message.substring(4,5) == "-")
+        {
+          sign = -1;
+        }
+        else 
+        {
+          return false;
+        }
+        float value = serial_message.substring(5).toFloat();
+        if (sign == 0 || value != 0)
+        {
+          offset = value * sign;
+          return true;
+        }
+      }
+      return false;
+    }
+}
+
 void MeasurementState::begin(){
     // initialize PIR sensor
     pinMode(m_pir_pin, INPUT);
@@ -46,6 +80,36 @@ void MeasurementState::begin(){
     if (m_temp_sensor_connected) {
         m_temp_sensor.begin();
     }
+}
+
+bool MeasurementState::update_temperature_offset_from_serial()
+{
+  // in case caller forgot, check if a message is available
+  if (Serial.available())
+  {
+    float new_offset{}; 
+    if (get_new_temperature_offset_from_serial(new_offset)) 
+    {
+      if(set_temperature_offset(new_offset))
+      {
+          Serial.print("Setting new temperature calibration: ");
+          Serial.println(new_offset);
+          return true;
+      }  
+    }
+  }
+  return false;
+}
+
+bool MeasurementState::set_temperature_offset(float new_temperature_offset)
+{
+    bool set_offset_successful = m_temp_sensor.set_temperature_offset(new_temperature_offset);
+    return set_offset_successful;
+}
+
+float MeasurementState::get_temperature_offset()
+{
+    return m_temp_sensor.get_temperature_offset();
 }
 
 void MeasurementState::update_pir()
