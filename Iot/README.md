@@ -19,8 +19,8 @@ Med PAX kan du på ett effektivt och automatiserat sätt, övervaka statusen på
 | **Luftkvalitets-sensor SPG30**    | **SDA(A4) / SCL(A5)** | Används för att mäta luftkvaliteten i rummet.       |
 | **Internet Interface Config Pin** | **7**                 | Används för att indikera val av nätverks interface. |
 
-[Projektplan](https://github.com/Kusten-ar-klar-Chas-Challenge-2025/pax/blob/main/PROJEKTPLAN.md)  
-[SRS](https://github.com/Kusten-ar-klar-Chas-Challenge-2025/pax/blob/docs/documentation_updates/Iot/docs/SRS.md)  
+[Projektplan](https://github.com/Kusten-ar-klar-Chas-Challenge-2025/pax/blob/main/Iot/docs/PROJEKTPLAN.md)  
+[SRS](https://github.com/Kusten-ar-klar-Chas-Challenge-2025/pax/blob/main/Iot/docs/SRS.md)  
 
 ### Möjlig industrialiserad design
 ![alt text](pax-dosa.png)
