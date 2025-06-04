@@ -84,15 +84,17 @@ const RoomCard = () => {
       marginTop: 10,
     },
     button: {
-      backgroundColor: theme.buttonColor,
+      backgroundColor: theme.textSecondary,
       padding: 12,
       flex: 1,
       marginHorizontal: 5,
       borderRadius: 8,
       alignItems: "center",
+      borderWidth: 1.7,
+      borderColor: "rgba(54, 110, 53, 0.44)",
     },
     cancelButton: {
-      backgroundColor: "red",
+      backgroundColor: "rgb(99, 159, 84)",
     },
     buttonText: {
       color: "#fff",

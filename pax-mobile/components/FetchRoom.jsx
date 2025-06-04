@@ -209,16 +209,16 @@ const createStyles = (theme) =>
     },
     roomDescription: {
       fontSize: 14,
-      color: theme.textSecondary,
+      color: theme.textPrimary,
       marginVertical: 4,
     },
     roomDetail: {
       fontSize: 13,
-      color: theme.textSecondary,
+      color: theme.textPrimary,
     },
     noRooms: {
       fontSize: 16,
-      color: theme.textSecondary,
+      color: theme.textPrimary,
       fontStyle: "italic",
       textAlign: "center",
       marginTop: 20,

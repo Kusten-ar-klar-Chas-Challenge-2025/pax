@@ -1,40 +1,40 @@
 export const lightTheme = {
   // Grundfärger  
   primary: '#FCFFF5',
-  secondary: '#f6f8c4',
-  accent: '#E3FAC8',
+  secondary: '#24524B',
+  accent: '#7DBA6A',
 
   // Layout och bakgrunder
-  background: '#344C3D',
-  card: '#BFCFBB',
-  headerBackground: '#f8c0b3',
-  tabBackground: '#24524B',
+  background: '#cefabf',
+  card: '#84ca6f',
+  headerBackground: ' #FCFFF5',
+  tabBackground: '#66c181',
 
   // Text
-  textLight: "#7DBA6A",
-  textPrimary: '#344C3',
-  textSecondary: '#BFCFBB',  
+  textLight: " #7DBA6A",
+  textPrimary: ' #BFCBB0',
+  textSecondary: '#b5da87',
 
   //Knapp icon
-  iconSwitchmode: '#B5DA87',
-  buttonColor: '#344C3D',
+  iconSwitchmode: ' #B5DA87',
+  buttonColor: ' #344C3D',
 };
 
 export const darkTheme = {
   // Grundfärger 
   primary: '#10302B',
   secondary: '#24524B',
-  accent: '#E3FAC8',
+  accent: '#7DBA6A',
 
   // Layout och bakgrunder
   background: '#061a17',
-  card: '#24524B',
-  headerBackground: '#264247',
+  card: '#10302B',
+  headerBackground: '#061a17',
   tabBackground: '#24524B',
 
   // Text
-  textDark: '#24524B',
-  textPrimary: '#E3FAC8',
+  textDark: '#7DBA6A',
+  textPrimary: '#FFFDCB',
   textSecondary: '#B5DA87',
 
   //Knapp icon
