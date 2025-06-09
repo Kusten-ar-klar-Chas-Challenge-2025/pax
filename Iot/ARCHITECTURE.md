@@ -5,7 +5,7 @@ PAX-dosan samlar information om närvaro i rummet via rörelsesensor och eCO2-ni
 ## Hårdvara
 PAX-dosan kontrolleras av en Arduino R4 Wifi. På den är det kopplat en temperatursensor, en gassensor och en PIR-sensor. Vi har också en lysdiod för handhavande i rummet.
 ### Koppling
-![Kopplingsschema](/docs/SCH_PAX-Schematic_1-P1_2025-05-26.png)
+![Kopplingsschema](./docs/SCH_PAX-Schematic_1-P1_2025-05-26.png)
 ### PIR-sensor
 Monteras så att den ser hela rummet i brösthöjd. Skall sättas i HOLD-läge och trimmas till lämplig håll-tid (vi föreslår 30 sekunder).
 ### Temperatur-sensor
