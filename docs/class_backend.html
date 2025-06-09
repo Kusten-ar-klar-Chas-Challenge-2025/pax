@@ -174,9 +174,11 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Construct a new <a class="el" href="class_backend.html">Backend</a> object. </p>
+<p>Constructor for a new <a class="el" href="class_backend.html">Backend</a> object.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">server_info</td><td>Server configuration information data structure </td></tr>
+    <tr><td class="paramname">server_info</td><td>Server configuration information data structure</td></tr>
+    <tr><td class="paramname">server_info</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -200,7 +202,13 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize the backend connection. </p>
-<dl class="section return"><dt>Returns</dt><dd>true if successful, false otherwise </dd></dl>
+<p>Begin function for <a class="el" href="class_backend.html">Backend</a> class Call this in <a class="el" href="main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d">setup()</a></p>
+<dl class="section return"><dt>Returns</dt><dd>true if successful, false otherwise</dd>
+<dd>
+true if successful </dd></dl>
+<p>Set root certificate for SSL</p>
+<p>Connect to server with retries</p>
+<p>Get JWT token if we don't have one</p>
 
 </div>
 </div>
@@ -220,7 +228,10 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Check if we can reach the server (makes server contact) </p>
-<dl class="section return"><dt>Returns</dt><dd>true if server is reachable, false otherwise </dd></dl>
+<p>Check server connection.</p>
+<dl class="section return"><dt>Returns</dt><dd>true if server is reachable, false otherwise</dd>
+<dd>
+true if connected </dd></dl>
 
 </div>
 </div>
@@ -240,7 +251,10 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Try to reconnect if connection is down (makes server contact) </p>
-<dl class="section return"><dt>Returns</dt><dd>true if connection is established, false otherwise </dd></dl>
+<p>Ensure connection If not connected, try to reestablish connection.</p>
+<dl class="section return"><dt>Returns</dt><dd>true if connection is established, false otherwise</dd>
+<dd>
+true if connected </dd></dl>
 
 </div>
 </div>
@@ -260,7 +274,12 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get room configuration from server. </p>
-<dl class="section return"><dt>Returns</dt><dd>true if successful, false otherwise </dd></dl>
+<p>Get room config.</p>
+<dl class="section return"><dt>Returns</dt><dd>true if successful, false otherwise</dd>
+<dd>
+true </dd>
+<dd>
+false </dd></dl>
 
 </div>
 </div>
@@ -420,7 +439,10 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Login to get JWT token. </p>
-<dl class="section return"><dt>Returns</dt><dd>true if successful, false otherwise </dd></dl>
+<p>Login using JWT.</p>
+<dl class="section return"><dt>Returns</dt><dd>true if successful, false otherwise</dd>
+<dd>
+true on success </dd></dl>
 
 </div>
 </div>
@@ -530,7 +552,10 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Check if current JWT token is still valid (makes server contact) </p>
-<dl class="section return"><dt>Returns</dt><dd>true if token is valid, false otherwise </dd></dl>
+<p>Check if we have a valid token.</p>
+<dl class="section return"><dt>Returns</dt><dd>true if token is valid, false otherwise</dd>
+<dd>
+true if valid </dd></dl>
 
 </div>
 </div>

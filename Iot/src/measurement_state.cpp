@@ -6,7 +6,11 @@
 #include "measurement_state.h"
 #include <cmath>  // For NAN
 
-
+/**
+ * @brief Concstructor for class that handles sensor measurements over time
+ * 
+ * Sensors implemented: PIR Sensor, DHT11, SPG30
+ */
 MeasurementState::MeasurementState(uint8_t pir_pin, unsigned long hold_duration, uint8_t temp_sensor_pin)
     : m_pir_pin { pir_pin }, m_hold_duration { hold_duration }, m_temp_sensor { temp_sensor_pin }
     {

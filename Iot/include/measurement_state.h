@@ -16,7 +16,7 @@
 /**
  * @brief This class handles sensor measurements over time for the Arduino UNO R4
  * 
- * Sensors implemented: PIR Sensor
+ * Sensors implemented: PIR Sensor, DHT11, SPG30
  */
 class MeasurementState {
 private:

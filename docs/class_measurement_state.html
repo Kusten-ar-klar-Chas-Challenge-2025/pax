@@ -161,7 +161,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>update_all</b> ()</td
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class handles sensor measurements over time for the Arduino UNO R4. </p>
-<p>Sensors implemented: PIR Sensor </p>
+<p>Sensors implemented: PIR Sensor, DHT11, SPG30 </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aaae9523bb6258fc023706c1220aa1dcf" name="aaae9523bb6258fc023706c1220aa1dcf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaae9523bb6258fc023706c1220aa1dcf">&#9670;&#160;</a></span>MeasurementState()</h2>
@@ -188,14 +188,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>update_all</b> ()</td
 </div><div class="memdoc">
 
 <p>Constructor. </p>
+<p>Concstructor for class that handles sensor measurements over time.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pir_pin</td><td></td></tr>
     <tr><td class="paramname">hold_duration</td><td>in milliseconds </td></tr>
-    <tr><td class="paramname">temp_sensor_pin</td><td>if not passed getTemperature will give error message </td></tr>
+    <tr><td class="paramname">temp_sensor_pin</td><td>if not passed getTemperature will give error message</td></tr>
   </table>
   </dd>
 </dl>
+<p>Sensors implemented: PIR Sensor, DHT11, SPG30 </p>
 
 </div>
 </div>
