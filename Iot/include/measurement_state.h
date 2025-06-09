@@ -122,12 +122,14 @@ public:
      * 
      */
     void begin(I2C_eeprom* eeprom);
+
+    bool update_temperature_offset_from_eeprom(uint16_t address);
     /**
      * @brief Reads from serial, and if command is valid updates temperature offset 
      * 
      * @return true if a new offset was successfully set
      */
-    bool update_temperature_offset_from_serial();
+    bool update_temperature_offset_from_serial(uint16_t eeprom_address);
     /**
      * @brief Set new temperature offset for TempSensor
      * 

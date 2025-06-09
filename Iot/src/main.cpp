@@ -298,7 +298,7 @@ void loop() {
     // Check serial for incoming calibration messages
     if (Serial.available())
     {
-        if(room_state.update_temperature_offset_from_serial())
+        if(room_state.update_temperature_offset_from_serial(temperature_offset_address))
         {
            // save_temperature_offset_to_eeprom(room_state.get_temperature_offset());
         } 

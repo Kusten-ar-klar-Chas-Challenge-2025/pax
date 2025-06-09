@@ -124,7 +124,24 @@ void MeasurementState::begin(I2C_eeprom* eeprom){
     }
 }
 
-bool MeasurementState::update_temperature_offset_from_serial()
+bool MeasurementState::update_temperature_offset_from_eeprom(uint16_t address)
+    {
+        float new_offset;
+        size_t offset_index { 0 };
+        if (!readFloatFromEEPROM(address, offset_index, &new_offset))
+        {
+            return false;
+        }
+        if(set_temperature_offset(new_offset))
+        {
+          Serial.print("Setting saved temperature calibration: ");
+          Serial.println(new_offset);
+          return true;
+        }      
+        return false;
+    }
+
+bool MeasurementState::update_temperature_offset_from_serial(uint16_t eeprom_address)
 {
   // in case caller forgot, check if a message is available
   if (Serial.available())
@@ -136,7 +153,12 @@ bool MeasurementState::update_temperature_offset_from_serial()
       {
           Serial.print("Setting new temperature calibration: ");
           Serial.println(new_offset);
-          return true;
+          
+          size_t buffer_index { 0 };
+          if (writeFloatToEEPROM(eeprom_address, new_offset, buffer_index))
+          {
+              return true;
+          }
       }  
     }
   }
@@ -146,6 +168,10 @@ bool MeasurementState::update_temperature_offset_from_serial()
 bool MeasurementState::set_temperature_offset(float new_temperature_offset)
 {
     bool set_offset_successful = m_temp_sensor.set_temperature_offset(new_temperature_offset);
+if (set_offset_successful){
+    size_t offset_index { 0 };
+    }
+
     return set_offset_successful;
 }
 
