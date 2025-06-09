@@ -5,7 +5,8 @@
  */
 #include "measurement_state.h"
 #include <cmath>  // For NAN
-
+#include <cstring>  // for memcpy
+#include <cstdint>  // for size_t
 
 MeasurementState::MeasurementState(uint8_t pir_pin, unsigned long hold_duration, uint8_t temp_sensor_pin)
     : m_pir_pin { pir_pin }, m_hold_duration { hold_duration }, m_temp_sensor { temp_sensor_pin }
@@ -57,7 +58,48 @@ String serial_message = Serial.readStringUntil('\n');
     }
 }
 
-void MeasurementState::begin(){
+bool MeasurementState::writeFloatToEEPROM(uint16_t eeprom_addr, float value, size_t buffer_index)
+{
+    if (!m_eeprom) {
+        return false;
+    }
+    std::array<uint8_t, 32> buf { 0 };
+    if (buffer_index * sizeof(float) >= buf.size()) {
+        return false;
+    }
+
+    uint8_t* data = &buf[buffer_index * sizeof(float)];
+
+    std::memcpy(buf.data() + buffer_index, &value, sizeof(float));
+    if (m_eeprom->writeBlock(eeprom_addr + (buffer_index*sizeof(float)), data, sizeof(float)) == 0) 
+    {
+        return true;
+    }
+    return false;
+}
+bool MeasurementState::readFloatFromEEPROM(uint16_t eeprom_addr, size_t buffer_index, float* destination)
+{
+    if (!m_eeprom) {
+        return false;
+    }
+
+    std::array<std::uint8_t, 4> data;
+    
+    const std::uint16_t byte_address = eeprom_addr + (buffer_index * sizeof(float));
+    if (m_eeprom->readBlock(byte_address, data.data(), sizeof(float)) != sizeof(float)) {
+        return false;
+    }
+    
+    std::memcpy(destination, data.data(), sizeof(float));
+    return true;
+
+}
+
+
+void MeasurementState::begin(I2C_eeprom* eeprom){
+    // initialize internal EEPROM
+    m_eeprom = eeprom;
+
     // initialize PIR sensor
     pinMode(m_pir_pin, INPUT);
 
