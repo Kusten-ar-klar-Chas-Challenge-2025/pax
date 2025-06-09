@@ -51,8 +51,22 @@ void ServerInfo::set_room_endpoint(std::string_view endpoint) {
     room_endpoint = std::string_view(room_endpoint_buffer.data(), len);
 }
 
+/**
+ * @brief Constructor for a new Backend object
+ * 
+ * @param server_info 
+ */
 Backend::Backend(ServerInfo& server_info) : m_server_info(server_info) {}
 
+/**
+ * @brief Construct a path
+ * 
+ * @param dest 
+ * @param endpoint 
+ * @param subpath 
+ * @param query 
+ * @return true if successful
+ */
 bool Backend::construct_path(String* dest, std::string_view endpoint, std::string_view subpath, std::string_view query) {
     if (!dest) {
         return false;
@@ -129,8 +143,14 @@ bool Backend::construct_path(String* dest, std::string_view endpoint, std::strin
     return true;
 }
 
+/**
+ * @brief Begin function for Backend class
+ * Call this in setup()
+ * 
+ * @return true if successful
+ */
 bool Backend::begin() {
-    // Set root certificate for SSL
+    //! Set root certificate for SSL
     if (m_server_info.server_cert.empty()) {
 #ifdef BACKEND_DEBUG
         Serial.println(F("Backend: Error - Server certificate is empty"));
@@ -142,7 +162,7 @@ bool Backend::begin() {
 #endif
     m_client.setCACert(m_server_info.server_cert.data());
     
-    // Connect to server with retries
+    //! Connect to server with retries
 #ifdef BACKEND_DEBUG
     Serial.print(F("Backend: Connecting to "));
     Serial.print(m_server_info.server_base_url.data());
@@ -182,7 +202,7 @@ bool Backend::begin() {
         }
     }
     
-    // Get JWT token if we don't have one
+    //! Get JWT token if we don't have one
     if (!m_has_token) {
 #ifdef BACKEND_DEBUG
         Serial.println(F("Backend: No JWT token, attempting login..."));
@@ -201,7 +221,15 @@ bool Backend::begin() {
     return true;
 }
 
-// Helper function to make HTTP requests
+/**
+ * @brief Helper function to make HTTP requests
+ * 
+ * @param method 
+ * @param path 
+ * @param headers 
+ * @param body 
+ * @return HttpResponse 
+ */
 HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path, 
                                       std::string_view headers, std::string_view body) {
     HttpResponse response = {-1, "", false};
@@ -218,7 +246,7 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
             return response;
     }
     
-    // Ensure we have a valid connection before sending request
+    //! Ensure we have a valid connection before sending request
     if (!ensure_connection()) {
         response.body = "No valid connection for HTTP request";
 #ifdef BACKEND_DEBUG
@@ -227,7 +255,7 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
         return response;
     }
     
-    // Verify connection is still valid
+    //! Verify connection is still valid
     if (!m_client.connected()) {
         response.body = "Lost connection before sending request";
 #ifdef BACKEND_DEBUG
@@ -236,17 +264,17 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
         return response;
     }
     
-    // Construct request
+    //! Construct request
     char request_buffer[1024];
     int content_length = body.empty() ? 0 : body.length();
     
-    // Ensure path starts with a slash
+    //! Ensure path starts with a slash
     String path_str = path.data();
     if (!path_str.startsWith("/")) {
         path_str = "/" + path_str;
     }
     
-    // Print request details before sending (original debug block, still useful)
+    //! Print request details before sending (original debug block, still useful)
 #ifdef BACKEND_DEBUG
     Serial.print(F("Backend: HTTP Request Details (prior to buffer construction):"));
     Serial.print(F("  Method: "));
@@ -276,7 +304,7 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
     bool buffer_ok = true;
     int written = 0; // Clear written before new construction logic
 
-    // Request Line (Method Path HTTP/Version)
+    //! Request Line (Method Path HTTP/Version)
     if (buffer_ok) {
         written_this_call = snprintf(request_buffer + offset, sizeof(request_buffer) - offset,
                                      "%s %s HTTP/1.1\r\n", method_str, path_str.c_str());
@@ -285,7 +313,7 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
         if (buffer_ok) offset += written_this_call;
     }
 
-    // Host Header
+    //! Host Header
     if (buffer_ok) {
         written_this_call = snprintf(request_buffer + offset, sizeof(request_buffer) - offset,
                                      "Host: %.*s\r\n",
@@ -296,7 +324,7 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
         if (buffer_ok) offset += written_this_call;
     }
 
-    // Additional Headers (from input 'headers' string_view)
+    //! Additional Headers (from input 'headers' string_view)
     if (buffer_ok && !headers.empty()) {
         written_this_call = snprintf(request_buffer + offset, sizeof(request_buffer) - offset,
                                      "%.*s", // 'headers' (e.g. LOGIN_POST_HEADERS) should provide its own trailing \r\n
@@ -307,7 +335,7 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
         if (buffer_ok) offset += written_this_call;
     }
     
-    // Connection: close Header
+    //! Connection: close Header
     if (buffer_ok) {
         written_this_call = snprintf(request_buffer + offset, sizeof(request_buffer) - offset,
                                      "Connection: close\r\n");
@@ -316,7 +344,7 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
         if (buffer_ok) offset += written_this_call;
     }
 
-    // Content-Length Header (if body exists)
+    //! Content-Length Header (if body exists)
     if (buffer_ok && content_length > 0) {
         written_this_call = snprintf(request_buffer + offset, sizeof(request_buffer) - offset,
                                      "Content-Length: %d\r\n", content_length);
@@ -325,7 +353,7 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
         if (buffer_ok) offset += written_this_call;
     }
 
-    // Separator line (\r\n) between headers and body
+    //! Separator line (\r\n) between headers and body
     if (buffer_ok) {
         written_this_call = snprintf(request_buffer + offset, sizeof(request_buffer) - offset, "\r\n");
         if (written_this_call < 0) { buffer_ok = false; Serial.println(F("snprintf error S1")); }
@@ -333,7 +361,7 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
         if (buffer_ok) offset += written_this_call;
     }
 
-    // Body (if exists)
+    //! Body (if exists)
     if (buffer_ok && content_length > 0 && !body.empty()) {
         written_this_call = snprintf(request_buffer + offset, sizeof(request_buffer) - offset,
                                      "%.*s",
@@ -371,7 +399,7 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
     Serial.println(F("--- End of constructed request_buffer ---"));
 #endif
     
-    // Send request
+    //! Send request
     size_t bytes_written = m_client.print(request_buffer); // m_client.print() on char* will send until null.
                                                            // Or use m_client.write(request_buffer, written) to send exact length.
                                                            // Let's use write for precision with 'written' length.
@@ -386,7 +414,7 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
         return response;
     }
     
-    // Verify connection is still valid after sending
+    //! Verify connection is still valid after sending
     if (!m_client.connected()) {
         response.body = "Lost connection after sending request";
 #ifdef BACKEND_DEBUG
@@ -395,7 +423,7 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
         return response;
     }
     
-    // Wait for initial response with timeout
+    //! Wait for initial response with timeout
 #ifdef BACKEND_DEBUG
     Serial.println(F("Backend: Waiting for response..."));
 #endif
@@ -421,7 +449,7 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
         return response;
     }
     
-    // Read response with timeout
+    //! Read response with timeout
     unsigned long timeout = millis() + response_timeout;
     char buffer[512];
     int bytesRead;
@@ -431,13 +459,13 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
     String status_line;
     bool got_status_line = false;
     
-    // First pass: read headers
+    //! First pass: read headers
     while (millis() < timeout) {
         if (m_client.available()) {
             bytesRead = m_client.readBytesUntil('\n', buffer, sizeof(buffer) - 1);
             buffer[bytesRead] = '\0';
             
-            // Extract status code from first line
+            //! Extract status code from first line
             if (!got_status_line) {
                 status_line = String(buffer);
                 if (status_line.indexOf("HTTP/1.1") == 0) {
@@ -457,13 +485,13 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
                 }
             }
             
-            // Look for Content-Length header
+            //! Look for Content-Length header
             if (!foundContentLength && strncmp(buffer, "Content-Length:", 14) == 0) {
                 contentLength = atoi(buffer + 15);
                 foundContentLength = true;
             }
             
-            // Check for end of headers
+            //! Check for end of headers
             if (bytesRead <= 2 && (buffer[0] == '\r' || buffer[0] == '\n')) {
                 break;
             }
@@ -481,7 +509,7 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
         return response;
     }
     
-    // Second pass: read body if needed
+    //! Second pass: read body if needed
     if (foundContentLength && contentLength > 0) {
 #ifdef BACKEND_DEBUG
         Serial.println(F("Backend: Reading response body..."));
@@ -526,6 +554,11 @@ HttpResponse Backend::make_http_request(HttpMethod method, std::string_view path
     return response;
 }
 
+/**
+ * @brief Check server connection
+ * 
+ * @return true if connected
+ */
 bool Backend::check_server_connection() {
     if (!m_client.connected()) {
 #ifdef BACKEND_DEBUG
@@ -538,6 +571,12 @@ bool Backend::check_server_connection() {
     return response.success;
 }
 
+/**
+ * @brief Ensure connection
+ * If not connected, try to reestablish connection
+ * 
+ * @return true if connected
+ */
 bool Backend::ensure_connection() {
     if (m_client.connected()) {
         return true;
@@ -586,6 +625,11 @@ bool Backend::ensure_connection() {
     return true; // Successfully connected (or reconnected)
 }
 
+/**
+ * @brief Check if we have a valid token
+ * 
+ * @return true if valid
+ */
 bool Backend::verify_token_validity() {
     if (!m_has_token) {
         return false;
@@ -619,6 +663,11 @@ bool Backend::verify_token_validity() {
     return true;
 }
 
+/**
+ * @brief Login using JWT
+ * 
+ * @return true on success
+ */
 bool Backend::login_jwt() {
     // DEBUG: Print current JWT user and pass as seen by Backend
     // These lines have been REMOVED to prevent accidental credential leakage
@@ -872,6 +921,12 @@ bool Backend::send_update_room_state(int temperature, bool activity, int air_qua
     return true;
 }
 
+/**
+ * @brief Get room config
+ * 
+ * @return true 
+ * @return false 
+ */
 bool Backend::get_room_config() {
     if (!m_has_token) {
         return false;
@@ -940,7 +995,15 @@ bool Backend::get_room_config() {
     }
 }
 
-// Helper function to make authenticated HTTP requests
+/**
+ * @brief Helper function to make authenticated HTTP requests
+ * 
+ * @param method 
+ * @param path 
+ * @param headers 
+ * @param body 
+ * @return HttpResponse 
+ */
 HttpResponse Backend::make_authenticated_request(HttpMethod method, std::string_view path, 
                                                std::string_view headers, std::string_view body) {
     if (!m_has_token || m_server_info.jwt_token.empty()) {
