@@ -1,3 +1,6 @@
+//! @file Device.h
+//! Device namespace with Ethernet and IP constants
+
 #ifndef DEVICE_H
 #define DEVICE_H
 #include <cstdint>

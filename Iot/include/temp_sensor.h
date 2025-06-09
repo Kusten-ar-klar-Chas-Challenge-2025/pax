@@ -1,11 +1,15 @@
+/**
+ * @file temp_sensor.h
+ * @brief This class handles the temperature and humidity sensor DHT11
+ * 
+ */
 #ifndef TEMP_SENSOR_H
 #define TEMP_SENSOR_H
 #include <Arduino.h>
 
 /**
  * @class Class for temperature and humidity sensor DHT11
- * @details
- * Values read will be formatted into json string and sent via Ether/WiFi.
+ * 
  */
 class TempSensor
 {
@@ -19,8 +23,8 @@ public:
     void begin();
 
     /**
-     * @brief Get the Temperature object
-     * @return float value of temperature (%)
+     * @brief Get the last read temperature value
+     * @return float value of temperature (°C)
      */
     float get_temperature();
 

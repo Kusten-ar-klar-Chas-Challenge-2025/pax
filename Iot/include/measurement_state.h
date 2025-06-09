@@ -1,9 +1,9 @@
 /**
- * @file MeasurementState.h
+ * @file measurement_state.h
+ * @brief This class handles sensor measurements over time for the Arduino UNO R4
  * @author Erik Dahl (erik@iunderlandet.se)
- * @brief 
- * @version 0.2
- * @date 2025-05-19
+ * @version 0.3
+ * @date 2025-05-26
  * 
  */
 #ifndef PAX_MEASUREMENT_STATE_CLASS
@@ -14,7 +14,7 @@
 #include "temp_sensor.h"
 
 /**
- * @brief Class to handle sensor measurements over time for Arduino UNO R4
+ * @brief This class handles sensor measurements over time for the Arduino UNO R4
  * 
  * Sensors implemented: PIR Sensor
  */
