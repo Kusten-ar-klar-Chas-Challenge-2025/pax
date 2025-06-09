@@ -12,7 +12,7 @@ Med PAX kan du på ett effektivt och automatiserat sätt, övervaka statusen på
 
 | **Komponent**                     | **I/O Pin**           | **Beskrivning**                                     |
 | --------------------------------- | --------------------- | --------------------------------------------------- |
-| **Arduino Uno Rev4 Mini**         |                       | Microkontroller för inkoppling.                     |
+| **Arduino Uno R4 WiFi**           |                       | Microkontroller för inkoppling.                     |
 | **PIR-sensor HC-SR501**           | **2**                 | Används för att detektera rörelse i rummet.         |
 | **LED**                           | **3**                 | Används för att driva en LED.                       |
 | **Temp-sensor DS18B20**           | **6**                 | Används för temperaturmätning i rummet.             |
@@ -21,12 +21,6 @@ Med PAX kan du på ett effektivt och automatiserat sätt, övervaka statusen på
 
 [Projektplan](https://github.com/Kusten-ar-klar-Chas-Challenge-2025/pax/blob/main/Iot/docs/PROJEKTPLAN.md)  
 [SRS](https://github.com/Kusten-ar-klar-Chas-Challenge-2025/pax/blob/main/Iot/docs/SRS.md)  
-
-### Hårdvaru-bild
-![Hårdvarubild](hardware.jpeg)
-
-### Möjlig industrialiserad design
-![PAX-dosa](pax-dosa.png)
 
 ### Bygga projektet
 
@@ -67,3 +61,9 @@ Välj den byggversion som är lämplig för din användning, release eller debug
 Koppla enheten enligt instruktion. Se till att det finns en motsvarighet till varje sensor för att kunna utvärdera beteendet. EEPROM behöver kopplas så att den är på address 0x50.
 
 Ladda upp den byggda mjukvaran till hårdvaran. Skrivningar till servern kan ses via backendverktyg (se backend för bygginfo) eller i appen (se frontend för bygginfo).
+
+### Hårdvaru-bild
+![Hårdvarubild](hardware.jpeg)
+
+### Möjlig industrialiserad design
+![PAX-dosa](pax-dosa.png)
