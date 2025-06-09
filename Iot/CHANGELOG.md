@@ -1,2 +1,3 @@
-# 1.0 Major release
-Connects to Vercel backend with JWT authentication. Reads actual sensors.
+# 1.0 Baseline release
+- Connects to Vercel backend over https with JWT authentication. 
+- Reads sensor data from connected sensors and uses updated backend API to send room updates.
