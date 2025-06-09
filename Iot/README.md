@@ -24,6 +24,9 @@ Med PAX kan du på ett effektivt och automatiserat sätt, övervaka statusen på
 
 ### Bygga projektet
 
+### Möjlig industrialiserad design
+![alt text](pax-dosa.png)
+
 #### Platform IO
 
 Installera PlatformIO och öppna undermappen pax/Iot med PlatformIO.  
