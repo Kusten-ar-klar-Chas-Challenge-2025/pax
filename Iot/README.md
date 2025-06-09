@@ -64,6 +64,12 @@ Koppla enheten enligt [kopplingsschemat](./docs/SCH_PAX-Schematic_1-P1_2025-05-2
 
 Ladda upp den byggda mjukvaran till hårdvaran. Skrivningar till servern kan ses via backendverktyg eller i appen (se länkar till backend och frontend ovan).
 
+### Sensorkalibrering
+Temperatursensorn kan kalibreras med meddelanden över Serial (Baud Rate: 115200).  
+`TEMP0`, `TEMP+<float>` och `TEMP-<float>`är giltiga kommandon.   
+Exempel: `TEMP+2.5` sätter en offset på 2.5 °C  
+Mer info om kalibrering: [send_temperature_offset](./calibration/README.md)  
+
 ### Hårdvaru-bild
 ![Hårdvarubild](hardware.jpeg)
 

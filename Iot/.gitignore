@@ -22,3 +22,7 @@ arduino_secrets.h
 
 # Ignore .DS_Store
 .DS_Store
+
+# Include distributed executables
+!send_temperature_offset
+!send_temperature_offset.exe
