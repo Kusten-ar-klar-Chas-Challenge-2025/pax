@@ -22,8 +22,11 @@ Med PAX kan du på ett effektivt och automatiserat sätt, övervaka statusen på
 [Projektplan](https://github.com/Kusten-ar-klar-Chas-Challenge-2025/pax/blob/main/Iot/docs/PROJEKTPLAN.md)  
 [SRS](https://github.com/Kusten-ar-klar-Chas-Challenge-2025/pax/blob/main/Iot/docs/SRS.md)  
 
+### Hårdvaru-bild
+![Hårdvarubild](hardware.jpeg)
+
 ### Möjlig industrialiserad design
-![alt text](pax-dosa.png)
+![PAX-dosa](pax-dosa.png)
 
 ### Bygga projektet
 
@@ -59,8 +62,8 @@ Kopiera mallen under för att konfigurera din egna uppkoppling (SSID, Password, 
 #endif
 ```
 
-Välj den byggversion som är lämplig för din användning, release eller debug. Debug har omfattande pinting vilket kommer göra körandet långsammare.
+Välj den byggversion som är lämplig för din användning, release eller debug. Debug har omfattande printing vilket kommer göra körandet långsammare.
 
 Koppla enheten enligt instruktion. Se till att det finns en motsvarighet till varje sensor för att kunna utvärdera beteendet. EEPROM behöver kopplas så att den är på address 0x50.
 
-Ladda upp den byggda mjukvaran till hårdvaran. SDkrivningar till servern kan ses via backendverktyg (se backend för bygginfo) eller i appen (se frontend för bygginfo).
+Ladda upp den byggda mjukvaran till hårdvaran. Skrivningar till servern kan ses via backendverktyg (se backend för bygginfo) eller i appen (se frontend för bygginfo).
