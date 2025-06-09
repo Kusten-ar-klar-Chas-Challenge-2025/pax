@@ -1,5 +1,6 @@
 /**
  * @file Backend.cpp
+ * @brief Functions for communicating with the backend server
  * 
  */
 // Comment this line out to disable verbose debug logging - OR define via build flags
@@ -14,22 +15,22 @@
 #include <cstdint>
 #include <algorithm>
 
-// HTTP header constants
+//! HTTP header constants
 constexpr const char* CONTENT_TYPE_JSON = "Content-Type: application/json\r\n";
 constexpr const char* ACCEPT_JSON = "Accept: application/json\r\n";
 constexpr const char* USER_AGENT_HEADER = "User-Agent: Arduino/1.0\r\n";
 
-// Composed headers for JSON POST/PATCH requests (excluding login)
+//! Composed headers for JSON POST/PATCH requests (excluding login)
 constexpr const char* JSON_HEADERS =
     "Content-Type: application/json\r\n"
     "Accept: application/json\r\n"
     "User-Agent: Arduino/1.0\r\n";
 
-// Headers for login POST request - minimal set
+//! Headers for login POST request - minimal set
 constexpr const char* LOGIN_POST_HEADERS =
     "Content-Type: application/json\r\n";
 
-// Composed headers
+//! Composed headers
 constexpr const char* ACCEPT_HEADERS =
     "Accept: application/json\r\n"
     "User-Agent: Arduino/1.0\r\n";
@@ -57,11 +58,11 @@ bool Backend::construct_path(String* dest, std::string_view endpoint, std::strin
         return false;
     }
 
-    // Calculate maximum possible length
+    //! Calculate maximum possible length
     size_t max_len = 256;  // Reasonable max path length
     size_t needed_len = 0;
     
-    // Add lengths of all components
+    //! Add lengths of all components
     if (!m_server_info.server_api_path.empty()) {
         needed_len += m_server_info.server_api_path.length() + 1;  // +1 for potential slash
     }
@@ -75,16 +76,16 @@ bool Backend::construct_path(String* dest, std::string_view endpoint, std::strin
         needed_len += query.length();
     }
     
-    // Check if path would be too long
+    //! Check if path would be too long
     if (needed_len > max_len) {
         return false;
     }
     
-    // Reserve space in destination
+    //! Reserve space in destination
     dest->reserve(needed_len);
     dest->remove(0);  // Clear the string
     
-    // Start with API path if not empty
+    //! Start with API path if not empty
     if (!m_server_info.server_api_path.empty()) {
         *dest = m_server_info.server_api_path.data();
         if (!dest->endsWith("/")) {
