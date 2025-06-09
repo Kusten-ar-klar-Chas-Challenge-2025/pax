@@ -72,23 +72,23 @@ Ladda upp den byggda mjukvaran till hårdvaran. Skrivningar till servern kan ses
 
 
 ## Ytterligare Dokumentation IoT
-[Projektplan](https://github.com/Kusten-ar-klar-Chas-Challenge-2025/pax/blob/main/Iot/docs/PROJEKTPLAN.md)  
+[Projektplan](./docs/PROJEKTPLAN.md)  
 
-[SRS](https://github.com/Kusten-ar-klar-Chas-Challenge-2025/pax/blob/main/Iot/docs/SRS.md)  
+[SRS](./docs/SRS.md)  
 
-API-Dokumentation  
+[API-Dokumentation](./docs/API-DOCUMENTATION.md)  
 
-Accessibility  
+[Accessibility](./docs/ACCESSIBILITY.md)  
 
-[Changelog](CHANGELOG.md)  
+[Changelog](./docs/CHANGELOG.md)  
 
 Retrospektiv  
 
-[Arkitektur](ARCHITECTURE.md)  
+[Arkitektur](./docs/ARCHITECTURE.md)  
 
 [Kopplingsschema](./docs/SCH_PAX-Schematic_1-P1_2025-05-26.png)  
 
-Testning  
+[Testning](./docs/TESTING.md)  
 
 Doxygen - utförlig dokumentation av IoT-mjukvaran  
 
