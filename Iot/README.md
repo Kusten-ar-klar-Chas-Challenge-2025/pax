@@ -96,5 +96,5 @@ Retrospektiv
 
 [Testning](./docs/TESTING.md)  
 
-Doxygen - utförlig dokumentation av IoT-mjukvaran  
+[Doxygen - utförlig dokumentation av IoT-mjukvaran](https://kusten-ar-klar-chas-challenge-2025.github.io/pax/files.html)  
 
