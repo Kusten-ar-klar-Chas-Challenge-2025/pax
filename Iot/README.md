@@ -25,6 +25,8 @@ Med PAX kan du på ett effektivt och automatiserat sätt, övervaka statusen på
 ### Möjlig industrialiserad design
 ![alt text](pax-dosa.png)
 
+### Bygga projektet
+
 #### Platform IO
 
 Installera PlatformIO och öppna undermappen pax/Iot med PlatformIO.  
@@ -56,3 +58,9 @@ Kopiera mallen under för att konfigurera din egna uppkoppling (SSID, Password, 
 
 #endif
 ```
+
+Välj den byggversion som är lämplig för din användning, release eller debug. Debug har omfattande pinting vilket kommer göra körandet långsammare.
+
+Koppla enheten enligt instruktion. Se till att det finns en motsvarighet till varje sensor för att kunna utvärdera beteendet. EEPROM behöver kopplas så att den är på address 0x50.
+
+Ladda upp den byggda mjukvaran till hårdvaran. SDkrivningar till servern kan ses via backendverktyg (se backend för bygginfo) eller i appen (se frontend för bygginfo).
