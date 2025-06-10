@@ -105,7 +105,7 @@ private:
      * @return true if a valid command was received
      */
     bool get_new_temperature_offset_from_serial(float& offset);
-    bool writeFloatToEEPROM(uint16_t eeprom_addr, float value, size_t buffer_index);
+    bool writeFloatToEEPROM(uint16_t eeprom_addr, size_t buffer_index, float value);
     bool readFloatFromEEPROM(uint16_t eeprom_addr, size_t buffer_index, float* destination);
 
 public:
@@ -122,7 +122,12 @@ public:
      * 
      */
     void begin(I2C_eeprom* eeprom);
-
+    /**
+     * @brief 
+     * 
+     * @param address EEPROM can store values at addresses between 0 and 7999
+     * @return true if successful
+     */
     bool update_temperature_offset_from_eeprom(uint16_t address);
     /**
      * @brief Reads from serial, and if command is valid updates temperature offset 

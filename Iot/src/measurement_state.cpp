@@ -58,24 +58,20 @@ String serial_message = Serial.readStringUntil('\n');
     }
 }
 
-bool MeasurementState::writeFloatToEEPROM(uint16_t eeprom_addr, float value, size_t buffer_index)
+bool MeasurementState::writeFloatToEEPROM(uint16_t eeprom_addr, size_t buffer_index, float value)
 {
     if (!m_eeprom) {
         return false;
     }
-    std::array<uint8_t, 32> buf { 0 };
-    if (buffer_index * sizeof(float) >= buf.size()) {
-        return false;
-    }
-
-    uint8_t* data = &buf[buffer_index * sizeof(float)];
-
-    std::memcpy(buf.data() + buffer_index, &value, sizeof(float));
-    if (m_eeprom->writeBlock(eeprom_addr + (buffer_index*sizeof(float)), data, sizeof(float)) == 0) 
-    {
+    std::array<uint8_t, 4> data;
+	std::memcpy(data.data(), &value, sizeof(float));
+	
+	const std::uint16_t byte_address = eeprom_addr + (buffer_index * sizeof(float));
+    
+    if (m_eeprom->writeBlock(byte_address, data.data(), sizeof(float)) == 0) {
         return true;
     }
-    return false;
+	return false;
 }
 bool MeasurementState::readFloatFromEEPROM(uint16_t eeprom_addr, size_t buffer_index, float* destination)
 {
@@ -89,7 +85,6 @@ bool MeasurementState::readFloatFromEEPROM(uint16_t eeprom_addr, size_t buffer_i
     if (m_eeprom->readBlock(byte_address, data.data(), sizeof(float)) != sizeof(float)) {
         return false;
     }
-    
     std::memcpy(destination, data.data(), sizeof(float));
     return true;
 
@@ -121,8 +116,12 @@ void MeasurementState::begin(I2C_eeprom* eeprom){
     // No return value is given from begin()
     if (m_temp_sensor_connected) {
         m_temp_sensor.begin();
+        #ifdef MAIN_STATE_DEBUG
+        Serial.println("DHT11 begin function called");
+        #endif
     }
 }
+
 
 bool MeasurementState::update_temperature_offset_from_eeprom(uint16_t address)
     {
@@ -132,6 +131,8 @@ bool MeasurementState::update_temperature_offset_from_eeprom(uint16_t address)
         {
             return false;
         }
+        Serial.print("Temperature offset from EEPROM: ");
+        Serial.println(new_offset);
         if(set_temperature_offset(new_offset))
         {
           Serial.print("Setting saved temperature calibration: ");
@@ -155,7 +156,7 @@ bool MeasurementState::update_temperature_offset_from_serial(uint16_t eeprom_add
           Serial.println(new_offset);
           
           size_t buffer_index { 0 };
-          if (writeFloatToEEPROM(eeprom_address, new_offset, buffer_index))
+          if (writeFloatToEEPROM(eeprom_address, buffer_index, new_offset))
           {
               return true;
           }
