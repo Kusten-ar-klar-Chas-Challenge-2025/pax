@@ -88,7 +88,9 @@ Mer info om kalibrering: [send_temperature_offset](./calibration/README.md)
 
 [Changelog](./docs/CHANGELOG.md)  
 
-Retrospektiv  
+[Retrospektiv - gemensam för alla team](../RETROSPECTIVE.md)  
+
+[Retrospektiv - IoT möjlig vidareutveckling](./docs/RETROSPECTIVE.md)  
 
 [Arkitektur](./docs/ARCHITECTURE.md)  
 

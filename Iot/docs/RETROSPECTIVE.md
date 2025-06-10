@@ -1,5 +1,5 @@
 # SUVX-specifik retrospektiv
-Se [retrospektiv](../RETROSPECTIVE.md) för hela gruppens tankar om arbetet i stort.
+Se [retrospektiv](../../RETROSPECTIVE.md) för hela gruppens tankar om arbetet i stort.
 ## Vidareutveckling
 Om vi hade fortsatt att utveckla produkten så finns det några identifierade nästa steg.
 - Byta inloggningsmetod.
