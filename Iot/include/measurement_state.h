@@ -12,6 +12,9 @@
 #include <Arduino.h>
 #include <Adafruit_SGP30.h>
 #include <I2C_eeprom.h>
+#include <cmath>  // For NAN
+#include <cstring>  // for memcpy
+#include <cstdint>  // for size_t
 #include "temp_sensor.h"
 
 
