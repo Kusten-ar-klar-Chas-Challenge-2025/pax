@@ -1,0 +1,168 @@
+paths:
+  /rooms:
+    get:
+      summary: Get all rooms
+      tags: [Rooms]
+      responses:
+        200:
+          description: A list of rooms
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Room"
+        500:
+          description: Internal server error
+
+    post:
+      summary: Create a new room
+      tags: [Rooms]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRoomInput"
+      responses:
+        201:
+          description: Room created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Room"
+        500:
+          description: Error creating room
+
+  /rooms/{id}:
+    get:
+      summary: Get a room by ID
+      tags: [Rooms]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Room found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Room"
+        404:
+          description: Room not found
+        500:
+          description: Internal server error
+
+    put:
+      summary: Update a room
+      tags: [Rooms]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRoomInput"
+      responses:
+        200:
+          description: Room updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Room"
+        404:
+          description: Room not found
+        500:
+          description: Internal server error
+
+    delete:
+      summary: Delete a room
+      tags: [Rooms]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Room deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  room:
+                    $ref: "#/components/schemas/Room"
+        404:
+          description: Room not found
+        500:
+          description: Internal server error
+
+components:
+  schemas:
+    Room:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        available:
+          type: boolean
+        air_quality:
+          type: number
+        screen:
+          type: boolean
+        floor:
+          type: integer
+        chairs:
+          type: integer
+        whiteboard:
+          type: boolean
+        projector:
+          type: boolean
+
+    CreateRoomInput:
+      type: object
+      required:
+        - name
+        - description
+        - available
+        - air_quality
+        - screen
+        - floor
+        - chairs
+        - whiteboard
+        - projector
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        available:
+          type: boolean
+        air_quality:
+          type: number
+        screen:
+          type: boolean
+        floor:
+          type: integer
+        chairs:
+          type: integer
+        whiteboard:
+          type: boolean
+        projector:
+          type: boolean

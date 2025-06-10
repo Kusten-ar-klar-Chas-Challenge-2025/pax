@@ -1,0 +1,140 @@
+paths:
+  /bookings:
+    get:
+      summary: Get all bookings with room name and user email
+      tags: [Bookings]
+      responses:
+        200:
+          description: A list of bookings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BookingWithRelations"
+        500:
+          description: Internal server error
+
+    post:
+      summary: Create a new booking
+      tags: [Bookings]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Booking"
+      responses:
+        201:
+          description: Booking created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+        400:
+          description: Invalid room_id or user_id
+        500:
+          description: Internal server error
+
+  /bookings/{id}:
+    get:
+      summary: Get a booking by ID
+      tags: [Bookings]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: Booking ID
+      responses:
+        200:
+          description: Booking found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+        404:
+          description: Booking not found
+
+    put:
+      summary: Update a booking by ID
+      tags: [Bookings]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: Booking ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Booking"
+      responses:
+        200:
+          description: Booking updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+        400:
+          description: Invalid room_id or user_id
+        404:
+          description: Booking not found
+        500:
+          description: Internal server error
+
+    delete:
+      summary: Delete a booking by ID
+      tags: [Bookings]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: Booking ID
+      responses:
+        204:
+          description: Booking deleted successfully
+        404:
+          description: Booking not found
+        500:
+          description: Internal server error
+
+components:
+  schemas:
+    Booking:
+      type: object
+      properties:
+        id:
+          type: integer
+        room_id:
+          type: integer
+        user_id:
+          type: integer
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+
+    BookingWithRelations:
+      type: object
+      properties:
+        id:
+          type: integer
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        room_name:
+          type: string
+        user_email:
+          type: string

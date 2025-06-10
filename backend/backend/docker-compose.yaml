@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: Test
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: db123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+
+  app:
+    build:
+      context: .
+    depends_on:
+      - db
+    ports:
+      - "13000:13000"
+    networks:
+      - mynetwork
+    environment:
+      DB_USER: Test
+      DB_HOST: db
+      DB_NAME: db123
+      DB_PASSWORD: password123
+      DB_PORT: 5432
+      PORT: 13000
+      JWT_SECRET: 'mysecretkey'
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: sh -c "npx ts-node-dev --respawn --transpile-only src/index.ts"
+
+volumes:
+  pgdata:
+
+networks:
+  mynetwork:
