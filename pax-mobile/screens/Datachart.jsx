@@ -2,6 +2,7 @@ import React from "react";
 import { ScrollView, Text, Image, View, StyleSheet } from "react-native";
 import { useTheme } from "../theme/ThemeContext";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import Datacharts from "../components/DataCharts";
 
 const Datachart = () => {
   const { theme, isDark, toggleTheme } = useTheme();
@@ -11,9 +12,7 @@ const Datachart = () => {
       <ScrollView style={{ backgroundColor: theme.background }}>
         <SafeAreaView>
           <View style={styles.container}>
-            <View style={styles.card}>
-              <Text style={styles.title}>UNDER CONSTRUCTION</Text>
-            </View>
+            <Datacharts />
           </View>
         </SafeAreaView>
       </ScrollView>
