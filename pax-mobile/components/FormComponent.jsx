@@ -1,9 +1,6 @@
-import { Pressable, StyleSheet, Text, View, TextInput } from 'react-native'
+import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React from 'react'
 import { useTheme } from '../theme/ThemeContext'
-
-
-
 
 const FormComponent = ({ email, setEmail, password, setPassword }) => {
     const { theme } = useTheme ();
@@ -31,19 +28,11 @@ const FormComponent = ({ email, setEmail, password, setPassword }) => {
       onChangeText={setPassword}
       secureTextEntry
        />
-       {success && (
-        <Text>Inloggningen lyckades!</Text>
-       )}
     </View>
   )
 }
 
-
-
-
 export default FormComponent
-
-
 
 
 const createStyles = (theme) =>
