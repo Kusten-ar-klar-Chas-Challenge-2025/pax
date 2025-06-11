@@ -13,8 +13,6 @@ import {
 } from "react-native";
 import { LineChart, BarChart } from "react-native-chart-kit";
 import { useTheme } from "../theme/ThemeContext";
-import { useLoading } from "../components/LoadingContext";
-import AnimatedLogo from "../components/AnimatedLogo";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -24,7 +22,6 @@ const DataCharts = () => {
   const [rooms, setRooms] = useState([]);
   const { theme, isDark, toggleTheme } = useTheme();
   const styles = createStyles(theme);
-  const { isLoading, setIsLoading } = useLoading();
   const roomIds = [1, 2, 3, 7, 4, 5, 6];
 
   useEffect(() => {
@@ -40,14 +37,12 @@ const DataCharts = () => {
       } catch (error) {
         console.error("Fel vid hämtning:", error);
       } finally {
-        setIsLoading(false);
+        // setLoading(false);
       }
     };
 
     fetchSelectedRooms();
   }, []);
-
-  if (isLoading) return <AnimatedLogo />;
 
   const labels = rooms.map((room) => room.name);
   const temperatureData = rooms.map((room) => room.temperature || 0);
