@@ -11,17 +11,29 @@ const FormComponent = ({ email, setEmail, password, setPassword }) => {
   return (
     <View>
      <Text style={styles.label}>Email:</Text>
-      <TextInput style={styles.input}
+      <TextInput
+      testID='email-input'
+      style={styles.input}
+      accessibilityLabel='E-postadress'
+      accessibilityRole='testbox'
+      accessibilityHint='Fält där du kan skriva in din e-post'
       value= {email}
       onChangeText={setEmail}
        />
        <Text style={styles.label}>Lösenord:</Text>
         <TextInput
+      testID='password-input'
       style={styles.input}
+      accessibilityLabel='Lösenord'
+      accessibilityRole='testbox'
+      accessibilityHint='Fält där du kan skriva in ditt lösenord'
       value={password}
       onChangeText={setPassword}
       secureTextEntry
        />
+       {success && (
+        <Text>Inloggningen lyckades!</Text>
+       )}
     </View>
   )
 }
