@@ -8,6 +8,8 @@
 #include "Backend.h"
 #include <Arduino.h>
 #include <WiFiS3.h>
+#include <Wire.h>
+#include <I2C_eeprom.h>
 
 // Comment this line out to disable verbose state debug logging - OR define via build flags
 // #define MAIN_STATE_DEBUG
@@ -33,9 +35,15 @@
  * @endcode
  */
 
-int pir_pin = 2;  //!< PIR sensor pin
-int led_pin = 3;  //!< LED indicator pin
-int temp_pin = 6; //!< Temperature sensor pin
+constexpr int pir_pin = 2;  //!< PIR sensor pin
+constexpr int led_pin = 3;  //!< LED indicator pin
+constexpr int temp_pin = 6; //!< Temperature sensor pin
+namespace I2C_address {
+    constexpr uint8_t eeprom_address { 0x50 };
+}
+constexpr uint16_t temperature_offset_address { 0 };
+bool eeprom_initialized { false };
+I2C_eeprom eeprom(I2C_address::eeprom_address);
 MeasurementState room_state(pir_pin, 60*1000, temp_pin); //!< Room state manager with PIR timeout and temperature sensor
 
 // Server configuration
@@ -145,8 +153,10 @@ void setup() {
     while (!Serial) {
         delay(50);
     }
-
+    delay(500); // Give Serial extra time to start
     update_state(SystemState::INITIALIZED, "Serial initialized");
+    
+
 
     //! Setting room ID to a specific number for testing
     #ifdef ROOM_OVERRIDE
@@ -156,13 +166,34 @@ void setup() {
 
     delay(500); // extra delay to give Serial connection time
     Wire.begin();
-#ifdef MAIN_STATE_DEBUG
+
+    //! Begin EEPROM
+    if (eeprom.begin())
+    {
+        #ifdef MAIN_STATE_DEBUG
+        Serial.println("EEPROM initialized");
+        #endif
+        eeprom_initialized = true;
+    }
+    else 
+    {
+        Serial.println("EEPROM not found...");
+    }    
+    #ifdef MAIN_STATE_DEBUG
+    Serial.print("eeprom address: ");
+    Serial.println(eeprom.getAddress());
+    #endif
+
+    #ifdef MAIN_STATE_DEBUG
     Serial.println(F("System: Initializing room state"));
 #endif
-    room_state.begin();
-    // TODO: READ from EEPROM and update offset
-    // float saved_offset = read_temperature_offset_from_eeprom();
-    // room_state.set_temperature_offset(saved_offset);
+    room_state.begin(&eeprom);
+    // Read from EEPROM and update offset
+    room_state.update_temperature_offset_from_eeprom(temperature_offset_address);
+    #ifdef MAIN_STATE_DEBUG
+    Serial.print("TEMPERATURE OFFSET: ");
+    Serial.println(room_state.get_temperature_offset());
+    #endif
 
 #ifdef MAIN_STATE_DEBUG
     Serial.println(F("System: Initializing WiFi"));
@@ -277,9 +308,11 @@ void loop() {
     // Check serial for incoming calibration messages
     if (Serial.available())
     {
-        if(room_state.update_temperature_offset_from_serial())
+        if(room_state.update_temperature_offset_from_serial(temperature_offset_address))
         {
-           // save_temperature_offset_to_eeprom(room_state.get_temperature_offset());
+            #ifdef MAIN_STATE_DEBUG
+            Serial.println("Temperatur offset saved to EEPROM");
+            #endif
         } 
         else 
         {

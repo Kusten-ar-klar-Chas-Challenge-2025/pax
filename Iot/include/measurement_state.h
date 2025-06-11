@@ -11,7 +11,12 @@
 
 #include <Arduino.h>
 #include <Adafruit_SGP30.h>
+#include <I2C_eeprom.h>
+#include <cmath>  // For NAN
+#include <cstring>  // for memcpy
+#include <cstdint>  // for size_t
 #include "temp_sensor.h"
+
 
 /**
  * @brief Class to handle sensor measurements over time for Arduino UNO R4
@@ -84,6 +89,8 @@ private:
      * 
      */
     uint16_t m_iaq_baseline_tvoc;
+    
+    I2C_eeprom* m_eeprom { nullptr };
     /**
      * @brief Read SGP30 values and update internal variables
      * 
@@ -101,6 +108,9 @@ private:
      * @return true if a valid command was received
      */
     bool get_new_temperature_offset_from_serial(float& offset);
+    bool writeFloatToEEPROM(uint16_t eeprom_addr, size_t buffer_index, float value);
+    bool readFloatFromEEPROM(uint16_t eeprom_addr, size_t buffer_index, float* destination);
+
 public:
     /**
      * @brief Constructor
@@ -114,13 +124,20 @@ public:
      * @brief Run in setup to set correct pinMode
      * 
      */
-    void begin();
+    void begin(I2C_eeprom* eeprom);
+    /**
+     * @brief 
+     * 
+     * @param address EEPROM can store values at addresses between 0 and 7999
+     * @return true if successful
+     */
+    bool update_temperature_offset_from_eeprom(uint16_t address);
     /**
      * @brief Reads from serial, and if command is valid updates temperature offset 
      * 
      * @return true if a new offset was successfully set
      */
-    bool update_temperature_offset_from_serial();
+    bool update_temperature_offset_from_serial(uint16_t eeprom_address);
     /**
      * @brief Set new temperature offset for TempSensor
      * 

@@ -4,7 +4,6 @@
  * 
  */
 #include "measurement_state.h"
-#include <cmath>  // For NAN
 
 
 MeasurementState::MeasurementState(uint8_t pir_pin, unsigned long hold_duration, uint8_t temp_sensor_pin)
@@ -57,7 +56,43 @@ String serial_message = Serial.readStringUntil('\n');
     }
 }
 
-void MeasurementState::begin(){
+bool MeasurementState::writeFloatToEEPROM(uint16_t eeprom_addr, size_t buffer_index, float value)
+{
+    if (!m_eeprom) {
+        return false;
+    }
+    std::array<uint8_t, 4> data;
+	std::memcpy(data.data(), &value, sizeof(float));
+	
+	const std::uint16_t byte_address = eeprom_addr + (buffer_index * sizeof(float));
+    
+    if (m_eeprom->writeBlock(byte_address, data.data(), sizeof(float)) == 0) {
+        return true;
+    }
+	return false;
+}
+bool MeasurementState::readFloatFromEEPROM(uint16_t eeprom_addr, size_t buffer_index, float* destination)
+{
+    if (!m_eeprom) {
+        return false;
+    }
+
+    std::array<std::uint8_t, 4> data;
+    
+    const std::uint16_t byte_address = eeprom_addr + (buffer_index * sizeof(float));
+    if (m_eeprom->readBlock(byte_address, data.data(), sizeof(float)) != sizeof(float)) {
+        return false;
+    }
+    std::memcpy(destination, data.data(), sizeof(float));
+    return true;
+
+}
+
+
+void MeasurementState::begin(I2C_eeprom* eeprom){
+    // initialize internal EEPROM
+    m_eeprom = eeprom;
+
     // initialize PIR sensor
     pinMode(m_pir_pin, INPUT);
 
@@ -79,10 +114,33 @@ void MeasurementState::begin(){
     // No return value is given from begin()
     if (m_temp_sensor_connected) {
         m_temp_sensor.begin();
+        #ifdef MAIN_STATE_DEBUG
+        Serial.println("DHT11 begin function called");
+        #endif
     }
 }
 
-bool MeasurementState::update_temperature_offset_from_serial()
+
+bool MeasurementState::update_temperature_offset_from_eeprom(uint16_t address)
+    {
+        float new_offset;
+        size_t offset_index { 0 };
+        if (!readFloatFromEEPROM(address, offset_index, &new_offset))
+        {
+            return false;
+        }
+        Serial.print("Temperature offset from EEPROM: ");
+        Serial.println(new_offset);
+        if(set_temperature_offset(new_offset))
+        {
+          Serial.print("Setting saved temperature calibration: ");
+          Serial.println(new_offset);
+          return true;
+        }      
+        return false;
+    }
+
+bool MeasurementState::update_temperature_offset_from_serial(uint16_t eeprom_address)
 {
   // in case caller forgot, check if a message is available
   if (Serial.available())
@@ -94,7 +152,12 @@ bool MeasurementState::update_temperature_offset_from_serial()
       {
           Serial.print("Setting new temperature calibration: ");
           Serial.println(new_offset);
-          return true;
+          
+          size_t buffer_index { 0 };
+          if (writeFloatToEEPROM(eeprom_address, buffer_index, new_offset))
+          {
+              return true;
+          }
       }  
     }
   }
@@ -104,6 +167,10 @@ bool MeasurementState::update_temperature_offset_from_serial()
 bool MeasurementState::set_temperature_offset(float new_temperature_offset)
 {
     bool set_offset_successful = m_temp_sensor.set_temperature_offset(new_temperature_offset);
+if (set_offset_successful){
+    size_t offset_index { 0 };
+    }
+
     return set_offset_successful;
 }
 
