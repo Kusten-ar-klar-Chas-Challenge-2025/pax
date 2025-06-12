@@ -11,6 +11,10 @@ const FormComponent = ({ email, setEmail, password, setPassword }) => {
       <TextInput
       testID='email-input'
       style={styles.input}
+      autoCapitalize='none'
+      keyboardType='email-address'
+      textContentType='emailAdress'
+      autoCorrect={false}
       accessibilityLabel='E-postadress'
       accessibilityRole='testbox'
       accessibilityHint='Fält där du kan skriva in din e-post'
@@ -19,6 +23,9 @@ const FormComponent = ({ email, setEmail, password, setPassword }) => {
        />
        <Text style={styles.label}>Lösenord:</Text>
         <TextInput
+      autoCapitalize='none'
+      autoCorrect={false}
+      textContentType='password'
       testID='password-input'
       style={styles.input}
       accessibilityLabel='Lösenord'
