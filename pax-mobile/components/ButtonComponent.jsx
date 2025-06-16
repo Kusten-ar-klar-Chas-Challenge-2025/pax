@@ -1,14 +1,17 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { useTheme } from '../../theme/ThemeContext'
+import { useTheme } from '../theme/ThemeContext'
 
-const ButtonComponent = ({ title, onPress, style }) => {
+const ButtonComponent = ({ title, onPress }) => {
         const { theme } = useTheme ();
         const styles = createStyles (theme);
 
 
   return (
     <Pressable
+    accessible={true}
+    accessibilityLabel={title}
+    accessibilityRole='button'
     onPress={onPress}
     style={({ pressed }) => [styles.button, pressed && styles.pressed]}>
      <Text style={styles.buttonText}>{title}</Text>

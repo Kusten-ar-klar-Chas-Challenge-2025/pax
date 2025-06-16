@@ -156,7 +156,7 @@ const createStyles = (theme) =>
       zIndex: 1,
     },
     bookingtext: {
-      color: theme.card,
+      color: theme.textPrimary,
       fontFamily: "NunitoSans",
       fontSize: 30,
       fontWeight: "600",

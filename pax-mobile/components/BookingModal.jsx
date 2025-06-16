@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ScrollView,
   TextInput,
+  AccessibilityInfo,
 } from "react-native";
 
 const BookingModal = ({ visible, onClose, room, onBookingSuccess, theme }) => {
@@ -91,6 +92,7 @@ const BookingModal = ({ visible, onClose, room, onBookingSuccess, theme }) => {
 
       setSuccess(true);
       onBookingSuccess(room.id);
+      AccessibilityInfo.announceForAccessibility("Bokning lyckades");
 
       setTimeout(() => {
         setSuccess(false);
@@ -104,10 +106,21 @@ const BookingModal = ({ visible, onClose, room, onBookingSuccess, theme }) => {
   };
 
   return (
-    <Modal visible={visible} animationType="slide" transparent={true}>
+    <Modal
+      visible={visible}
+      animationType="slide"
+      transparent={true}
+      accessible={true}
+      accessibilityViewIsModal={true}
+    >
       <View style={styles.modalBackground}>
         <View style={styles.modalContent}>
-          <ScrollView>
+          <ScrollView
+            accessible={true}
+            accessibilityLabel={`Bokningsformulär för ${
+              room?.name || "rummet"
+            }`}
+          >
             <Text style={styles.title}>Boka: {room?.name}</Text>
 
             <TextInput
@@ -116,6 +129,7 @@ const BookingModal = ({ visible, onClose, room, onBookingSuccess, theme }) => {
               value={name}
               onChangeText={setName}
               placeholderTextColor={theme.textSecondary}
+              accessibilityLabel="Fält för namn"
             />
 
             <Text style={styles.label}>Datum (YYYY-MM-DD):</Text>
@@ -125,6 +139,7 @@ const BookingModal = ({ visible, onClose, room, onBookingSuccess, theme }) => {
               value={date}
               onChangeText={setDate}
               placeholderTextColor={theme.textSecondary}
+              accessibilityLabel="Fält för datum i formatet år-månad-dag"
             />
 
             <Text style={styles.label}>Starttid (HH:mm):</Text>
@@ -135,6 +150,7 @@ const BookingModal = ({ visible, onClose, room, onBookingSuccess, theme }) => {
               placeholder="10:00"
               keyboardType="numeric"
               placeholderTextColor={theme.textSecondary}
+              accessibilityLabel="Fält för starttid i formatet timmar och minuter"
             />
 
             <Text style={styles.label}>Sluttid (HH:mm):</Text>
@@ -145,18 +161,45 @@ const BookingModal = ({ visible, onClose, room, onBookingSuccess, theme }) => {
               placeholder="11:00"
               keyboardType="numeric"
               placeholderTextColor={theme.textSecondary}
+              accessibilityLabel="Fält för sluttid i formatet timmar och minuter"
             />
 
-            {error && <Text style={styles.error}>{error}</Text>}
-            {success && <Text style={styles.success}>Bokning lyckades!</Text>}
+            {error && (
+              <Text
+                style={styles.error}
+                accessibilityLiveRegion="polite"
+                accessibilityRole="alert"
+              >
+                {error}
+              </Text>
+            )}
 
-            <Pressable style={styles.button} onPress={handleBooking}>
+            {success && (
+              <Text
+                style={styles.success}
+                accessibilityLiveRegion="polite"
+                accessibilityRole="alert"
+              >
+                Bokning lyckades!
+              </Text>
+            )}
+
+            <Pressable
+              style={styles.button}
+              onPress={handleBooking}
+              accessibilityRole="button"
+              accessibilityLabel="Bekräfta bokning"
+              accessibilityHint="Tryck för att skicka bokningen"
+            >
               <Text style={styles.buttonText}>Bekräfta bokning</Text>
             </Pressable>
 
             <Pressable
               style={[styles.button, { marginTop: 10 }]}
               onPress={onClose}
+              accessibilityRole="button"
+              accessibilityLabel="Avbryt"
+              accessibilityHint="Tryck för att stänga formuläret utan att boka"
             >
               <Text style={styles.buttonText}>Avbryt</Text>
             </Pressable>

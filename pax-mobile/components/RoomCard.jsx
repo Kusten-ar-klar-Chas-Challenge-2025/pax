@@ -115,7 +115,11 @@ const RoomCard = () => {
             </Text>
           )}
           <View style={styles.buttonRow}>
-            <TouchableOpacity style={styles.button} onPress={startPauseTimer}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={startPauseTimer}
+              accessibilityLabel="Pausa bokning"
+            >
               <Text style={styles.buttonText}>Pausa bokning</Text>
             </TouchableOpacity>
             <TouchableOpacity

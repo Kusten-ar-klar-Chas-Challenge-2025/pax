@@ -1,9 +1,6 @@
-import { Pressable, StyleSheet, Text, View, TextInput } from 'react-native'
+import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React from 'react'
 import { useTheme } from '../theme/ThemeContext'
-
-
-
 
 const FormComponent = ({ email, setEmail, password, setPassword }) => {
     const { theme } = useTheme ();
@@ -11,13 +8,29 @@ const FormComponent = ({ email, setEmail, password, setPassword }) => {
   return (
     <View>
      <Text style={styles.label}>Email:</Text>
-      <TextInput style={styles.input}
+      <TextInput
+      testID='email-input'
+      style={styles.input}
+      autoCapitalize='none'
+      keyboardType='email-address'
+      textContentType='emailAdress'
+      autoCorrect={false}
+      accessibilityLabel='E-postadress'
+      accessibilityRole='testbox'
+      accessibilityHint='Fält där du kan skriva in din e-post'
       value= {email}
       onChangeText={setEmail}
        />
        <Text style={styles.label}>Lösenord:</Text>
         <TextInput
+      autoCapitalize='none'
+      autoCorrect={false}
+      textContentType='password'
+      testID='password-input'
       style={styles.input}
+      accessibilityLabel='Lösenord'
+      accessibilityRole='testbox'
+      accessibilityHint='Fält där du kan skriva in ditt lösenord'
       value={password}
       onChangeText={setPassword}
       secureTextEntry
@@ -26,12 +39,7 @@ const FormComponent = ({ email, setEmail, password, setPassword }) => {
   )
 }
 
-
-
-
 export default FormComponent
-
-
 
 
 const createStyles = (theme) =>

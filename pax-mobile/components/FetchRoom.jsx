@@ -107,6 +107,9 @@ const FetchRoom = ({ favorites, setFavorites, setAllRooms }) => {
             <TouchableOpacity
               style={styles.roomItem}
               onPress={() => openRoomModal(item)}
+              accessible={true}
+              accessibilityRole="button"
+              accessibilityLabel={`Rum ${item.name}, tryck för mer information`}
             >
               <Text style={styles.roomName}>{item.name}</Text>
             </TouchableOpacity>
@@ -130,6 +133,8 @@ const FetchRoom = ({ favorites, setFavorites, setAllRooms }) => {
                     style={styles.roomImage}
                     resizeMode="cover"
                     onError={() => setImageError(true)}
+                    accessible={true}
+                    accessibilityLabel={`Bild på rummet ${selectedRoom.name}`}
                   />
                 ) : (
                   <Text style={styles.imageErrorText}>
@@ -167,11 +172,20 @@ const FetchRoom = ({ favorites, setFavorites, setAllRooms }) => {
                     setModalVisible(false);
                   }}
                   style={styles.bookButton}
+                  accessible={true}
+                  accessibilityRole="button"
+                  accessibilityLabel="Boka rummet"
                 >
                   <Text style={styles.bookButtonText}>Boka</Text>
                 </Pressable>
 
-                <Pressable onPress={closeModal} style={styles.closeButton}>
+                <Pressable
+                  onPress={closeModal}
+                  style={styles.closeButton}
+                  accessible={true}
+                  accessibilityRole="button"
+                  accessibilityLabel="Stäng detaljer om rum"
+                >
                   <Text style={styles.closeButtonText}>Stäng</Text>
                 </Pressable>
               </ScrollView>
