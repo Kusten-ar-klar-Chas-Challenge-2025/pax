@@ -8,6 +8,7 @@ import {
     Keyboard,
     StyleSheet,
     Text,
+    AccessibilityInfo,
 } from "react-native";
 
 const MapModal = ({ isVisible, onClose, mapImage, imageDescription }) => {
@@ -17,13 +18,42 @@ const MapModal = ({ isVisible, onClose, mapImage, imageDescription }) => {
             animationType="fade"
             transparent={true}
             onRequestClose={onClose}
+            accessible={true}
+            accessibilityViewIsModal={true}
+            accessibilityLabel="Kartvy öppen"
         >
-            <TouchableWithoutFeedback onPress={onClose}>
+            <TouchableWithoutFeedback onPress={onClose} accessible={false}>
                 <View style={styles.modalContainer}>
-                    <TouchableWithoutFeedback>
-                        <View style={styles.modalContent}>
-                            <Image source={mapImage} style={styles.mapImage} />
-                            {imageDescription && <Text style={styles.imageDescription}>{imageDescription}</Text>}
+                    <TouchableWithoutFeedback accessible={false}>
+                        <View
+                            style={styles.modalContent}
+                            accessibilityRole="dialog"
+                            accessibilityLabel="Modal med karta"
+                        >
+                            <Image
+                                source={mapImage}
+                                style={styles.mapImage}
+                                accessibilityLabel={imageDescription || "Karta över rummet"}
+                                accessible={true}
+                            />
+                            {imageDescription && (
+                                <Text
+                                    style={styles.imageDescription}
+                                    accessibilityLabel={`Beskrivning: ${imageDescription}`}
+                                    accessible={true}
+                                >
+                                    {imageDescription}
+                                </Text>
+                            )}
+                            <TouchableOpacity
+                                onPress={onClose}
+                                style={styles.closeButton}
+                                accessibilityRole="button"
+                                accessibilityLabel="Stäng karta"
+                                accessible={true}
+                            >
+                                <Text style={styles.closeButtonText}>Stäng</Text>
+                            </TouchableOpacity>
                         </View>
                     </TouchableWithoutFeedback>
                 </View>
@@ -49,12 +79,26 @@ const styles = StyleSheet.create({
         marginTop: "1%",
     },
     mapImage: {
-        maxWidth: "120%",
+        width: "100%",
         height: 300,
         resizeMode: "contain",
     },
     imageDescription: {
-        color: "FFF",
+        marginTop: 10,
+        color: "#000", // korrekt färgkod
+        fontSize: 14,
+        textAlign: "center",
+    },
+    closeButton: {
+        marginTop: 15,
+        padding: 10,
+        backgroundColor: "#7DBA6A",
+        borderRadius: 8,
+    },
+    closeButtonText: {
+        color: "#fff",
+        fontWeight: "600",
+        fontSize: 16,
     },
 });
 
