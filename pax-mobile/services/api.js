@@ -8,9 +8,8 @@ export const loginWithApi = async (email, password) => {
             body: JSON.stringify({ email, password })
         });
         if (!response.ok) throw new Error("Inloggningen misslyckades");
-        // return await response.json(); // Innehåller tokens
         const data = await response.json();
-        console.log(" JWT-token:", data.token); // logga token här (eller accessToken om det heter så)
+        console.log(" JWT-token:", data.token); 
         console.log(data);
         return data;
     } catch (error) {

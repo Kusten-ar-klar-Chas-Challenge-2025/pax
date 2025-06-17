@@ -10,4 +10,4 @@ export default function AuthNavigator() {
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
     </Stack.Navigator>
   );
-}
+} 

@@ -1,12 +1,10 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FormComponent from '../components/FormComponent';
 import LogoComponent from '../components/LogoComponent';
 import { useTheme } from '../theme/ThemeContext';
 import ThemeToggleTabButton from '../components/ThemeToggleTabButton';
 import ButtonComponent from '../components/buttons/ButtonComponent';
-import { useNavigation } from '@react-navigation/native';
-import { useUser } from '../context/UserContext';
 import { useAuth } from '../context/AuthContext';
 import { loginWithApi } from '../services/api';
 
@@ -14,8 +12,7 @@ const LoginScreen = ({ }) => {
   const { theme } = useTheme();
   const styles = createStyles(theme);
   const { login } = useAuth();
-  const navigation = useNavigation();
-
+ 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
