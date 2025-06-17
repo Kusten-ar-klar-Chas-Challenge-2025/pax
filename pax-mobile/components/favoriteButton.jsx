@@ -7,7 +7,16 @@ const FavoriteButton = ({ isFavorite, onToggle }) => {
   const styles = createStyles(theme);
 
   return (
-    <Pressable onPress={onToggle} style={styles.button}>
+    <Pressable
+      onPress={onToggle}
+      style={styles.button}
+      accessible={true}
+      accessibilityRole="button"
+      accessibilityLabel={
+        isFavorite ? "Ta bort som favorit" : "Lägg till som favorit"
+      }
+      accessibilityState={{ selected: isFavorite }}
+    >
       <Text style={styles.buttonText}>
         {isFavorite ? "★ Ta bort som favorit" : "☆ Lägg till favorit"}
       </Text>

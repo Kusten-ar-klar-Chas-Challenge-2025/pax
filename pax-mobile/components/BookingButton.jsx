@@ -5,14 +5,21 @@ import { useTheme } from "../theme/ThemeContext";
 export default function BookingButton({ onPress }) {
   const { theme } = useTheme();
   const styles = createStyles(theme);
+
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={onPress}
       activeOpacity={0.8}
+      accessibilityRole="button"
+      accessibilityLabel="Boka nu"
+      accessibilityHint="Tryck för att gå vidare till bokningen"
+      accessible={true}
     >
       <View style={styles.button}>
-        <Text style={styles.text}>PAXA</Text>
+        <Text style={styles.text} accessibilityElementsHidden={true}>
+          PAXA
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -45,7 +52,7 @@ const createStyles = (theme) =>
       fontSize: 16,
       lineHeight: 16,
       marginTop: 3,
-      letterSpacing: "0.06rem",
+      letterSpacing: 1,
       textAlign: "center",
     },
   });
