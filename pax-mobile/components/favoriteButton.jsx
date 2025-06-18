@@ -34,7 +34,7 @@ const createStyles = (theme) =>
       alignItems: "center",
     },
     buttonText: {
-      color: "#fff",
+      color: "#000",
       fontWeight: "600",
     },
   });

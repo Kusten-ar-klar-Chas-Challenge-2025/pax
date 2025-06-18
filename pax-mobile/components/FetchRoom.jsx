@@ -277,7 +277,7 @@ const createStyles = (theme) =>
       alignItems: "center",
     },
     closeButtonText: {
-      color: "#fff",
+      color: "#000",
       fontWeight: "600",
     },
     bookButton: {
@@ -288,7 +288,7 @@ const createStyles = (theme) =>
       alignItems: "center",
     },
     bookButtonText: {
-      color: "#fff",
+      color: "#000",
       fontWeight: "600",
     },
   });
